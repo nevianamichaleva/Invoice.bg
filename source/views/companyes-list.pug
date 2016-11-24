@@ -1,0 +1,68 @@
+extends _layout
+block content
+
+ .row.main
+   .panel-heading
+    .panel-title.text-center
+      h1.title Въведете фирмените си данни
+      hr
+    .main-login.main-center
+      form.form-horizontal(method='post', action='#')
+       .form-group
+        label.cols-sm-2.control-label(for='name') Име на фирмата
+        .cols-sm-10
+          .input-group
+            span.input-group-addon
+              i.fa.fa-user.fa(aria-hidden='true')
+            input#name.form-control(type='text', name='name', placeholder='Въведете име на фирма (BG)')
+       .form-group
+        label.cols-sm-2.control-label(for='email') ЕИК
+        .cols-sm-10
+          .input-group
+            span.input-group-addon
+              i.fa.fa-info-circle(aria-hidden='true')
+            input#eik.form-control(type='text', name='eik', placeholder='Въведете ЕИК')
+       .form-group
+         .checkbox
+          label
+            input(type='checkbox', value='')
+            | Регистрация по ДДС
+       .form-group
+        label.cols-sm-2.control-label(for='username') Адрес
+        .cols-sm-10
+          .input-group
+            span.input-group-addon
+              i.fa.fa-address-card-o(aria-hidden='true')
+            textarea#address.form-control(rows='3', name='address', placeholder='Въведете адрес')
+       .form-group
+        label.cols-sm-2.control-label(for='password') Материално отговорно лице
+        .cols-sm-10
+          .input-group
+            span.input-group-addon
+              i.fa.fa-user-circle-o(aria-hidden='true')
+            input#mol.form-control(type='text', name='mol', placeholder='Въведете име на МОЛ')
+       .form-group
+        label.cols-sm-2.control-label(for='confirm') Email
+        .cols-sm-10
+          .input-group
+            span.input-group-addon
+              i.fa.fa-envelope.fa(aria-hidden='true')
+            input#email.form-control(type='email', name='email', placeholder='Въведете email')
+       .form-group
+        label.cols-sm-2.control-label(for='confirm') Телефон
+        .cols-sm-10
+          .input-group
+            span.input-group-addon
+              i.fa.fa-phone(aria-hidden='true')
+            input#phone.form-control(type='text', name='phone', placeholder='Въведете телефон')
+       .form-group
+        label.control-label Вашето лого
+        input#input-4.file-loading(name='input4[]', type='file', multiple='')
+        script.
+            $(document).on('ready', function() {
+            $("#input-4").fileinput({
+              showCaption: false
+              });
+              });
+       .form-group
+           a.btn.btn-primary.btn-lg.btn-block.login-button(href='./invoice.html') Запис

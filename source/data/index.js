@@ -1,20 +1,27 @@
-/* globals module require __dirname */
-"use strict";
+/* globals module require global __dirname */
 
-const path = require("path");
+const mongoose = require("mongoose");
 const fs = require("fs");
+const path = require("path");
 
-module.exports = function(models) {
+module.exports = function(config) {
+    mongoose.Promise = global.Promise;
+    mongoose.connect(config.connectionString);
+    let Company = require("../models/company-model");
+    let models = { Company };
     let data = {};
 
-    fs.readdirSync(__dirname)
-        .filter(file => file.includes("-data"))
+    fs.readdirSync("./data")
+        .filter(x => x.includes("-data"))
         .forEach(file => {
-            let dataModule = require(path.join(__dirname, file))(models);
+            let dataModule =
+                require(path.join(__dirname, file))(models);
+
             Object.keys(dataModule)
                 .forEach(key => {
                     data[key] = dataModule[key];
                 });
         });
+
     return data;
 };

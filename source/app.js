@@ -1,6 +1,11 @@
-/* globals require */
-"use strict";
+/* globals module */
 
-const mongoose = require("mongoose");
+const config = require("./config");
 
-require("./config/mongoose")(mongoose);
+const app = require("./config/application");
+
+const data = require("./data")(config);
+
+require("./routers")(app, data);
+
+app.listen(config.port, () => console.log(`Running at :${config.port}`));
