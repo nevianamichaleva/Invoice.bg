@@ -2,44 +2,39 @@
 "use strict";
 
 module.exports = function(models) {
-    let { Category } = models;
+    let { Product } = models;
     return {
-        createCategory(name, ...products) {
-            if (Array.isArray(products[0])) {
-                products = products[0];
-            }
-
-            const category = new Category({
+        createProduct(name, description) {
+            const product = new Product({
                 name,
-                products
+                description
             });
 
             return new Promise((resolve, reject) => {
-                category.save((err) => {
+                product.save((err) => {
                     if (err) {
                         return reject(err);
                     }
 
-                    return resolve(category);
+                    return resolve(product);
                 });
             });
         },
-        getAllCategories() {
+        getAllProducts() {
             return new Promise((resolve, reject) => {
-                const query = Category.find()
+                const query = Product.find()
                     .sort({ name: "asc" });
-
-                query.exec((err, categories) => {
+                query.exec((err, products) => {
                     if (err) {
                         return reject(err);
                     }
-                    return resolve(categories);
+                    return resolve(products);
                 });
             });
         },
-        getCategoryById(id) {
+        getProductById(id) {
             return new Promise((resolve, reject) => {
-                Category.findById(id, (err, category) => {
+                Product.findById(id, (err, category) => {
                     if (err) {
                         return reject(err);
                     }

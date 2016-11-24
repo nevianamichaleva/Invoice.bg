@@ -10,18 +10,7 @@ let productSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 100
     },
-    description: String,
-    price: Number,
-    categoryName: {
-        type: String,
-        require: true,
-        minlength: 2,
-        maxlength: 50
-    },
-    categoryid: {
-        type: String,
-        require: true
-    }
+    description: String
 });
 
 mongoose.model("Product", productSchema);
