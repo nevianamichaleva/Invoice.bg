@@ -1,9 +1,11 @@
-/* globals require */
-
-"use strict";
+/* globals module */
 
 const config = require("./config");
-// const app = require("./config/application");
+
+const app = require("./config/application");
+
 const data = require("./data")(config);
 
-console.log(data);
+require("./routers")(app, data);
+
+app.listen(config.port, () => console.log(`Running at :${config.port}`));

@@ -1,4 +1,4 @@
-/* globals module require __dirname */
+/* globals module require global __dirname */
 "use strict";
 
 const mongoose = require("mongoose");
