@@ -4,16 +4,17 @@
 module.exports = function(models) {
     let { CompanySettings } = models;
     return {
-        createCompanySettings(name, identity, useTax, address, email, accountablePerson, phone, logo) {
+        createCompanySettings(data) {
             const companysettings = new CompanySettings({
-                name,
-                identity,
-                useTax,
-                address,
-                email,
-                accountablePerson,
-                phone,
-                logo
+                name: data.name,
+                identity: data.identity,
+                useTax: data.useTax,
+                address: data.address,
+                email: data.email,
+                accountablePerson: data.accountablePerson,
+                phone: data.phone,
+                logo: data.logo,
+                user: data.user
             });
 
             return new Promise((resolve, reject) => {
@@ -26,9 +27,9 @@ module.exports = function(models) {
                 });
             });
         },
-        getCompanysettings() {
+        getCompanysettings(user) {
             return new Promise((resolve, reject) => {
-                CompanySettings.find((err, companysettings) => {
+                CompanySettings.findOne({ user }, (err, companysettings) => {
                     if (err) {
                         return reject(err);
                     }
@@ -36,18 +37,18 @@ module.exports = function(models) {
                 });
             });
         },
-        updateCompanysettings(id, name, identity, useTax, address, email, accountablePerson, phone, logo) {
+        updateCompanysettings(id, data) {
             return new Promise((resolve, reject) => {
                 CompanySettings.findByIdAndUpdate(id, {
                     $set: {
-                        name,
-                        identity,
-                        useTax,
-                        address,
-                        email,
-                        accountablePerson,
-                        phone,
-                        logo
+                        name: data.name,
+                        identity: data.identity,
+                        useTax: data.useTax,
+                        address: data.address,
+                        email: data.email,
+                        accountablePerson: data.accountablePerson,
+                        phone: data.phone,
+                        logo: data.logo
                     }
                 },
                 { new: true },

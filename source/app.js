@@ -1,6 +1,9 @@
 /* globals require */
+
 "use strict";
 
-const mongoose = require("mongoose");
+const config = require("./config");
+// const app = require("./config/application");
+const data = require("./data")(config);
 
-require("./config/mongoose")(mongoose);
+console.log(data);

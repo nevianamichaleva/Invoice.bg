@@ -4,29 +4,30 @@
 module.exports = function(models) {
     let { Invoice } = models;
     return {
-        createInvoice(number, date, company, client, ...products, sum, vat) {
+        createInvoice(data, ...products) {
             if (Array.isArray(products[0])) {
                 products = products[0];
             }
 
             const invoice = new Invoice({
-                number,
-                date,
+                number: data.number,
+                date: data.date,
                 company: {
-                    name: company.name,
-                    identity: company.identity,
-                    address: company.address,
-                    accountablePerson: company.accountablePerson
+                    name: data.company.name,
+                    identity: data.company.identity,
+                    address: data.company.address,
+                    accountablePerson: data.company.accountablePerson
                 },
                 client: {
-                    name: client.name,
-                    identity: client.identity,
-                    address: client.address,
-                    accountablePerson: client.accountablePerson
+                    name: data.client.name,
+                    identity: data.client.identity,
+                    address: data.client.address,
+                    accountablePerson: data.client.accountablePerson
                 },
                 products,
-                sum,
-                vat
+                sum: data.sum,
+                vat: data.vat,
+                user: data.user
             });
 
             return new Promise((resolve, reject) => {
@@ -39,9 +40,9 @@ module.exports = function(models) {
                 });
             });
         },
-        getAllInvoices() {
+        getAllInvoices(user) {
             return new Promise((resolve, reject) => {
-                const query = Invoice.find()
+                const query = Invoice.find({ user })
                     .sort({ date: "desc" });
                 query.exec((err, invoices) => {
                     if (err) {

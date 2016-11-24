@@ -33,6 +33,10 @@ let clientSchema = new mongoose.Schema({
     phone: {
         type: String,
         require: true
+    },
+    user: {
+        type: String,
+        require: true
     }
 });
 

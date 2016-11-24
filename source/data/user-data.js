@@ -4,12 +4,12 @@
 module.exports = function(models) {
     let { User } = models;
     return {
-        createUser(username, name, email, password) {
+        createUser(data) {
             const user = new User({
-                username,
-                name,
-                email,
-                password
+                username: data.username,
+                name: data.name,
+                email: data.email,
+                password: data.password
             });
 
             return new Promise((resolve, reject) => {

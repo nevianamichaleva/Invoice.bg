@@ -38,6 +38,10 @@ let companysettingsSchema = new mongoose.Schema({
         type: String,
         require: true,
         default: "http://www.chadomoto.com/wp-content/uploads/2014/06/x-empty.png"
+    },
+    user: {
+        type: String,
+        require: true
     }
 });
 

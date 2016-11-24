@@ -37,7 +37,11 @@ let invoiceSchema = new mongoose.Schema({
         }]
     },
     sum: Number,
-    vat: Number
+    vat: Number,
+    user: {
+        type: String,
+        require: true
+    }
 });
 
 invoiceSchema.virtual.total = function() {

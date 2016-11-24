@@ -4,10 +4,11 @@
 module.exports = function(models) {
     let { Product } = models;
     return {
-        createProduct(name, description) {
+        createProduct(data) {
             const product = new Product({
-                name,
-                description
+                name: data.name,
+                description: data.description,
+                user: data.user
             });
 
             return new Promise((resolve, reject) => {
@@ -20,9 +21,9 @@ module.exports = function(models) {
                 });
             });
         },
-        getAllProducts() {
+        getAllProducts(user) {
             return new Promise((resolve, reject) => {
-                const query = Product.find()
+                const query = Product.find({ user })
                     .sort({ name: "asc" });
                 query.exec((err, products) => {
                     if (err) {

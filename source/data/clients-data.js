@@ -4,15 +4,16 @@
 module.exports = function(models) {
     let { Client } = models;
     return {
-        createClient(name, identity, useTax, address, email, accountablePerson, phone) {
+        createClient(data) {
             const client = new Client({
-                name,
-                identity,
-                useTax,
-                address,
-                email,
-                accountablePerson,
-                phone
+                name: data.name,
+                identity: data.identity,
+                useTax: data.useTax,
+                address: data.address,
+                email: data.email,
+                accountablePerson: data.accountablePerson,
+                phone: data.phone,
+                user: data.user
             });
 
             return new Promise((resolve, reject) => {
@@ -25,9 +26,9 @@ module.exports = function(models) {
                 });
             });
         },
-        getAllClients() {
+        getAllClients(user) {
             return new Promise((resolve, reject) => {
-                const query = Client.find()
+                const query = Client.find({ user })
                     .sort({ name: "asc" });
 
                 query.exec((err, clients) => {

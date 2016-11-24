@@ -10,7 +10,11 @@ let productSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 100
     },
-    description: String
+    description: String,
+    user: {
+        type: String,
+        require: true
+    }
 });
 
 mongoose.model("Product", productSchema);
