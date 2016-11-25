@@ -4,7 +4,8 @@
   "description": "Online invoicing",
   "main": "main.js",
   "scripts": {
-    "test": "test",
+    "test": "./node_modules/.bin/eslint .",
+    "postinstall": "./node_modules/.bin/bower install",
     "dev": "./node_modules/.bin/nodemon source/app.js"
   },
   "repository": {
@@ -21,11 +22,18 @@
   },
   "homepage": "https://github.com/Tyche-Team/Invoice.bg#readme",
   "devDependencies": {
+    "eslint": "^3.10.2",
     "nodemon": "^1.11.0"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "bower": "^1.8.0",
+    "cookie-parser": "^1.4.3",
     "express": "^4.14.0",
-    "mongoose": "^4.7.0"
+    "express-session": "^1.14.2",
+    "mongoose": "^4.7.0",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-beta6"
   }
 }
