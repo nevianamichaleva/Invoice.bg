@@ -10,7 +10,7 @@ let clientSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 50
     },
-    identity: {
+    bulstat: {
         type: String,
         require: true,
         unique: true,
@@ -18,6 +18,10 @@ let clientSchema = new mongoose.Schema({
         maxlength: 13
     },
     useTax: Boolean,
+    city: {
+        type: String,
+        required: true
+    },
     address: {
         type: String,
         require: true
@@ -39,6 +43,15 @@ let clientSchema = new mongoose.Schema({
         require: true
     }
 });
+
+clientSchema.virtual.identity = function() {
+    if (this.useTax) {
+        return "BG" + this.busltat;
+    }
+    else {
+        return "";
+    }
+};
 
 mongoose.model("Client", clientSchema);
 let ClientModel = mongoose.model("Client");

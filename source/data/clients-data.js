@@ -7,8 +7,9 @@ module.exports = function(models) {
         createClient(data) {
             const client = new Client({
                 name: data.name,
-                identity: data.identity,
+                bulstat: data.bulstat,
                 useTax: data.useTax,
+                city: data.city,
                 address: data.address,
                 email: data.email,
                 accountablePerson: data.accountablePerson,
@@ -17,7 +18,7 @@ module.exports = function(models) {
             });
 
             return new Promise((resolve, reject) => {
-                client.save((err) => {
+                client.save(err => {
                     if (err) {
                         return reject(err);
                     }

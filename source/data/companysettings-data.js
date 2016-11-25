@@ -4,11 +4,12 @@
 module.exports = function(models) {
     let { CompanySettings } = models;
     return {
-        createCompanySettings(data) {
+        createCompanysettings(data) {
             const companysettings = new CompanySettings({
                 name: data.name,
-                identity: data.identity,
+                bulstat: data.bulstat,
                 useTax: data.useTax,
+                city: data.city,
                 address: data.address,
                 email: data.email,
                 accountablePerson: data.accountablePerson,
@@ -18,7 +19,7 @@ module.exports = function(models) {
             });
 
             return new Promise((resolve, reject) => {
-                companysettings.save((err) => {
+                companysettings.save(err => {
                     if (err) {
                         return reject(err);
                     }

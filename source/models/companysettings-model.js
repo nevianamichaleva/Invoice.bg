@@ -10,7 +10,7 @@ let companysettingsSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 50
     },
-    identity: {
+    busltat: {
         type: String,
         require: true,
         unique: true,
@@ -18,6 +18,10 @@ let companysettingsSchema = new mongoose.Schema({
         maxlength: 13
     },
     useTax: Boolean,
+    city: {
+        type: String,
+        required: true
+    },
     address: {
         type: String,
         require: true
@@ -44,6 +48,15 @@ let companysettingsSchema = new mongoose.Schema({
         require: true
     }
 });
+
+companysettingsSchema.virtual.identity = function() {
+    if (this.useTax) {
+        return "BG" + this.busltat;
+    }
+    else {
+        return "";
+    }
+};
 
 mongoose.model("CompanySettings", companysettingsSchema);
 let CompanySettingsModel = mongoose.model("CompanySettings");
