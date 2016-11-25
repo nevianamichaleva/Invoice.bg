@@ -15,7 +15,7 @@ module.exports = function(config) {
     let models = { User, Client, CompanySettings, Product, Invoice };
     let data = {};
 
-    fs.readdirSync("./source/data")
+    fs.readdirSync("./data")
     .filter(file => file.includes("-data"))
     .forEach(file => {
         let dataModule = require(path.join(__dirname, file))(models);
