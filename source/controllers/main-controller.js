@@ -8,6 +8,9 @@ module.exports = function() {
         },
         getRegister(req, res) {
             res.render("register");
+        },
+        getInvoice(req, res) {
+            res.render("invoice");
         }
     };
 };

@@ -59,3 +59,111 @@ input::-webkit-input-placeholder {
     font-size: 11px;
     text-align: center;
 }
+
+#supplier-logo {
+    float: left;
+    margin-right: 80px;
+}
+
+#supplier-logo img {
+    width: 150px;
+}
+
+.supplier {
+    margin-top: 36px;
+}
+
+.supplier-left {
+    float: left;
+}
+
+.disabled {
+    border: none;
+    background-color: white;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.space {
+    margin-left: 10px;
+}
+
+#invoice {
+    float: left;
+}
+
+.noborderselect {
+    background: transparent;
+    border: none;
+    font-size: 30px;
+    color: lightgrey;
+    font-family: "Courier New", Courier, monospace;
+    height: 60px;
+    padding: 5px;
+    /* If you add too much padding here, the options won't show in IE */
+    width: 260px;
+}
+
+.black {
+    color: black;
+    font-size: 40px;
+    font-family: 'Oxygen', sans-serif;
+    font-weight: bold;
+}
+
+.invoicenumber {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+}
+
+#recipient {
+    margin: 0 0 50px 450px;
+}
+
+#recipient input,
+#end-invoice input,
+.supplier input
+ {
+    font-size: 16px;
+}
+
+.big-invoice {
+    border: 1px solid lightgrey;
+    border-radius: 15px;
+    padding-left: 100px;
+}
+
+#invoice-details table thead,
+#invoice-details table tbody tr {
+    border-bottom: 1px solid lightgrey;
+}
+
+#invoice-details input {
+    border: none;
+    font-size: 16px;
+}
+
+#invoice-value {
+    float: right;
+    margin-top: 20px;
+}
+
+#additional-info {
+    float: left;
+}
+
+#end-invoice {
+    margin-top: 30px;
+}
+
+#end-invoice .points {
+    margin-top: 30px;
+    margin-left: 80px;
+}
+
+.down-nav {
+    margin-left: 450px;
+}
