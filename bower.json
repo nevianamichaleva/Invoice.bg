@@ -1,17 +1,9 @@
 {
-<<<<<<< HEAD
-  "name": "invoice",
-  "description": "Online invoicing",
-  "main": "main.js",
-  "authors": [
-    "Tyche Team"
-=======
   "name": "invoice-app",
   "description": "Online invoicing",
   "main": "index.js",
   "authors": [
     "Tyche Team"
->>>>>>> 9ca71ee2f12c2edc4c4d94af9db30c2cf134094b
   ],
   "license": "ISC",
   "homepage": "https://github.com/Tyche-Team/Invoice.bg",
