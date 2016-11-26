@@ -1,16 +1,14 @@
-module.exports = function() {
+/* globals module */
+"user strict";
+
+module.exports = function(data) {
     return {
-        getMain(req, res) {
+        getHome(req, res) {
             res.render("carousel");
         },
-        getLogin(req, res) {
-            res.render("login");
-        },
-        getRegister(req, res) {
-            res.render("register");
-        },
-        getInvoice(req, res) {
-            res.render("invoice");
+        getAboutUs(req, res) {
+            res.status(201)
+                .send("<h1>About us</h1>");
         }
     };
 };

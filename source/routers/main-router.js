@@ -1,4 +1,5 @@
 /* globals module require */
+"use strict";
 
 const express = require("express");
 
@@ -7,7 +8,9 @@ module.exports = function(app, data) {
 
     let router = new express.Router();
 
-    router.get("/", controller.getMain);
+    router
+        .get("/home", controller.getHome)
+        .get("/about-us", controller.getAboutUs);
 
-    app.use("/home", router);
+    app.use(router);
 };
