@@ -1,12 +1,12 @@
 {
-  "name": "superheroes-app",
-  "description": "4",
-  "main": "index.js",
+  "name": "invoice",
+  "description": "Online invoicing",
+  "main": "main.js",
   "authors": [
-    "Doncho Minkov <DonchoMinkov@gmail.com>"
+    "Tyche Team"
   ],
   "license": "ISC",
-  "homepage": "https://github.com/TelerikAcademy/Node.js-Course",
+  "homepage": "https://github.com/Tyche-Team/Invoice.bg",
   "ignore": [
     "**/.*",
     "node_modules",
