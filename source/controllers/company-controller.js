@@ -1,32 +1,37 @@
+/* globals module */
+"user strict";
+
 module.exports = function(data) {
     return {
-        getAll(req, res) {
-            data.getAllCompanyes()
-                .then(companyes => {
-                    res.render("companyes-list", {
-                        result: companyes
-                    });
-                });
-        },
-        getById(req, res) {
-            data.getCompanyesById(req.params.id)
-                .then(company => {
-                    if (company === null) {
-                        return res.status(404)
-                            .redirect("/error");
-                    }
+        getCompany(req, res) {
+            // data.getCompanyesById(req.params.id)
+            //     .then(company => {
+            //         if (company === null) {
+            //             return res.status(404)
+            //                 .redirect("/error");
+            //         }
 
-                    return res.render("companyes-details", {
-                        result: company
-                    });
-                });
+            //         return res.render("companyes-details", {
+            //             result: company
+            //         });
+            //     });
+            res.send("<h1>User Company</h1>");
         },
-        create(req, res) {
+        getCreateCompany(req, res) {
+            res.send("<h1>Create Company form</h1>");
+        },
+        getCompanySettings(req, res) {
+            res.send("<h1>Company settings</h1>");
+        },
+        createCompany(req, res) {
             let body = req.body;
             data.createCompany(body.eik, body.name, body.city, body.address, body.mol)
                 .then(() => {
-                    res.redirect("/companyes");
+                    res.redirect("/company");
                 });
+        },
+        companySettings(req, res) {
+            res.send("<h1>Company settings changed");
         }
     };
 };
