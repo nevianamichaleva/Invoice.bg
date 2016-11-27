@@ -16,11 +16,11 @@ block content
               i.fa.fa-user.fa(aria-hidden='true')
             input#name.form-control(type='text', name='name', placeholder='Въведете име на фирма (BG)')
        .form-group
-        label.cols-sm-2.control-label(for='email') ЕИК
+        label.cols-sm-2.control-label(for='bulstat') ЕИК
         .cols-sm-10
           .input-group
             span.input-group-addon
-              i.fa.fa-info-circle(aria-hidden='true')
+              i.fa.fa-info-circle(aria-hidden='bulstat')
             input#eik.form-control(type='text', name='eik', placeholder='Въведете ЕИК')
        .form-group
          .checkbox
@@ -28,28 +28,35 @@ block content
             input(type='checkbox', value='')
             | Регистрация по ДДС
        .form-group
-        label.cols-sm-2.control-label(for='username') Адрес
+        label.cols-sm-2.control-label(for='city') Град
+        .cols-sm-10
+          .input-group
+            span.input-group-addon
+              i.fa.fa-address-card-o(aria-hidden='true')
+            input#mol.form-control(type='text', name='city', placeholder='Въведете град')
+       .form-group
+        label.cols-sm-2.control-label(for='address') Адрес
         .cols-sm-10
           .input-group
             span.input-group-addon
               i.fa.fa-address-card-o(aria-hidden='true')
             textarea#address.form-control(rows='3', name='address', placeholder='Въведете адрес')
        .form-group
-        label.cols-sm-2.control-label(for='password') Материално отговорно лице
+        label.cols-sm-2.control-label(for='accountablePerson') Материално отговорно лице
         .cols-sm-10
           .input-group
             span.input-group-addon
               i.fa.fa-user-circle-o(aria-hidden='true')
-            input#mol.form-control(type='text', name='mol', placeholder='Въведете име на МОЛ')
+            input#mol.form-control(type='text', name='accountablePerson', placeholder='Въведете име на МОЛ')
        .form-group
-        label.cols-sm-2.control-label(for='confirm') Email
+        label.cols-sm-2.control-label(for='email') Email
         .cols-sm-10
           .input-group
             span.input-group-addon
               i.fa.fa-envelope.fa(aria-hidden='true')
             input#email.form-control(type='email', name='email', placeholder='Въведете email')
        .form-group
-        label.cols-sm-2.control-label(for='confirm') Телефон
+        label.cols-sm-2.control-label(for='phone') Телефон
         .cols-sm-10
           .input-group
             span.input-group-addon
@@ -57,7 +64,7 @@ block content
             input#phone.form-control(type='text', name='phone', placeholder='Въведете телефон')
        .form-group
         label.control-label Вашето лого
-        input#input-4.file-loading(name='input4[]', type='file', multiple='')
+        input#input-4.file-loading(name='imgfile', type='file', multiple='')
         script.
             $(document).on('ready', function() {
             $("#input-4").fileinput({
@@ -65,4 +72,5 @@ block content
               });
               });
        .form-group
-           a.btn.btn-primary.btn-lg.btn-block.login-button(href='./invoice.html') Запис
+           button.btn.btn-primary.btn-lg.btn-block.login-button
+               | Запис

@@ -23,7 +23,7 @@ module.exports = function(models) {
                     if (err) {
                         return reject(err);
                     }
-
+                    //console.log(companysettings);
                     return resolve(companysettings);
                 });
             });
@@ -41,25 +41,24 @@ module.exports = function(models) {
         updateCompanysettings(id, data) {
             return new Promise((resolve, reject) => {
                 CompanySettings.findByIdAndUpdate(id, {
-                    $set: {
-                        name: data.name,
-                        identity: data.identity,
-                        useTax: data.useTax,
-                        address: data.address,
-                        email: data.email,
-                        accountablePerson: data.accountablePerson,
-                        phone: data.phone,
-                        logo: data.logo
-                    }
-                },
-                { new: true },
-                (err, companysettings) => {
-                    if (err) {
-                        return reject(err);
-                    }
+                        $set: {
+                            name: data.name,
+                            identity: data.identity,
+                            useTax: data.useTax,
+                            address: data.address,
+                            email: data.email,
+                            accountablePerson: data.accountablePerson,
+                            phone: data.phone,
+                            logo: data.logo
+                        }
+                    }, { new: true },
+                    (err, companysettings) => {
+                        if (err) {
+                            return reject(err);
+                        }
 
-                    return resolve(companysettings);
-                });
+                        return resolve(companysettings);
+                    });
             });
         }
     };
