@@ -22,7 +22,7 @@ module.exports = function(data) {
 
             data.createUser(user);
 
-            res.redirect("/login");
+            res.redirect("/company/create");
             return;
         },
         logout(req, res) {
