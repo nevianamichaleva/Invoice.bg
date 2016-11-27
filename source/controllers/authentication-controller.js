@@ -10,7 +10,7 @@ module.exports = function(data) {
             res.render("register");
         },
         login(req, res) {
-            res.send("<h1>You logged in</h1>");
+            res.redirect("/profile");
         },
         register(req, res) {
             let user = {
@@ -26,6 +26,7 @@ module.exports = function(data) {
             return;
         },
         logout(req, res) {
+            req.logout();
             res.send("<h1>Logout</h1>");
         }
     }

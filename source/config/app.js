@@ -8,9 +8,9 @@ const express = require("express"),
 let app = express();
 
 // configure body-parser and express-session
-app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
+app.use(cookieParser());
 app.use(expressSession({ secret: 'invoice'}));
 
 // passport

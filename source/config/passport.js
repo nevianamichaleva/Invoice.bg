@@ -3,19 +3,18 @@
 const passport = require('passport'),
     LocalStrategy = require('passport-local'),
     userModel = require('../models/user-model.js');
-//    userData = require('../data/user-data.js')(userModel);
 
 
 
 // configure LocalStrategy
 
-const authStartegy = new LocalStrategy(function(username, password, done) {
+const authStartegy = new LocalStrategy(function (username, password, done) {
     userModel.findOne({
             'username': username,
             'password': password
         },
-        function(error, user) {
-            console.log("LocalStrategy");
+        function (error, user) {
+
             if (user) {
                 return done(null, user);
             }
@@ -27,7 +26,7 @@ const authStartegy = new LocalStrategy(function(username, password, done) {
 passport.use(authStartegy);
 
 passport.serializeUser((user, done) => {
-    console.log("serializeUser");
+
     if (user) {
         return done(null, user._id);
     }
@@ -37,8 +36,9 @@ passport.serializeUser((user, done) => {
 
 
 passport.deserializeUser((userId, done) => {
-    userModel.findOne({ '_id': userId }, function(error, user) {
-        console.log("deserializeUser");
+    userModel.findOne({
+        '_id': userId
+    }, function (error, user) {
         if (user) {
             return done(null, user);
         }
