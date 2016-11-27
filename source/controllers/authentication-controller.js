@@ -10,6 +10,7 @@ module.exports = function(data) {
             res.render("register");
         },
         login(req, res) {
+            console.log('login : success');
             res.redirect("/profile");
         },
         register(req, res) {

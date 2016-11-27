@@ -1,7 +1,7 @@
 /* globals module */
 "user strict";
 
-module.exports = function(data) {
+module.exports = function (data) {
     return {
         getProfile(req, res) {
             res.send("<h1>Profil page</h1>");
