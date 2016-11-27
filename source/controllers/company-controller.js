@@ -18,16 +18,24 @@ module.exports = function(data) {
             res.send("<h1>User Company</h1>");
         },
         getCreateCompany(req, res) {
-            res.send("<h1>Create Company form</h1>");
+            res.send("<h1> Company settings </h1>");
         },
         getCompanySettings(req, res) {
-            res.send("<h1>Company settings</h1>");
+            res.render("company-details");
         },
         createCompany(req, res) {
-            let body = req.body;
-            data.createCompany(body.eik, body.name, body.city, body.address, body.mol)
+            let companysettings = {
+                name: req.body.name,
+                bulstat: req.body.bulstat,
+                city: req.body.city,
+                address: req.body.address,
+                accountablePerson: req.body.accountablePerson,
+                email: req.body.email,
+                phone: req.body.phone
+            };
+            data.createCompanysettings(companysettings)
                 .then(() => {
-                    res.redirect("/company");
+                    res.redirect("/invoice");
                 });
         },
         companySettings(req, res) {
