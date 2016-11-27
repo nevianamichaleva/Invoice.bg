@@ -35,6 +35,7 @@ module.exports = function(data) {
             };
             data.createCompanysettings(companysettings)
                 .then(() => {
+                    //console.log(companysettings.name);
                     res.redirect("/invoice");
                 });
         },
