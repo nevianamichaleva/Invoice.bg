@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 let invoiceSchema = new mongoose.Schema({
     number: {
         type: Number,
-        require: true,
+        required: true,
         length: 10
     },
     date: {
@@ -40,7 +40,7 @@ let invoiceSchema = new mongoose.Schema({
     vat: Number,
     user: {
         type: String,
-        require: true
+        required: true
     }
 });
 

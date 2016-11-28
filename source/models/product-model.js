@@ -6,14 +6,14 @@ const mongoose = require("mongoose");
 let productSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
         minlength: 2,
         maxlength: 100
     },
     description: String,
     user: {
         type: String,
-        require: true
+        required: true
     }
 });
 

@@ -6,13 +6,13 @@ const mongoose = require("mongoose");
 let clientSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
         minlength: 2,
         maxlength: 50
     },
     bulstat: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
         minlength: 9,
         maxlength: 13
@@ -24,23 +24,23 @@ let clientSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        require: true
+        required: true
     },
     email: {
         type: String,
-        require: true
+        required: true
     },
     accountablePerson: {
         type: String,
-        require: true
+        required: true
     },
     phone: {
         type: String,
-        require: true
+        required: true
     },
     user: {
         type: String,
-        require: true
+        required: true
     }
 });
 

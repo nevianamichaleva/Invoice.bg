@@ -6,13 +6,13 @@ const mongoose = require("mongoose");
 let companysettingsSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
         minlength: 2,
         maxlength: 50
     },
     busltat: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
         minlength: 9,
         maxlength: 13
@@ -24,28 +24,28 @@ let companysettingsSchema = new mongoose.Schema({
     },
     address: {
         type: String,
-        require: true
+        required: true
     },
     email: {
         type: String,
-        require: true
+        required: true
     },
     accountablePerson: {
         type: String,
-        require: true
+        required: true
     },
     phone: {
         type: String,
-        require: true
+        required: true
     },
     logo: {
         type: String,
-        require: true,
+        required: true,
         default: "http://www.chadomoto.com/wp-content/uploads/2014/06/x-empty.png"
     },
     user: {
         type: String,
-        require: true
+        required: true
     }
 });
 
