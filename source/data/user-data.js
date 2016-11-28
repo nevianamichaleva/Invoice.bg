@@ -31,6 +31,17 @@ module.exports = function(models) {
                     return resolve(clients);
                 });
             });
+        },
+        findUserById(id) {
+            return new Promise((resolve, reject) => {
+                User.findOne({ _id: id }, (err, user) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(user);
+                });
+            });
         }
     };
 };

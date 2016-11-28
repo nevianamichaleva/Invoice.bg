@@ -21,7 +21,9 @@ module.exports = function(data) {
             res.send("<h1> Company settings </h1>");
         },
         getCompanySettings(req, res) {
-            res.render("company-details");
+            res.render("company-details", {
+                user: req.user
+            });
         },
         createCompany(req, res) {
             let companysettings = {

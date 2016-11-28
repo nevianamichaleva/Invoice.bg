@@ -11,7 +11,8 @@ module.exports = function(data) {
         },
         login(req, res) {
             console.log('login : success');
-            res.redirect("/profile");
+            console.log(req.user);
+            res.redirect("/user");
         },
         register(req, res) {
             let user = {

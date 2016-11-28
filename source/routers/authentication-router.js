@@ -4,7 +4,7 @@
 const express = require("express"),
     passport = require("passport");
 
-module.exports = function (app, data) {
+module.exports = function(app, data) {
     let controller = require("../controllers/authentication-controller")(data);
 
     let router = new express.Router();
