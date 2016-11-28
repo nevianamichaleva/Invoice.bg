@@ -22,14 +22,14 @@ module.exports = function(data) {
                 password: req.body.password
             };
 
-            data.createUser(user);
+            data.createUser(user)
 
             res.redirect("/company/create");
             return;
         },
         logout(req, res) {
             req.logout();
-            res.send("<h1>Logout</h1>");
+            res.redirect("/home");
         }
     }
 }

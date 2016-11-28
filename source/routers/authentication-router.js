@@ -18,7 +18,7 @@ module.exports = function(app, data) {
             }),
             controller.login)
         .post("/register", controller.register)
-        .post("/logout", controller.logout)
+        .post("/logout", controller.logout);
 
     app.use(router);
 };

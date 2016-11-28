@@ -20,7 +20,7 @@ let companysettingsSchema = new mongoose.Schema({
     useTax: Boolean,
     city: {
         type: String,
-        required: true
+        require: true
     },
     address: {
         type: String,
@@ -43,17 +43,13 @@ let companysettingsSchema = new mongoose.Schema({
         require: true,
         default: "http://www.chadomoto.com/wp-content/uploads/2014/06/x-empty.png"
     },
-    user: {
-        type: String,
-        require: true
-    }
+    user: {}
 });
 
 companysettingsSchema.virtual.identity = function() {
     if (this.useTax) {
         return "BG" + this.busltat;
-    }
-    else {
+    } else {
         return "";
     }
 };
