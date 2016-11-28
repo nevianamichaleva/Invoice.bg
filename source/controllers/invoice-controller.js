@@ -4,7 +4,9 @@
 module.exports = function(data) {
     return {
         getInvoice(req, res) {
-            res.render("invoice");
+            res.render("invoice", {
+                user: req.user
+            });
         }
     };
 };

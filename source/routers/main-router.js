@@ -10,6 +10,7 @@ module.exports = function(app, data) {
 
     router
         .get("/home", controller.getHome)
+        .get("/user", controller.getUser)
         .get("/about-us", controller.getAboutUs);
 
     app.use(router);

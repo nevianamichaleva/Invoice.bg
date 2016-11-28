@@ -20,7 +20,7 @@ let companysettingsSchema = new mongoose.Schema({
     useTax: Boolean,
     city: {
         type: String,
-        required: true
+        require: true
     },
     address: {
         type: String,
@@ -52,8 +52,7 @@ let companysettingsSchema = new mongoose.Schema({
 companysettingsSchema.virtual.identity = function() {
     if (this.useTax) {
         return "BG" + this.busltat;
-    }
-    else {
+    } else {
         return "";
     }
 };

@@ -2,7 +2,8 @@
 
 const passport = require('passport'),
     LocalStrategy = require('passport-local'),
-    userModel = require('../models/user-model.js');
+    userModel = require('../models/user-model.js'),
+    CryptoJS = require("crypto-js");
 
 
 
@@ -10,8 +11,8 @@ const passport = require('passport'),
 
 const authStartegy = new LocalStrategy(function (username, password, done) {
     userModel.findOne({
-            'username': username,
-            'password': password
+            username: username,
+            password: password
         },
         function (error, user) {
 

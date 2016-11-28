@@ -45,10 +45,16 @@ html(lang='en')
               li
                 a(href='/invoice') Фактура
             ul.nav.navbar-nav.navbar-right
-              li
-                a(href='/login') Вход
-              li
-                a(href='/register') Регистрация
+                if user
+                  li
+                    a(href='/user')= user.username
+                  li
+                    a(href='/logout') Изход
+                else                          
+                  li
+                    a(href='/login') Вход
+                  li
+                    a(href='/register') Регистрация
     block content
     br
     footer.footer.text-center.footer-body
@@ -72,4 +78,3 @@ html(lang='en')
     script(src='http://getbootstrap.com/assets/js/vendor/holder.min.js')
     // IE10 viewport hack for Surface/desktop Windows 8 bug
     script(src='http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js')
-    script(src="/static/scripts/login.js")
