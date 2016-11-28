@@ -2,12 +2,16 @@
 "use strict";
 
 const express = require("express"),
+    expressValidator = require("express-validator"),
     passport = require("passport");
 
 module.exports = function(app, data) {
     let controller = require("../controllers/authentication-controller")(data);
 
     let router = new express.Router();
+    
+
+    app.use(expressValidator());
 
     router
         .get("/login", controller.getLogin)
@@ -18,7 +22,7 @@ module.exports = function(app, data) {
             }),
             controller.login)
         .post("/register", controller.register)
-        .post("/logout", controller.logout);
+        .get("/logout", controller.logout);
 
     app.use(router);
 };

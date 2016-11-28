@@ -2,18 +2,19 @@
 
 const passport = require('passport'),
     LocalStrategy = require('passport-local'),
-    userModel = require('../models/user-model.js');
+    userModel = require('../models/user-model.js'),
+    CryptoJS = require("crypto-js");
 
 
 
 // configure LocalStrategy
 
-const authStartegy = new LocalStrategy(function(username, password, done) {
+const authStartegy = new LocalStrategy(function (username, password, done) {
     userModel.findOne({
             username: username,
             password: password
         },
-        function(error, user) {
+        function (error, user) {
 
             if (user) {
                 return done(null, user);
@@ -38,7 +39,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser((userId, done) => {
     userModel.findOne({
         '_id': userId
-    }, function(error, user) {
+    }, function (error, user) {
         if (user) {
             return done(null, user);
         }
