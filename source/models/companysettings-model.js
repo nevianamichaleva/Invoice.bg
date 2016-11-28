@@ -10,17 +10,16 @@ let companysettingsSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 50
     },
-    busltat: {
+    bulstat: {
         type: String,
         required: true,
-        unique: true,
         minlength: 9,
         maxlength: 13
     },
     useTax: Boolean,
     city: {
         type: String,
-        require: true
+        required: true
     },
     address: {
         type: String,
@@ -44,8 +43,6 @@ let companysettingsSchema = new mongoose.Schema({
         default: "http://www.chadomoto.com/wp-content/uploads/2014/06/x-empty.png"
     },
     user: {
-        type: String,
-        required: true
     }
 });
 

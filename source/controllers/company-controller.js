@@ -29,6 +29,7 @@ module.exports = function(data) {
             let companysettings = {
                 name: req.body.name,
                 bulstat: req.body.bulstat,
+                useTax: req.body.useTax,
                 city: req.body.city,
                 address: req.body.address,
                 accountablePerson: req.body.accountablePerson,
