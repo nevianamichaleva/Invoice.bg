@@ -30,16 +30,36 @@ module.exports = function(models) {
                 });
             });
         },
-        getAllInvoices(user) {
-            return new Promise((resolve, reject) => {
-                const query = Invoice.find({ user })
-                    .sort({ date: "desc" });
-                query.exec((err, invoices) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    return resolve(invoices);
-                });
+        getAllInvoices(user, page, pageSize) {
+            let skip = (page - 1) * pageSize,
+                limit = page * pageSize;
+
+            return Promise.all([
+                new Promise((resolve, reject) => {
+                    Invoice.find()
+                        .sort({ date: "desc" })
+                        .skip(skip)
+                        .limit(limit)
+                        .exec((err, invoices) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(invoices);
+                        });
+                }), new Promise((resolve, reject) => {
+                    Invoice.count({})
+                        .exec((err, count) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(count);
+                        });
+                })
+            ]).then(results => {
+                let [invoices, count] = results;
+                return { invoices, count };
             });
         },
         getInvoiceById(id) {

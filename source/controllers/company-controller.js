@@ -9,11 +9,7 @@ module.exports = function(data) {
                     if (company === null) {
                         return res.redirect("/company/create");
                     }
-                    // To be changed to redirect to List of invoices for current user
-                    return res.render("carousel", {
-                        model: company,
-                        user: req.user
-                    });
+                    return res.redirect("/invoice/all");
                 });
         },
         getBlankCompanySettings(req, res) {

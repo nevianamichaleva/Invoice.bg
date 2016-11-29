@@ -1,0 +1,12 @@
+extends _layout
+include _mixins/_invoice-list
+block content
+
+ .row.main
+   .panel-heading
+    .panel-title.text-center
+      h1.title Списък с издадени фактури
+      hr
+ +invoice-list(model, params.page, params.pages)
+ if user
+  a(href="/invoice") Добави фактура
