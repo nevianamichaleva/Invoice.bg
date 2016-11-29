@@ -10,6 +10,7 @@ module.exports = function(data) {
                         if (company === null) {
                             return res.redirect("/company/create");
                         }
+                        console.log(company.identity);
                         // To be changed to redirect to List of invoices for current user
                         return res.render("invoice", {
                             model: company,
@@ -17,7 +18,7 @@ module.exports = function(data) {
                         });
                     });
             } else {
-                res.redirect("/invoice/unregistered");
+                res.render("invoice");
             }
         },
         getUnregisteredInvoice(req, res) {
