@@ -7,7 +7,9 @@ $(function() {
         $ddsValue = $("#dds-value"),
         $ddsRate = $("#dds-rate"),
         $dds = $("#dds"),
-        $total = $("#value-end");
+        $total = $("#value-end"),
+        $eik = $("#eik"),
+        $zdds = $("#zdds");
 
     let productField = $productsTable.find("tbody tr:first-child");
 
@@ -53,6 +55,11 @@ $(function() {
         $dds.val(dds + " лв.");
         $total.val(total + " лв.");
     });
+
+    $eik.on("change", function(){
+        let eik = $eik.val();
+        $zdds.val("BG"+eik);
+    })
 
     $("#add-more-products").on("click", function() {
         $productsTable.find("tbody").append(productField.clone());

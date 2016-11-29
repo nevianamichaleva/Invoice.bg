@@ -32,7 +32,7 @@ module.exports = function(models) {
         },
         getAllInvoices(user, page, pageSize) {
             let skip = (page - 1) * pageSize,
-                limit = page * pageSize;
+                limit = pageSize;
 
             return Promise.all([
                 new Promise((resolve, reject) => {
