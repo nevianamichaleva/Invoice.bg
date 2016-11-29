@@ -5,25 +5,15 @@ module.exports = function(models) {
     let { Invoice } = models;
     return {
         createInvoice(data, ...products) {
-            if (Array.isArray(products[0])) {
-                products = products[0];
-            }
+            // if (Array.isArray(products[0])) {
+            //     products = products[0];
+            // }
 
             const invoice = new Invoice({
                 number: data.number,
                 date: data.date,
-                company: {
-                    name: data.company.name,
-                    identity: data.company.identity,
-                    address: data.company.address,
-                    accountablePerson: data.company.accountablePerson
-                },
-                client: {
-                    name: data.client.name,
-                    identity: data.client.identity,
-                    address: data.client.address,
-                    accountablePerson: data.client.accountablePerson
-                },
+                company: data.company,
+                client: data.client,
                 products,
                 sum: data.sum,
                 vat: data.vat,
@@ -31,7 +21,7 @@ module.exports = function(models) {
             });
 
             return new Promise((resolve, reject) => {
-                invoice.save((err) => {
+                invoice.save(err => {
                     if (err) {
                         return reject(err);
                     }
