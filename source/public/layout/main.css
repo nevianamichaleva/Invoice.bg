@@ -174,3 +174,7 @@ input::-webkit-input-placeholder {
 .down-nav a {
     margin-right: 20px;
 }
+
+.red {
+    color: red;
+}

@@ -6,44 +6,39 @@ const mongoose = require("mongoose");
 let companysettingsSchema = new mongoose.Schema({
     name: {
         type: String,
-        require: true,
+        required: true,
         minlength: 2,
         maxlength: 50
     },
-    busltat: {
+    bulstat: {
         type: String,
-        require: true,
-        unique: true,
+        required: true,
         minlength: 9,
         maxlength: 13
     },
     useTax: Boolean,
     city: {
         type: String,
-        require: true
+        required: true
     },
     address: {
         type: String,
-        require: true
+        required: true
     },
-    email: {
-        type: String,
-        require: true
-    },
+    email: String,
     accountablePerson: {
         type: String,
-        require: true
+        required: true
     },
-    phone: {
-        type: String,
-        require: true
-    },
+    phone: String,
     logo: {
         type: String,
-        require: true,
         default: "http://www.chadomoto.com/wp-content/uploads/2014/06/x-empty.png"
     },
-    user: {}
+    user: {
+        type: String,
+        required: true
+    }
 });
 
 companysettingsSchema.virtual.identity = function() {

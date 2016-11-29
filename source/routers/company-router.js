@@ -9,11 +9,11 @@ module.exports = function(app, data) {
     let router = new express.Router();
 
     router
-        .get("/", controller.getCompany)
-        .get("/create", controller.getCompanySettings)
+        .get("/", controller.checkCompanySettings)
+        .get("/create", controller.getBlankCompanySettings)
         .get("/settings", controller.getCompanySettings)
-        .post("/create", controller.createCompany)
-        .post("/settings", controller.companySettings)
+        .post("/create", controller.createCompanySettings)
+        .post("/settings", controller.changeCompanySettings)
 
     app.use("/company", router);
 };

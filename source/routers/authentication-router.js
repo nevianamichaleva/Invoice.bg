@@ -9,7 +9,7 @@ module.exports = function(app, data) {
     let controller = require("../controllers/authentication-controller")(data);
 
     let router = new express.Router();
-    
+
 
     app.use(expressValidator());
 
