@@ -7,7 +7,7 @@ block content
       h1.title Въведете фирмените си данни
       hr
     .main-login.main-center
-      form.form-horizontal(method='post', action='#')
+      form.form-horizontal(method='post', action='#', enctype="multipart/form-data")
        if model
         input#name.form-control(type='hidden', name='_id', value=model._id)
        .form-group
@@ -96,13 +96,7 @@ block content
               input#phone.form-control(type='text', name='phone', placeholder='Въведете телефон')  
        .form-group
         label.control-label Вашето лого
-        input#input-4.file-loading(name='imgfile', type='file', multiple='')
-        script.
-            $(document).on('ready', function() {
-            $("#input-4").fileinput({
-              showCaption: false
-              });
-              });
+        input#input-4.file-loading(type="file",name="upl")        
        .form-group
            button.btn.btn-primary.btn-lg.btn-block.login-button
                | Запис

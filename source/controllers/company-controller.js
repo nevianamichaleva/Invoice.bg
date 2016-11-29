@@ -52,6 +52,7 @@ module.exports = function(data) {
                 });
         },
         changeCompanySettings(req, res) {
+            //console.log(req.file);
             let companysettings = {
                 name: req.body.name,
                 bulstat: req.body.bulstat,
@@ -60,7 +61,8 @@ module.exports = function(data) {
                 address: req.body.address,
                 accountablePerson: req.body.accountablePerson,
                 email: req.body.email,
-                phone: req.body.phone
+                phone: req.body.phone,
+                logo: req.file
             };
             data.updateCompanysettings(req.body._id, companysettings)
                 .then(() => {
