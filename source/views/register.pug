@@ -10,6 +10,7 @@ block content
       form.form-horizontal(method='post', action='/register')
         .form-group
           label.cols-sm-2.control-label(for='name') Име, фамилия
+                                                    <span class="red">*</span>
           .cols-sm-10
             .input-group
               span.input-group-addon
@@ -17,6 +18,7 @@ block content
               input#name.form-control(type='text', name='name', placeholder='Въведете име и фамилия')
         .form-group
           label.cols-sm-2.control-label(for='email') Email
+                                                     <span class="red">*</span>
           .cols-sm-10
             .input-group
               span.input-group-addon
@@ -24,6 +26,7 @@ block content
               input#email.form-control(type='text', name='email', placeholder='Въведете вашия Email')
         .form-group
           label.cols-sm-2.control-label(for='username') Потребителско име
+                                                        <span class="red">*</span>
           .cols-sm-10
             .input-group
               span.input-group-addon
@@ -31,6 +34,7 @@ block content
               input#username.form-control(type='text', name='username', placeholder='Въведете вашето потребителско име')
         .form-group
           label.cols-sm-2.control-label(for='password') Парола
+                                                        <span class="red">*</span>
           .cols-sm-10
             .input-group
               span.input-group-addon
@@ -38,6 +42,7 @@ block content
               input#password.form-control(type='password', name='password', placeholder='Въведете парола')
         .form-group
           label.cols-sm-2.control-label(for='confirm') Потвърдете парола
+                                                       <span class="red">*</span>
           .cols-sm-10
             .input-group
               span.input-group-addon

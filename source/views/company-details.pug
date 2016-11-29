@@ -12,6 +12,7 @@ block content
         input#name.form-control(type='hidden', name='_id', value=model._id)
        .form-group
         label.cols-sm-2.control-label(for='name') Име на фирмата
+                                                  <span class="red">*</span>
         .cols-sm-10
           .input-group
             span.input-group-addon
@@ -22,6 +23,7 @@ block content
               input#name.form-control(type='text', name='name', placeholder='Въведете име на фирма (BG)') 
        .form-group
         label.cols-sm-2.control-label(for='bulstat') ЕИК
+                                                     <span class="red">*</span> 
         .cols-sm-10
           .input-group
             span.input-group-addon
@@ -40,6 +42,7 @@ block content
             | Регистрация по ДДС
        .form-group
         label.cols-sm-2.control-label(for='city') Град
+                                                  <span class="red">*</span>
         .cols-sm-10
           .input-group
             span.input-group-addon
@@ -50,6 +53,7 @@ block content
               input#mol.form-control(type='text', name='city', placeholder='Въведете град')  
        .form-group
         label.cols-sm-2.control-label(for='address') Адрес
+                                                     <span class="red">*</span>
         .cols-sm-10
           .input-group
             span.input-group-addon
@@ -61,6 +65,7 @@ block content
               textarea#address.form-control(rows='3', name='address', placeholder='Въведете адрес')  
        .form-group
         label.cols-sm-2.control-label(for='accountablePerson') Материално отговорно лице
+                                                               <span class="red">*</span>
         .cols-sm-10
           .input-group
             span.input-group-addon
