@@ -8,33 +8,33 @@ block content
             h1.title Въведете данни за фактура
         .big-invoice
           #supplier-logo
-            img(src='/static/images/icon/Logo.jpg', alt='Company Logo')
+            img(src='/static/images/icon/logo.jpg', alt='Company Logo')
           .supplier
             .supplier-left
               table.disabled
                 tr
                   td
-                    input.disabled(type='text', disabled='', value='Име на фирмата', size='50', name='companyName')
+                    input.disabled(type='text', value='Въведете име на фирмата', size='50', name='companyName')
                 tr
                   td
-                    input.disabled(type='text', disabled='', value='Град', size='50')
+                    input.disabled(type='text', value='Въведете град', size='50')
                 tr
                   td
-                    input.disabled(type='text', disabled='', value='Адрес', size='50', name='companyAddress')
+                    input.disabled(type='text', value='Въведете адрес', size='50', name='companyAddress')
             .supplier-right
               table.disabled
                 tr
                   td
                     label(name='EIK') ЕИК(Булстат):
-                    input.disabled.space(type='text',  disabled='', value='ЕИК', name="companyIdentity")
+                    input.disabled.space(type='text', value='ЕИК', name="companyIdentity")
                 tr
                   td
                     label(name='ZDDS') ЗДДС №:
-                    input.disabled.space(type='text', name='ZDDS', disabled='', value='ДДС номер')
+                    input.disabled.space(type='text', name='ZDDS', , value='ДДС номер')
                 tr
                   td
                     label(name='MOL') МОЛ:
-                    input.disabled.space(type='text', disabled='', value='Представляващ', name="companyMOL")
+                    input.disabled.space(type='text', value='Представляващ', name="companyMOL")
           .clearfix
           #invoice
             div
@@ -188,9 +188,9 @@ block content
                 p .........................................
                 p /подпис/
           .down-nav
-            button.btn.btn-primary.btn-lg.login-button(type='submit') Запис
-            button.btn.btn-primary.btn-lg.login-button Печат
-            button.btn.btn-primary.btn-lg.login-button E-mail
+              button.btn.btn-primary.btn-lg.login-button(type='submit') Запис
+              button.btn.btn-primary.btn-lg.login-button Печат
+              button.btn.btn-primary.btn-lg.login-button E-mail
         script(src='/static/bower_components/jspdf/dist/jspdf.debug.js')
         script(src='/static/bower_components/jquery/dist/jquery.js')
         script(src='/static/bower_components/dom-to-image/dist/dom-to-image.min.js')

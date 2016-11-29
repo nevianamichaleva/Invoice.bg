@@ -4,9 +4,24 @@
 module.exports = function(data) {
     return {
         getInvoice(req, res) {
-            res.render("invoice", {
-                user: req.user
-            });
+            if (req.user) {
+                data.getCompanysettings(req.user._id)
+                    .then(company => {
+                        if (company === null) {
+                            return res.redirect("/company/create");
+                        }
+                        // To be changed to redirect to List of invoices for current user
+                        return res.render("invoice", {
+                            model: company,
+                            user: req.user
+                        });
+                    });
+            } else {
+                res.redirect("/invoice/unregistered");
+            }
+        },
+        getUnregisteredInvoice(req, res) {
+            res.render("invoice-unregistered");
         },
         getAllInvoices(req, res) {
             let user = req.user.username;
