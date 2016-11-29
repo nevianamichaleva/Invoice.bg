@@ -46,10 +46,20 @@ html(lang='en')
                 a(href='/invoice') Фактура
             ul.nav.navbar-nav.navbar-right
                 if user
-                  li
-                    a(href='/user')= user.username
-                  li
-                    a(href='/logout') Изход
+                  li.dropdown
+                    a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+                      = user.username
+                      span.caret
+                      ul.dropdown-menu
+                        li
+                          a(href="/user/profile") 
+                            | Профил
+                        li
+                          a(href="/company/settings")
+                            | Фирмени настройки    
+                        li
+                          a(href='/logout') 
+                            | Изход
                 else                          
                   li
                     a(href='/login') Вход

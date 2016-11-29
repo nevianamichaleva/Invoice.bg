@@ -4,7 +4,7 @@
 module.exports = function(models) {
     let { CompanySettings } = models;
     return {
-        createCompanysettings(data) {
+        createCompanySettings(data) {
             const companysettings = new CompanySettings({
                 name: data.name,
                 bulstat: data.bulstat,
@@ -23,7 +23,6 @@ module.exports = function(models) {
                     if (err) {
                         return reject(err);
                     }
-                    //console.log(companysettings);
                     return resolve(companysettings);
                 });
             });
@@ -43,8 +42,9 @@ module.exports = function(models) {
                 CompanySettings.findByIdAndUpdate(id, {
                         $set: {
                             name: data.name,
-                            identity: data.identity,
+                            bulstat: data.bulstat,
                             useTax: data.useTax,
+                            city: data.city,
                             address: data.address,
                             email: data.email,
                             accountablePerson: data.accountablePerson,

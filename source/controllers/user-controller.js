@@ -4,7 +4,22 @@
 module.exports = function (data) {
     return {
         getProfile(req, res) {
-            res.send("<h1>Profilе page</h1>");
+            res.render("profile", {
+                model: req.user,
+                user: req.user
+            });
+        },
+        changeProfile(req, res){
+            let userdata = {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+                _id: req.user._id
+            };
+            data.updateUser(userdata)
+                .then(() => {
+                    res.redirect("/home");
+                });
         },
         getUserSettings(req, res) {
             res.send("<h1>User Settings</h1>");

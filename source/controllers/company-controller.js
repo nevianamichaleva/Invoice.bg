@@ -3,29 +3,35 @@
 
 module.exports = function(data) {
     return {
-        getCompany(req, res) {
-            // data.getCompanyesById(req.params.id)
-            //     .then(company => {
-            //         if (company === null) {
-            //             return res.status(404)
-            //                 .redirect("/error");
-            //         }
-
-            //         return res.render("companyes-details", {
-            //             result: company
-            //         });
-            //     });
-            res.send("<h1>User Company</h1>");
+        checkCompanySettings(req, res) {
+            data.getCompanysettings(req.user._id)
+            .then(company => {
+                if (company === null) {
+                    return res.redirect("/company/create");
+                }
+                // To be changed to redirect to List of invoices for current user
+                return res.redirect("/home");
+            });
         },
-        getCreateCompany(req, res) {
-            res.send("<h1> Company settings </h1>");
-        },
-        getCompanySettings(req, res) {
+        getBlankCompanySettings(req, res) {
             res.render("company-details", {
                 user: req.user
             });
         },
-        createCompany(req, res) {
+        getCompanySettings(req, res) {
+            data.getCompanysettings(req.user._id)
+            .then(company => {
+                if (company === null) {
+                    return res.status(404)
+                        .redirect("/error");
+                }
+                return res.render("company-details", {
+                    model: company,
+                    user: req.user
+                });
+            });
+        },
+        createCompanySettings(req, res) {
             let companysettings = {
                 name: req.body.name,
                 bulstat: req.body.bulstat,
@@ -35,19 +41,28 @@ module.exports = function(data) {
                 accountablePerson: req.body.accountablePerson,
                 email: req.body.email,
                 phone: req.body.phone,
-                user: {
-                    userId: req.user.id,
-                    user: req.user.username
-                }
+                user: req.user._id
             };
-            data.createCompanysettings(companysettings)
+            data.createCompanySettings(companysettings)
                 .then(() => {
-                    //console.log(companysettings.name);
                     res.redirect("/invoice");
                 });
         },
-        companySettings(req, res) {
-            res.send("<h1>Company settings changed");
+        changeCompanySettings(req, res) {
+            let companysettings = {
+                name: req.body.name,
+                bulstat: req.body.bulstat,
+                useTax: req.body.useTax,
+                city: req.body.city,
+                address: req.body.address,
+                accountablePerson: req.body.accountablePerson,
+                email: req.body.email,
+                phone: req.body.phone
+            };
+            data.updateCompanysettings(req.body._id, companysettings)
+                .then(() => {
+                    res.redirect("/invoice");
+                });
         }
     };
 };

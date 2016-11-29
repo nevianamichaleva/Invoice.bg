@@ -25,24 +25,19 @@ let companysettingsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true
-    },
+    email: String,
     accountablePerson: {
         type: String,
         required: true
     },
-    phone: {
-        type: String,
-        required: true
-    },
+    phone: String,
     logo: {
         type: String,
-        required: true,
         default: "http://www.chadomoto.com/wp-content/uploads/2014/06/x-empty.png"
     },
     user: {
+        type: String,
+        required: true
     }
 });
 
