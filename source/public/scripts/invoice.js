@@ -11,8 +11,6 @@ $(function() {
         $eik = $("#eik"),
         $zdds = $("#zdds");
 
-    let productField = $productsTable.find("tbody tr:first-child");
-
     $productsTable.on("input", "tr", function() {
         let $this = $(this);
 
@@ -62,6 +60,34 @@ $(function() {
     })
 
     $("#add-more-products").on("click", function() {
-        $productsTable.find("tbody").append(productField.clone());
+        let $productForm = $productsTable.find("tbody tr:first-child").clone(),
+            $productFields = $productForm.children();
+
+        $.each($productFields, function(_, field) {
+            $(field).children().val("");
+        });
+
+        $productsTable.find("tbody").append($productForm);
+    });
+
+    $("#submit-invoice").on("click", function() {
+        let invoice = {
+            number: $("invoiceNumber").val(),
+            date: $("date").val(),
+            company: {
+                name: $("#companyName").val(),
+                identity: $("#companyIdentity").val(),
+                address: $("#companyAddress").val(),
+                accountablePerson: $("#companyMOL").val()
+            },
+            client: {
+                name: $("#clientName").val(),
+                identity: $("#clientIdentity").val(),
+                address: $("#clientAddress").val(),
+                accountablePerson: $("#clientMOL").val()
+            },
+            sum: $("sum").val(),
+            vat: $("vat").val()
+        };
     });
 });
