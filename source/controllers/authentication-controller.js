@@ -14,7 +14,7 @@ module.exports = function(data) {
         login(req, res) {
             console.log('login : success');
             console.log(req.user);
-            res.redirect("/user");
+            res.redirect("/company");
         },
         register(req, res) {
             let encryptPassword = CryptoJS.AES.encrypt(req.body.password, 'pass');
@@ -34,7 +34,7 @@ module.exports = function(data) {
 
             data.createUser(user)
 
-            res.redirect("/company/create");
+            res.redirect("/login");
             return;
         },
         logout(req, res) {
