@@ -50,7 +50,6 @@ module.exports = function(data) {
                 })
         },
         createInvoice(req, res) {
-            console.log(req.user);
             let user = req.user.username;
             let { companyName, companyAddress, companyIdentity, companyMOL, number, date, clientName, clientAddress, clientIdentity, clientMOL, sum, vat } = req.body;
             let company = {

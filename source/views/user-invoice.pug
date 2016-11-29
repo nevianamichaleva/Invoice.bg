@@ -79,7 +79,7 @@ block content
                   input.disabled.space(type='text', placeholder='Въведете име на представляващо лице', size='60', name="clientMOL", value=model.client.accountablePerson)
           .clearfix
           #invoice-details
-            table
+            table#products
               thead
                 tr
                   td Наименование на стока/услуга
@@ -90,37 +90,37 @@ block content
               tbody
                 tr
                   td
-                    input(type='text', size='60', placeholder='Въведете стока или услуга')
+                    input.productName(type='text', size='60', placeholder='Въведете стока или услуга')
                   td
-                    input(type='text', size='10', placeholder='Мярка')
+                    input.productUnit(type='text', size='10', placeholder='Мярка')
                   td
-                    input(type='text', size='10', placeholder='Kоличество')
+                    input.productQuantity(type='text', size='10', placeholder='Kоличество')
                   td
-                    input(type='text', size='10', placeholder='Eд. цена')
+                    input.productPrice(type='text', size='10', placeholder='Eд. цена')
                   td
-                    input(type='text', size='20', disabled='')
+                    input.productValue(type='text', size='20', disabled='')
                 tr
                   td
-                    input(type='text', size='60', placeholder='Въведете стока или услуга')
+                    input.productName(type='text', size='60', placeholder='Въведете стока или услуга')
                   td
-                    input(type='text', size='10', placeholder='Мярка')
+                    input.productUnit(type='text', size='10', placeholder='Мярка')
                   td
-                    input(type='text', size='10', placeholder='Kоличество')
+                    input.productQuantity(type='text', size='10', placeholder='Kоличество')
                   td
-                    input(type='text', size='10', placeholder='Eд. цена')
+                    input.productPrice(type='text', size='10', placeholder='Eд. цена')
                   td
-                    input(type='text', size='20', disabled='')
+                    input.productValue(type='text', size='20', disabled='')
                 tr
                   td
-                    input(type='text', size='60', placeholder='Въведете стока или услуга')
+                    input.productName(type='text', size='60', placeholder='Въведете стока или услуга')
                   td
-                    input(type='text', size='10', placeholder='Мярка')
+                    input.productUnit(type='text', size='10', placeholder='Мярка')
                   td
-                    input(type='text', size='10', placeholder='Kоличество')
+                    input.productQuantity(type='text', size='10', placeholder='Kоличество')
                   td
-                    input(type='text', size='10', placeholder='Eд. цена')
+                    input.productPrice(type='text', size='10', placeholder='Eд. цена')
                   td
-                    input(type='text', size='20', disabled='')
+                    input.productValue(type='text', size='20', disabled='')
           #invoice-value
             div
               label(for='value') Сума по фактура:
@@ -200,3 +200,4 @@ block content
         script(src='/static/bower_components/jquery/dist/jquery.js')
         script(src='/static/bower_components/dom-to-image/dist/dom-to-image.min.js')
         script(src='/static/scripts/pdfGenerator.js')
+        script(src='/static/scripts/invoice.js')
