@@ -25,7 +25,7 @@ module.exports = function(data) {
             let id = req.params.id;
             data.getInvoiceById(id)
                 .then(invoice => {
-                    res.render("dbInvoice", {
+                    res.render("user-invoice", {
                         model: invoice,
                         user: req.user
                     })
@@ -35,6 +35,7 @@ module.exports = function(data) {
                 })
         },
         createInvoice(req, res) {
+            console.log(req.user);
             let user = req.user.username;
             let { companyName, companyAddress, companyIdentity, companyMOL, number, date, clientName, clientAddress, clientIdentity, clientMOL, sum, vat } = req.body;
             let company = {

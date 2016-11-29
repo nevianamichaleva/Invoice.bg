@@ -14,19 +14,19 @@ block content
               table.disabled
                 tr
                   td
-                    input.disabled(type='text', disabled='', value='Име на фирмата', size='50', name='companyName')
+                    input.disabled(type='text', disabled='', value=model.company.name, size='50', name='companyName')
                 tr
                   td
                     input.disabled(type='text', disabled='', value='Град', size='50')
                 tr
                   td
-                    input.disabled(type='text', disabled='', value='Адрес', size='50', name='companyAddress')
+                    input.disabled(type='text', disabled='', value=model.company.address, size='50', name='companyAddress')
             .supplier-right
               table.disabled
                 tr
                   td
                     label(name='EIK') ЕИК(Булстат):
-                    input.disabled.space(type='text',  disabled='', value='ЕИК', name="companyIdentity")
+                    input.disabled.space(type='text',  disabled='', value=model.company.identity, name="companyIdentity")
                 tr
                   td
                     label(name='ZDDS') ЗДДС №:
@@ -34,7 +34,7 @@ block content
                 tr
                   td
                     label(name='MOL') МОЛ:
-                    input.disabled.space(type='text', disabled='', value='Представляващ', name="companyMOL")
+                    input.disabled.space(type='text', disabled='', value=model.company.accountablePerson, name="companyMOL")
           .clearfix
           #invoice
             div
@@ -46,10 +46,10 @@ block content
                 option(selected='', value='1') ФАКТУРА
             div
               label.invoicenumber.space(name='number-input') №
-              input.invoicenumber.space(type='text', name='number')
+              input.invoicenumber.space(type='text', name='number', value=model.number)
             div
               label.invoicenumber.space(for='date-input') дата
-              input#date-input.invoicenumber.space(type='date', name='date')
+              input#date-input.invoicenumber.space(type='date', name='date', value=model.date)
             div
               label.space(for='place-input') Mясто на сделката
               input#place-input.invoicenumber.space(type='text')
@@ -58,17 +58,17 @@ block content
             table#recipienttable
               tr
                 td
-                  input.disabled(type='text', placeholder='Въведете име на фирмата', size='60', name='clientName')
+                  input.disabled(type='text', placeholder='Въведете име на фирмата', size='60', name='clientName', value=model.client.name)
               tr
                 td
                   input.disabled(type='text', placeholder='Въведете град', size='60')
               tr
                 td
-                  input.disabled(type='text', placeholder='Въведете адрес', size='60', name='clientAddress')
+                  input.disabled(type='text', placeholder='Въведете адрес', size='60', name='clientAddress', value=model.client.address)
               tr
                 td
                   label(name='EIK') ЕИК(Булстат):
-                  input.disabled.space(type='text', placeholder='Въведете ЕИК', size='130', name='clientIdentity')
+                  input.disabled.space(type='text', placeholder='Въведете ЕИК', size='130', name='clientIdentity', value=model.client.identity)
               tr
                 td
                   label(name='ZDDS') ЗДДС №:
@@ -76,7 +76,7 @@ block content
               tr
                 td
                   label(name='MOL') МОЛ:
-                  input.disabled.space(type='text', placeholder='Въведете име на представляващо лице', size='60', name="clientMOL")
+                  input.disabled.space(type='text', placeholder='Въведете име на представляващо лице', size='60', name="clientMOL", value=model.client.accountablePerson)
           .clearfix
           #invoice-details
             table
@@ -124,10 +124,10 @@ block content
           #invoice-value
             div
               label(for='value') Сума по фактура:
-              input#inv-value.disabled.space(type='text', disabled='', size='50', name='sum')
+              input#inv-value.disabled.space(type='text', disabled='', size='50', name='sum', value=model.sum)
             div
               label(for='value') Данъчна основа:
-              input#dds-value.disabled.space(type='text', disabled='', size='50', name='vat')
+              input#dds-value.disabled.space(type='text', disabled='', size='50', name='vat', value=model.vat)
             div
               label(for='dds-rate') Процент ДДС:
               select#dds-rate.disabled.space
