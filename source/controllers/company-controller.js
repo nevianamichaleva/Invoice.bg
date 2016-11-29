@@ -44,7 +44,8 @@ module.exports = function(data) {
                 accountablePerson: req.body.accountablePerson,
                 email: req.body.email,
                 phone: req.body.phone,
-                user: req.user._id
+                user: req.user._id,
+                logo: req.file
             };
             data.createCompanySettings(companysettings)
                 .then(() => {
