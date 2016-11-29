@@ -8,7 +8,11 @@ module.exports = function(app, data) {
 
     let router = new express.Router();
 
-    router.get("/", controller.getInvoice);
+    router
+        .get("/", controller.getInvoice)
+        .get("/all", controller.getAllInvoices)
+        .get("/:id", controller.getInvoiceById)
+        .post("/", controller.createInvoice);
 
     app.use("/invoice", router);
 };

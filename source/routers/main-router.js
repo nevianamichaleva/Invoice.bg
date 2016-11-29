@@ -9,9 +9,12 @@ module.exports = function(app, data) {
     let router = new express.Router();
 
     router
+        .get("/", (req, res) => {
+            res.redirect("/home");
+        })
         .get("/home", controller.getHome)
         .get("/user", controller.getUser)
-        .get("/about-us", controller.getAboutUs);
+        .get("/about", controller.getAboutUs);
 
     app.use(router);
 };
