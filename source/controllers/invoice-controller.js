@@ -1,6 +1,9 @@
 /* globals module */
 "user strict";
 
+const DEFAULT_PAGE = 1,
+    PAGE_SIZE = 3
+
 module.exports = function(data) {
     return {
         getInvoice(req, res) {
@@ -11,7 +14,6 @@ module.exports = function(data) {
                             return res.redirect("/company/create");
                         }
                         console.log(company.identity);
-                        // To be changed to redirect to List of invoices for current user
                         return res.render("invoice", {
                             model: company,
                             user: req.user
@@ -21,18 +23,45 @@ module.exports = function(data) {
                 res.render("invoice");
             }
         },
-        getUnregisteredInvoice(req, res) {
-            res.render("invoice-unregistered");
-        },
         getAllInvoices(req, res) {
             let user = req.user.username;
-            data.getAllInvoices(user)
-                .then(invoices => {
-                    res.render("invoices-list", {
+            let page = Number(req.query.page || DEFAULT_PAGE);
+
+            data.getAllInvoices(user, page, PAGE_SIZE)
+                .then((result => {
+                    let {
+                        invoices,
+                        count
+                    } = result;
+
+                    if (count === 0) {
+                        return res.render("invoice-list", {
+                            model: invoices,
+                            user,
+                            params: { page, pages: 0 }
+                        });
+                    }
+
+                    if (page < 1) {
+                        return res.redirect("/invoice/all?page=1");
+                    }
+
+                    let pages = count / PAGE_SIZE;
+                    if (parseInt(pages, 10) < pages) {
+                        pages += 1;
+                        pages = parseInt(pages, 10);
+                    }
+                    if (page > pages) {
+                        page = pages;
+                        return res.redirect(`/invoice/all?page=${page}`);
+                    }
+
+                    return res.render("invoice-list", {
                         model: invoices,
-                        user: req.user
-                    })
-                })
+                        user: req.user,
+                        params: { page, pages }
+                    });
+                }))
                 .catch(err => {
                     //TODO
                 });

@@ -11,7 +11,6 @@ module.exports = function(app, data) {
     router
         .get("/", controller.getInvoice)
         .get("/all", controller.getAllInvoices)
-        .get("/unregistered", controller.getUnregisteredInvoice)
         .get("/:id", controller.getInvoiceById)
         .post("/", controller.createInvoice);
 

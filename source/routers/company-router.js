@@ -12,7 +12,7 @@ module.exports = function(app, data) {
         .get("/", controller.checkCompanySettings)
         .get("/create", controller.getBlankCompanySettings)
         .get("/settings", controller.getCompanySettings)
-        .post("/create", controller.createCompanySettings)
+        .post("/create", multer({ dest: './uploads/' }).single('upl'), controller.createCompanySettings)
         .post("/settings", multer({ dest: './uploads/' }).single('upl'), controller.changeCompanySettings)
 
     app.use("/company", router);
