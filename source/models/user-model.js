@@ -1,7 +1,8 @@
 /* globals require module String */
 "use strict";
 
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"),
+     bcrypt = require("bcrypt-nodejs");
 
 let userSchema = new mongoose.Schema({
     username: {
@@ -18,6 +19,16 @@ let userSchema = new mongoose.Schema({
     },
     password: String
 });
+
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
+
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
+
 
 mongoose.model("User", userSchema);
 let UserModel = mongoose.model("User");

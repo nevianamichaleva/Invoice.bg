@@ -1,9 +1,7 @@
 /* globals module crypto*/
 "user strict";
 
-const CryptoJS = require("crypto-js");
-
-module.exports = function(data) {
+module.exports = function (data) {
     return {
         getLogin(req, res) {
             res.render("login");
@@ -17,13 +15,12 @@ module.exports = function(data) {
             res.redirect("/user");
         },
         register(req, res) {
-            let encryptPassword = CryptoJS.AES.encrypt(req.body.password, 'pass');
 
             let user = {
                 name: req.body.name,
                 username: req.body.username,
                 email: req.body.email,
-                password: req.body.password //encryptPassword
+                password: req.body.password
             };
 
             req.checkBody('name', 'Name is required').notEmpty();
