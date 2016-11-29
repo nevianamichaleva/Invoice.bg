@@ -1,7 +1,7 @@
 /* globals module crypto*/
 "user strict";
 
-module.exports = function (data) {
+module.exports = function(data) {
     return {
         getLogin(req, res) {
             res.render("login");
@@ -11,7 +11,7 @@ module.exports = function (data) {
         },
         login(req, res) {
             console.log('login : success');
-            console.log(req.user);
+            //console.log(req.user);
             res.redirect("/company");
         },
         register(req, res) {

@@ -32,8 +32,8 @@ let companysettingsSchema = new mongoose.Schema({
     },
     phone: String,
     logo: {
-        type: String,
-        default: "http://www.chadomoto.com/wp-content/uploads/2014/06/x-empty.png"
+        data: Buffer,
+        contentType: String
     },
     user: {
         type: String,

@@ -1,6 +1,8 @@
 /* globals require module Promise*/
 "use strict";
 
+const fs = require("fs");
+
 module.exports = function(models) {
     let { CompanySettings } = models;
     return {
@@ -39,6 +41,11 @@ module.exports = function(models) {
         },
         updateCompanysettings(id, data) {
             return new Promise((resolve, reject) => {
+                //console.log(data.logo);
+                let logoImage = {
+                    data: fs.readFileSync(data.logo.path),
+                    contentType: 'image/png'
+                };
                 CompanySettings.findByIdAndUpdate(id, {
                         $set: {
                             name: data.name,
@@ -49,7 +56,7 @@ module.exports = function(models) {
                             email: data.email,
                             accountablePerson: data.accountablePerson,
                             phone: data.phone,
-                            logo: data.logo
+                            logo: logoImage
                         }
                     }, { new: true },
                     (err, companysettings) => {
