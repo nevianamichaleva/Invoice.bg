@@ -9,6 +9,7 @@ $(function() {
         $dds = $("#dds"),
         $total = $("#value-end");
 
+    let productField = $productsTable.find("tbody tr:first-child");
 
     $productsTable.on("input", "tr", function() {
         let $this = $(this);
@@ -51,5 +52,9 @@ $(function() {
 
         $dds.val(dds + " лв.");
         $total.val(total + " лв.");
+    });
+
+    $("#add-more-products").on("click", function() {
+        $productsTable.find("tbody").append(productField.clone());
     });
 });
