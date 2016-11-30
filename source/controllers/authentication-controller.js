@@ -1,7 +1,6 @@
-/* globals module crypto*/
 "user strict";
 
-module.exports = function(data) {
+module.exports = function (data) {
     return {
         getLogin(req, res) {
             res.render("login");
@@ -10,8 +9,10 @@ module.exports = function(data) {
             res.render("register");
         },
         login(req, res) {
-            console.log('login : success');
-            //console.log(req.user);
+            /*res.json({
+                success: true,
+                msg: "You are logged."
+            });*/
             res.redirect("/company");
         },
         register(req, res) {
@@ -30,6 +31,11 @@ module.exports = function(data) {
             req.checkBody('password', 'Password is required').notEmpty();
 
             data.createUser(user)
+
+            /*res.json({
+                success: true,
+                msg: "The user is created."
+            });*/
 
             res.redirect("/login");
             return;

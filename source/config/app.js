@@ -8,13 +8,13 @@ const express = require("express"),
 let app = express();
 
 // configure body-parser and express-session
+app.use(cookieParser('invoice'));
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(expressSession({ secret: 'invoice'}));
+app.use(expressSession({ secret: 'invoice',  cookie: { maxAge: 60000 }}));
 
 // passport
-require('./passport.js')(app);
+require('./passport/passport.js')(app);
 
 app.set("view engine", "pug");
 
