@@ -1,36 +1,44 @@
 mixin invoice-list(invoices, currentPage, pages)
-    ul.list.list-horizontal.list-pages.text-center
-        - for(let i = 1; i <= pages; i+=1 )
-            li
-                if currentPage === i
-                    a.btn.btn-danger.disabled(href="/invoice/all?page=" + i)
-                        = i
-                else
-                    a.btn.btn-danger(href="/invoice/all?page=" + i)
-                        = i
-
-    table
-        thead
-            tr
-                td Дата
-                td Номер
-                td Стойност
-                td Клиент
-                td МОЛ
-                td Адрес
-        tbody
-            each invoice in invoices
-                tr
-                    td
-                        = invoice.date
-                    td
-                        a(href="/invoice/" + invoice._id) 
-                            = invoice.number
-                    td
-                        = invoice.total
-                    td
-                        = invoice.client.name
-                    td
-                        = invoice.client.accountablePerson
-                    td
-                        = invoice.client.address        
+		
+	#invoicelist-details
+		table#nvoicelist
+				thead
+					tr
+						td(width='10%') Дата
+						td(width='10%') Номер
+						td(width='10%') Стойност
+						td(width='20%') Клиент
+						td(width='20%') МОЛ
+						td(width='30%') Адрес
+				tbody
+					each invoice in invoices
+						tr
+							td.date
+								-
+									var date= new Date(invoice.date);
+									var day = date.getDate();
+									var monthIndex = date.getMonth();
+									var year = date.getFullYear();
+									var convertedDate = day + '.' + monthIndex + '.' + year + ' г.';
+								= convertedDate
+							td
+								a(href="/invoice/" + invoice._id) 
+									= invoice.number
+							td
+								= invoice.total
+							td
+								= invoice.client.name
+							td
+								= invoice.client.accountablePerson
+							td
+								= invoice.client.address     
+	nav#paging(aria-label='Page navigation')
+		ul.breadcrumb
+				- for(let i = 1; i <= pages; i+=1 )
+							li
+									if currentPage === i
+											a(href="/invoice/all?page=" + i)
+												= i
+									else
+											a(href="/invoice/all?page=" + i)
+												= i
