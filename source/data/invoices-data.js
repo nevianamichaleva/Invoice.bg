@@ -4,24 +4,10 @@
 module.exports = function(models) {
     let { Invoice } = models;
     return {
-        createInvoice(data, ...products) {
-            // if (Array.isArray(products[0])) {
-            //     products = products[0];
-            // }
-
-            const invoice = new Invoice({
-                number: data.number,
-                date: data.date,
-                company: data.company,
-                client: data.client,
-                products,
-                sum: data.sum,
-                vat: data.vat,
-                user: data.user
-            });
-
+        createInvoice(invoice) {
+            let invoiceDb = new Invoice(invoice);
             return new Promise((resolve, reject) => {
-                invoice.save(err => {
+                invoiceDb.save(err => {
                     if (err) {
                         return reject(err);
                     }

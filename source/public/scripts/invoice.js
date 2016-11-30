@@ -64,23 +64,50 @@ $(function() {
     });
 
     $("#submit-invoice").on("click", function() {
+        const url = "/invoice";
+
         let invoice = {
-            number: $("invoiceNumber").val(),
-            date: $("date").val(),
+            number: +$("#invoiceNumber").val(),
+            date: new Date($("#date-input").val()),
+            place: $("#place-input").val(),
             company: {
                 name: $("#companyName").val(),
                 identity: $("#companyIdentity").val(),
                 address: $("#companyAddress").val(),
+                city: $("#companyCity").val(),
                 accountablePerson: $("#companyMOL").val()
             },
             client: {
                 name: $("#clientName").val(),
                 identity: $("#clientIdentity").val(),
                 address: $("#clientAddress").val(),
+                city: $("#clientCity").val(),
                 accountablePerson: $("#clientMOL").val()
             },
-            sum: $("sum").val(),
-            vat: $("vat").val()
+            sum: +($("#inv-value").val().split(" ")[0]),
+            vat: +($("#dds-value").val().split(" ")[0])
         };
+
+        let products = [],
+            $productForms = $productsTable.find("tbody tr");
+
+        $.each($productForms, function(_, product) {
+            let $product = $(product);
+            products.push({
+                name: $product.find(".productName").val(),
+                price: +$product.find(".productPrice").val(),
+                quantity: +$product.find(".productQuantity").val(),
+                unit: $product.find(".productUnit").val()
+            });
+        });
+
+        invoice.products = products;
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(invoice)
+        });
     });
 });

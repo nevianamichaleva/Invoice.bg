@@ -16,19 +16,19 @@ block content
                 table.disabled
                   tr
                     td
-                      input.disabled(type='text', disabled='', value=model.name, size='50', name='companyName')
+                      input#companyName.disabled(type='text', disabled='', value=model.name, size='50', name='companyName')
                   tr
                     td
-                      input.disabled(type='text', disabled='', value=model.city, size='50')
+                      input#companyCity.disabled(type='text', disabled='', value=model.city, size='50')
                   tr
                     td
-                      input.disabled(type='text', disabled='', value=model.address, size='50', name='companyAddress')
+                      input#companyAddress.disabled(type='text', disabled='', value=model.address, size='50', name='companyAddress')
               .supplier-right
                 table.disabled
                   tr
                     td
                       label(name='EIK') ЕИК(Булстат):
-                      input.disabled.space(type='text',  disabled='', value=model.bulstat, name='companyIdentity')
+                      input#companyIdentity.disabled.space(type='text',  disabled='', value=model.bulstat, name='companyIdentity')
                   tr
                     td
                       label(name='ZDDS') ЗДДС №:
@@ -36,33 +36,33 @@ block content
                   tr
                     td
                       label(name='MOL') МОЛ:
-                      input.disabled.space(type='text', disabled='', value=model.accountablePerson, name='companyMOL')
+                      input#companyMOL.disabled.space(type='text', disabled='', value=model.accountablePerson, name='companyMOL')
             else
               .supplier-left
                 table.disabled
                   tr
                     td
-                      input.disabled(type='text', value='Име на фирмата', size='50', name='companyName')
+                      input#companyName.disabled(type='text', placeholder='Име на фирмата', size='50', name='companyName')
                   tr
                     td
-                      input.disabled(type='text', value='Град', size='50')
+                      input#companyCity.disabled(type='text', placeholder='Град', size='50')
                   tr
                     td
-                      input.disabled(type='text', value='Адрес', size='50', name='companyAddress')
+                      input#companyAddress.disabled(type='text', placeholder='Адрес', size='50', name='companyAddress')
               .supplier-right
                 table.disabled
                   tr
                     td
                       label(name='EIK') ЕИК(Булстат):
-                      input.disabled.space(type='text', value='ЕИК', name='companyIdentity')
+                      input#companyIdentity.disabled.space(type='text', placeholder='ЕИК', name='companyIdentity')
                   tr
                     td
                       label(name='ZDDS') ЗДДС №:
-                      input.disabled.space(type='text', name='ZDDS', value='ДДС номер')
+                      input.disabled.space(type='text', name='ZDDS', placeholder='ДДС номер')
                   tr
                     td
                       label(name='MOL') МОЛ:
-                      input.disabled.space(type='text', value='Представляващ', name='companyMOL')
+                      input#companyMOL.disabled.space(type='text', placeholder='Представляващ', name='companyMOL')
           .clearfix
           #invoice
             div
@@ -74,7 +74,7 @@ block content
                 option(selected='', value='1') ФАКТУРА
             div
               label.invoicenumber.space(name='number-input') №
-              input.invoicenumber.space(type='text', name='number')
+              input#invoiceNumber.invoicenumber.space(type='text', name='number')
             div
               label.invoicenumber.space(for='date-input') дата
               input#date-input.invoicenumber.space(type='date', name='date')
@@ -86,17 +86,17 @@ block content
             table#recipienttable
               tr
                 td
-                  input.disabled(type='text', placeholder='Въведете име на фирмата', size='60', name='clientName')
+                  input#clientName.disabled(type='text', placeholder='Въведете име на фирмата', size='60', name='clientName')
               tr
                 td
-                  input.disabled(type='text', placeholder='Въведете град', size='60')
+                  input#clientCity.disabled(type='text', placeholder='Въведете град', size='60')
               tr
                 td
-                  input.disabled(type='text', placeholder='Въведете адрес', size='60', name='clientAddress')
+                  input#clientAddress.disabled(type='text', placeholder='Въведете адрес', size='60', name='clientAddress')
               tr
                 td
                   label(name='EIK') ЕИК(Булстат):
-                  input.disabled.space(type='text', placeholder='Въведете ЕИК', size='13', name='clientIdentity')
+                  input#clientIdentity.disabled.space(type='text', placeholder='Въведете ЕИК', size='13', name='clientIdentity')
               tr
                 td
                   label(name='ZDDS') ЗДДС №:
@@ -104,7 +104,7 @@ block content
               tr
                 td
                   label(name='MOL') МОЛ:
-                  input.disabled.space(type='text', placeholder='Въведете име на представляващо лице', size='60', name='clientMOL')
+                  input#clientMOL.disabled.space(type='text', placeholder='Въведете име на представляващо лице', size='60', name='clientMOL')
           .clearfix
           #invoice-details
             table#products
@@ -219,7 +219,7 @@ block content
                 p .........................................
                 p /подпис/
           .down-nav
-            button#submit-invoice.btn.btn-primary.btn-lg.login-button Запис
+            button#submit-invoice.btn.btn-primary.btn-lg.login-button(type='button') Запис
             button.btn.btn-primary.btn-lg.login-button Печат
             button.btn.btn-primary.btn-lg.login-button E-mail
         script(src='/static/bower_components/jspdf/dist/jspdf.debug.js')

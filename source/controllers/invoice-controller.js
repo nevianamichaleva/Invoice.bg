@@ -64,6 +64,7 @@ module.exports = function(data) {
                 }))
                 .catch(err => {
                     //TODO
+                    console.log(err);
                 });
         },
         getInvoiceById(req, res) {
@@ -77,43 +78,24 @@ module.exports = function(data) {
                 })
                 .catch(err => {
                     //TODO
+                    console.log(err);
                 })
         },
         createInvoice(req, res) {
-            let user = req.user.username;
-            let { companyName, companyAddress, companyIdentity, companyMOL, number, date, clientName, clientAddress, clientIdentity, clientMOL, sum, vat } = req.body;
-            let company = {
-                name: companyName,
-                identity: companyIdentity,
-                address: companyAddress,
-                accountablePerson: companyMOL
-            };
+            let user = "author" || req.user.username,
+                invoice = req.body;
 
-            let client = {
-                name: clientName,
-                identity: clientIdentity,
-                address: clientAddress,
-                accountablePerson: clientMOL
-            };
+            invoice.user = user;
 
-            let invoiceData = {
-                number,
-                date,
-                company,
-                client,
-                sum,
-                vat,
-                user
-            }
-
-            data.createInvoice(invoiceData)
-                .then(invoice => {
-                    console.log(invoice);
+            data.createInvoice(invoice)
+                .then(() => {
+                    //TODO
+                    console.log("done");
                 })
                 .catch(err => {
+                    //TODO
                     console.log(err);
                 });
-            //TODO
         }
     };
 };
