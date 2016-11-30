@@ -1,5 +1,6 @@
 /* globals module */
 "user strict";
+var fs = require("fs");
 
 module.exports = function(data) {
     return {
@@ -9,11 +10,7 @@ module.exports = function(data) {
                     if (company === null) {
                         return res.redirect("/company/create");
                     }
-                    // To be changed to redirect to List of invoices for current user
-                    return res.render("carousel", {
-                        model: company,
-                        user: req.user
-                    });
+                    return res.redirect("/invoice/all");
                 });
         },
         getBlankCompanySettings(req, res) {
@@ -44,10 +41,16 @@ module.exports = function(data) {
                 accountablePerson: req.body.accountablePerson,
                 email: req.body.email,
                 phone: req.body.phone,
-                user: req.user._id
+                user: req.user._id,
+                logo: req.file
             };
             data.createCompanySettings(companysettings)
                 .then(() => {
+                    fs.unlink('../source/' + req.file.path, function(err) {
+                        if (err) {
+                            return console.error(err);
+                        }
+                    });
                     res.redirect("/invoice");
                 });
         },
@@ -66,6 +69,13 @@ module.exports = function(data) {
             };
             data.updateCompanysettings(req.body._id, companysettings)
                 .then(() => {
+                    //console.log("Going to delete an existing file");
+                    fs.unlink('../source/' + req.file.path, function(err) {
+                        if (err) {
+                            return console.error(err);
+                        }
+                        //console.log("File deleted successfully!");
+                    });
                     res.redirect("/invoice");
                 });
         }

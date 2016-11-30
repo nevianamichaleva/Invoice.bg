@@ -4,24 +4,10 @@
 module.exports = function(models) {
     let { Invoice } = models;
     return {
-        createInvoice(data, ...products) {
-            // if (Array.isArray(products[0])) {
-            //     products = products[0];
-            // }
-
-            const invoice = new Invoice({
-                number: data.number,
-                date: data.date,
-                company: data.company,
-                client: data.client,
-                products,
-                sum: data.sum,
-                vat: data.vat,
-                user: data.user
-            });
-
+        createInvoice(invoice) {
+            let invoiceDb = new Invoice(invoice);
             return new Promise((resolve, reject) => {
-                invoice.save(err => {
+                invoiceDb.save(err => {
                     if (err) {
                         return reject(err);
                     }
@@ -30,16 +16,36 @@ module.exports = function(models) {
                 });
             });
         },
-        getAllInvoices(user) {
-            return new Promise((resolve, reject) => {
-                const query = Invoice.find({ user })
-                    .sort({ date: "desc" });
-                query.exec((err, invoices) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    return resolve(invoices);
-                });
+        getAllInvoices(user, page, pageSize) {
+            let skip = (page - 1) * pageSize,
+                limit = pageSize;
+
+            return Promise.all([
+                new Promise((resolve, reject) => {
+                    Invoice.find()
+                        .sort({ date: "desc" })
+                        .skip(skip)
+                        .limit(limit)
+                        .exec((err, invoices) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(invoices);
+                        });
+                }), new Promise((resolve, reject) => {
+                    Invoice.count({})
+                        .exec((err, count) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(count);
+                        });
+                })
+            ]).then(results => {
+                let [invoices, count] = results;
+                return { invoices, count };
             });
         },
         getInvoiceById(id) {

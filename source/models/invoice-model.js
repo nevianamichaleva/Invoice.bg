@@ -13,16 +13,19 @@ let invoiceSchema = new mongoose.Schema({
         type: Date,
         default: new Date()
     },
+    place: String,
     company: {
         name: String,
         identity: String,
         address: String,
+        city: String,
         accountablePerson: String
     },
     client: {
         name: String,
         identity: String,
         address: String,
+        city: String,
         accountablePerson: String
     },
     products: {

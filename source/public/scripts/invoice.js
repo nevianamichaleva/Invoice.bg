@@ -7,9 +7,9 @@ $(function() {
         $ddsValue = $("#dds-value"),
         $ddsRate = $("#dds-rate"),
         $dds = $("#dds"),
-        $total = $("#value-end");
-
-    let productField = $productsTable.find("tbody tr:first-child");
+        $total = $("#value-end"),
+        $eik = $("#eik"),
+        $zdds = $("#zdds");
 
     $productsTable.on("input", "tr", function() {
         let $this = $(this);
@@ -54,7 +54,67 @@ $(function() {
         $total.val(total + " лв.");
     });
 
+    $eik.on("change", function(){
+        let eik = $eik.val();
+        $zdds.val("BG"+eik);
+    })
+
     $("#add-more-products").on("click", function() {
-        $productsTable.find("tbody").append(productField.clone());
+        let $productForm = $productsTable.find("tbody tr:first-child").clone(),
+            $productFields = $productForm.children();
+
+        $.each($productFields, function(_, field) {
+            $(field).children().val("");
+        });
+
+        $productsTable.find("tbody").append($productForm);
+    });
+
+    $("#submit-invoice").on("click", function() {
+        const url = "/invoice";
+
+        let invoice = {
+            number: +$("#invoiceNumber").val(),
+            date: new Date($("#date-input").val()),
+            place: $("#place-input").val(),
+            company: {
+                name: $("#companyName").val(),
+                identity: $("#companyIdentity").val(),
+                address: $("#companyAddress").val(),
+                city: $("#companyCity").val(),
+                accountablePerson: $("#companyMOL").val()
+            },
+            client: {
+                name: $("#clientName").val(),
+                identity: $("#clientIdentity").val(),
+                address: $("#clientAddress").val(),
+                city: $("#clientCity").val(),
+                accountablePerson: $("#clientMOL").val()
+            },
+            sum: +($("#inv-value").val().split(" ")[0]),
+            vat: +($("#dds-value").val().split(" ")[0])
+        };
+
+        let products = [],
+            $productForms = $productsTable.find("tbody tr");
+
+        $.each($productForms, function(_, product) {
+            let $product = $(product);
+            products.push({
+                name: $product.find(".productName").val(),
+                price: +$product.find(".productPrice").val(),
+                quantity: +$product.find(".productQuantity").val(),
+                unit: $product.find(".productUnit").val()
+            });
+        });
+
+        invoice.products = products;
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(invoice)
+        });
     });
 });

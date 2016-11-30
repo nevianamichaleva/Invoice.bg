@@ -151,6 +151,10 @@ input::-webkit-input-placeholder {
     margin-top: 20px;
 }
 
+#invoice-value input {
+    font-size: 18px;
+}
+
 #additional-info {
     float: left;
 }
@@ -180,4 +184,14 @@ input::-webkit-input-placeholder {
 
 .red {
     color: red;
+}
+
+#add-more-products {
+    margin-top: 10px;
+}
+
+#nvoicelist {
+    width: 100%;
+    border: 1px solid lightgrey;
+    font-size: 18px;
 }

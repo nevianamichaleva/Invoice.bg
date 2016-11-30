@@ -7,6 +7,10 @@ module.exports = function(models) {
     let { CompanySettings } = models;
     return {
         createCompanySettings(data) {
+            let logoImage = {
+                data: fs.readFileSync(data.logo.path),
+                contentType: 'image/png'
+            };
             const companysettings = new CompanySettings({
                 name: data.name,
                 bulstat: data.bulstat,
@@ -16,7 +20,7 @@ module.exports = function(models) {
                 email: data.email,
                 accountablePerson: data.accountablePerson,
                 phone: data.phone,
-                logo: data.logo,
+                logo: logoImage,
                 user: data.user
             });
 
