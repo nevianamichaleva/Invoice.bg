@@ -9,7 +9,8 @@ $(function() {
         $dds = $("#dds"),
         $total = $("#value-end"),
         $eik = $("#eik"),
-        $zdds = $("#zdds");
+        $zdds = $("#zdds"),
+        $inWords = $("#inwords");
 
     $productsTable.on("input", "tr", function() {
         let $this = $(this);
@@ -25,7 +26,8 @@ $(function() {
             ddsRate = +$ddsRate.val(),
             sum = 0,
             dds,
-            total;
+            total,
+            slovom;
 
         $.each($products, function(_, product) {
             let productValue = $(product).find(".productValue").val();
@@ -37,26 +39,30 @@ $(function() {
 
         dds = sum * ddsRate / 100;
         total = sum + dds;
+        slovom = converter.number2lv(total);
 
         $invoiceValue.val(sum + " лв.");
         $ddsValue.val(sum + " лв.");
         $dds.val(dds + " лв.");
         $total.val(total + " лв.")
+        $inWords.val(slovom);
     });
 
     $ddsRate.on("change", function() {
         let sum = +$invoiceValue.val().split(' ')[0],
             ddsRate = $ddsRate.val(),
             dds = sum * ddsRate / 100,
-            total = sum + dds;
+            total = sum + dds,
+            slovom = converter.number2lv(total);
 
         $dds.val(dds + " лв.");
         $total.val(total + " лв.");
+        $inWords.val(slovom);
     });
 
-    $eik.on("change", function(){
+    $eik.on("change", function() {
         let eik = $eik.val();
-        $zdds.val("BG"+eik);
+        $zdds.val("BG" + eik);
     })
 
     $("#add-more-products").on("click", function() {

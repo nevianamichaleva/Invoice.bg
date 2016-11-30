@@ -195,3 +195,7 @@ input::-webkit-input-placeholder {
     border: 1px solid lightgrey;
     font-size: 18px;
 }
+
+#inwords {
+    font-size: 18px;
+}
