@@ -4,16 +4,30 @@
 module.exports = function(models) {
     let { Invoice } = models;
     return {
-        createInvoice(invoice) {
-            let invoiceDb = new Invoice(invoice);
+        createInvoice(data) {
+            let invoice = new Invoice(data);
             return new Promise((resolve, reject) => {
-                invoiceDb.save(err => {
+                invoice.save(err => {
                     if (err) {
                         return reject(err);
                     }
 
                     return resolve(invoice);
                 });
+            });
+        },
+        updateInvoice(id, data) {
+            return new Promise((resolve, reject) => {
+                Invoice.findByIdAndUpdate(id, {
+                        $set: data
+                    }, { new: true },
+                    (err, invoice) => {
+                        if (err) {
+                            return reject(err);
+                        }
+
+                        return resolve(invoice);
+                    });
             });
         },
         getAllInvoices(user, page, pageSize) {

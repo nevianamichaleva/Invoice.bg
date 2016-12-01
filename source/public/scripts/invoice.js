@@ -1,4 +1,4 @@
-/* globals $ converter */
+/* globals $ converter window */
 "use strict";
 
 $(function() {
@@ -95,7 +95,8 @@ $(function() {
     });
 
     $("#update-invoice").on("click", function() {
-        const url = "/invoice",
+        const id = window.location.href.split("/")[4],
+            url = "/invoice/" + id,
             invoice = getInvoce();
 
         $.ajax({

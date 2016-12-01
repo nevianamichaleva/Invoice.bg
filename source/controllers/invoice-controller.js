@@ -81,7 +81,7 @@ module.exports = function(data) {
                 })
         },
         createInvoice(req, res) {
-            let user = "author" || req.user.username,
+            let user = req.user.username,
                 invoice = req.body;
 
             invoice.user = user;
@@ -98,13 +98,15 @@ module.exports = function(data) {
         },
         updateInvoice(req, res) {
             let id = req.params.id,
-                user = req.user.username,
                 invoice = req.body;
 
-            // data.updateInvoice(id, invoice)
-            //     .then(() => {
-
-            //     });
+            data.updateInvoice(id, invoice)
+                .then(() => {
+                    console.log("done");
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
     };
 };
