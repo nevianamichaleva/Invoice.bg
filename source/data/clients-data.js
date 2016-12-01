@@ -50,6 +50,22 @@ module.exports = function(models) {
                     return resolve(client);
                 });
             });
+        },
+        getClientByTerm(term) {
+            return new Promise((resolve, reject) => {
+                var regex = new RegExp(term, 'i');
+                Client.find({name: regex}, { 'name': 1 })
+                    .sort({ name: "asc" })
+                    .limit(20)
+                    .lean()
+                    .exec((err, clients) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    console.log(clients);
+                    return resolve(clients);
+                });
+            });
         }
     };
 };
