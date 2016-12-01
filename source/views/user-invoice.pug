@@ -5,11 +5,11 @@ block content
       .row.main
         .panel-heading
           .panel-title.text-left
-            h1.title Въведете данни за фактура
+            h1.title Преглед/корекция на фактура
         .big-invoice
           #supplier-logo
-            if model
-              //- img(src="data:" +model.logo.contentType + ";base64," +Buffer.from(model.logo.data).toString('base64'), alt='Company Logo')
+            if model.company.logo != null
+              img(src=model.company.logo, alt='Company Logo')
             else
               img(src='/static/images/icon/Logo.jpg', alt='Company Logo')
           .supplier

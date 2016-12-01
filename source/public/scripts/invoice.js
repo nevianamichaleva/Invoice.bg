@@ -130,7 +130,8 @@ $(function() {
                 identity: $("#companyIdentity").val(),
                 address: $("#companyAddress").val(),
                 city: $("#companyCity").val(),
-                accountablePerson: $("#companyMOL").val()
+                accountablePerson: $("#companyMOL").val(),
+                logo: $("#hiddenData").val()
             },
             client: {
                 name: $("#clientName").val(),
