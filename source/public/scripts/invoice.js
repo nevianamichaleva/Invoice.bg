@@ -82,8 +82,44 @@ $(function() {
         $productsTable.find("tbody").append($productForm);
     });
 
-    $("#submit-invoice").on("click", function() {
-        const url = "/invoice";
+    $("#save-invoice").on("click", function() {
+        const url = "/invoice",
+            invoice = getInvoce();
+
+        $.ajax({
+            url: url,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(invoice)
+        });
+    });
+
+    $("#update-invoice").on("click", function() {
+        const url = "/invoice",
+            invoice = getInvoce();
+
+        $.ajax({
+            url: url,
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(invoice)
+        })
+    });
+
+    function getInvoce() {
+        let products = [],
+            $productForms = $productsTable.find("tbody tr");
+
+        $.each($productForms, function(_, product) {
+            let $product = $(product);
+            products.push({
+                name: $product.find(".productName").val(),
+                price: +$product.find(".productPrice").val(),
+                quantity: +$product.find(".productQuantity").val(),
+                unit: $product.find(".productUnit").val()
+            });
+        });
+
 
         let invoice = {
             number: +$("#invoiceNumber").val(),
@@ -103,30 +139,11 @@ $(function() {
                 city: $("#clientCity").val(),
                 accountablePerson: $("#clientMOL").val()
             },
+            products: products,
             sum: +($("#inv-value").val().split(" ")[0]),
             vat: +($("#dds-value").val().split(" ")[0])
         };
 
-        let products = [],
-            $productForms = $productsTable.find("tbody tr");
-
-        $.each($productForms, function(_, product) {
-            let $product = $(product);
-            products.push({
-                name: $product.find(".productName").val(),
-                price: +$product.find(".productPrice").val(),
-                quantity: +$product.find(".productQuantity").val(),
-                unit: $product.find(".productUnit").val()
-            });
-        });
-
-        invoice.products = products;
-
-        $.ajax({
-            url: url,
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(invoice)
-        });
-    });
+        return invoice;
+    }
 });
