@@ -95,6 +95,16 @@ module.exports = function(data) {
                     //TODO
                     console.log(err);
                 });
+        },
+        updateInvoice(req, res) {
+            let id = req.params.id,
+                user = req.user.username,
+                invoice = req.body;
+
+            // data.updateInvoice(id, invoice)
+            //     .then(() => {
+
+            //     });
         }
     };
 };

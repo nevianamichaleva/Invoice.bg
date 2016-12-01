@@ -78,6 +78,10 @@ input::-webkit-input-placeholder {
     float: left;
 }
 
+.supplier-left td input {
+    margin-bottom: 15px;
+}
+
 .disabled {
     border: none;
     background-color: white;

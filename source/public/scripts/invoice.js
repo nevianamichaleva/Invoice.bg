@@ -82,31 +82,31 @@ $(function() {
         $productsTable.find("tbody").append($productForm);
     });
 
-    $("#submit-invoice").on("click", function() {
-        const url = "/invoice";
+    $("#save-invoice").on("click", function() {
+        const url = "/invoice",
+            invoice = getInvoce();
 
-        let invoice = {
-            number: +$("#invoiceNumber").val(),
-            date: new Date($("#date-input").val()),
-            place: $("#place-input").val(),
-            company: {
-                name: $("#companyName").val(),
-                identity: $("#companyIdentity").val(),
-                address: $("#companyAddress").val(),
-                city: $("#companyCity").val(),
-                accountablePerson: $("#companyMOL").val()
-            },
-            client: {
-                name: $("#clientName").val(),
-                identity: $("#clientIdentity").val(),
-                address: $("#clientAddress").val(),
-                city: $("#clientCity").val(),
-                accountablePerson: $("#clientMOL").val()
-            },
-            sum: +($("#inv-value").val().split(" ")[0]),
-            vat: +($("#dds-value").val().split(" ")[0])
-        };
+        $.ajax({
+            url: url,
+            method: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(invoice)
+        });
+    });
 
+    $("#update-invoice").on("click", function() {
+        const url = "/invoice",
+            invoice = getInvoce();
+
+        $.ajax({
+            url: url,
+            method: "PUT",
+            contentType: "application/json",
+            data: JSON.stringify(invoice)
+        })
+    });
+
+    function getInvoce() {
         let products = [],
             $productForms = $productsTable.find("tbody tr");
 
@@ -120,13 +120,31 @@ $(function() {
             });
         });
 
-        invoice.products = products;
 
-        $.ajax({
-            url: url,
-            method: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(invoice)
-        });
-    });
+        let invoice = {
+            number: +$("#invoiceNumber").val(),
+            date: new Date($("#date-input").val()),
+            place: $("#place-input").val(),
+            company: {
+                name: $("#companyName").val(),
+                identity: $("#companyIdentity").val(),
+                address: $("#companyAddress").val(),
+                city: $("#companyCity").val(),
+                accountablePerson: $("#companyMOL").val(),
+                logo: $("#hiddenData").val()
+            },
+            client: {
+                name: $("#clientName").val(),
+                identity: $("#clientIdentity").val(),
+                address: $("#clientAddress").val(),
+                city: $("#clientCity").val(),
+                accountablePerson: $("#clientMOL").val()
+            },
+            products: products,
+            sum: +($("#inv-value").val().split(" ")[0]),
+            vat: +($("#dds-value").val().split(" ")[0])
+        };
+
+        return invoice;
+    }
 });
