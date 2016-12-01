@@ -2,7 +2,7 @@
 "user strict";
 
 const DEFAULT_PAGE = 1,
-    PAGE_SIZE = 3
+    PAGE_SIZE = 10
 
 module.exports = function(data) {
     return {
@@ -55,7 +55,6 @@ module.exports = function(data) {
                         page = pages;
                         return res.redirect(`/invoice/all?page=${page}`);
                     }
-
                     return res.render("invoice-list", {
                         model: invoices,
                         user: req.user,

@@ -1,4 +1,4 @@
-/* globals $ */
+/* globals $ converter */
 "use strict";
 
 $(function() {
@@ -10,6 +10,8 @@ $(function() {
         $total = $("#value-end"),
         $eik = $("#eik"),
         $zdds = $("#zdds"),
+        $clientIdentity = $("#clientIdentity"),
+        $clientZdds = $("#clientZDDS"),
         $inWords = $("#inwords");
 
     $productsTable.on("input", "tr", function() {
@@ -20,7 +22,6 @@ $(function() {
             value = (+quantity * price) + " лв.";
 
         $this.find(".productValue").val(value);
-
 
         let $products = $productsTable.find("tbody tr"),
             ddsRate = +$ddsRate.val(),
@@ -63,7 +64,12 @@ $(function() {
     $eik.on("change", function() {
         let eik = $eik.val();
         $zdds.val("BG" + eik);
-    })
+    });
+
+    $clientIdentity.on("change", function() {
+        let eik = $clientIdentity.val();
+        $clientZdds.val("BG" + eik);
+    });
 
     $("#add-more-products").on("click", function() {
         let $productForm = $productsTable.find("tbody tr:first-child").clone(),

@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 
 let invoiceSchema = new mongoose.Schema({
     number: {
-        type: Number,
+        type: String,
         required: true,
         length: 10
     },

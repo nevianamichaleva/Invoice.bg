@@ -13,7 +13,6 @@ let clientSchema = new mongoose.Schema({
     bulstat: {
         type: String,
         required: true,
-        unique: true,
         minlength: 9,
         maxlength: 13
     },
@@ -26,18 +25,12 @@ let clientSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true
-    },
+    email: String,
     accountablePerson: {
         type: String,
         required: true
     },
-    phone: {
-        type: String,
-        required: true
-    },
+    phone: String,
     user: {
         type: String,
         required: true
