@@ -55,15 +55,21 @@ html(lang='en')
                           a(href="/user/profile") 
                             | Профил
                         li
+                          a(href="/company/settings") 
+                            | Фирмени данни
+                        li
                           a(href="/invoice/all")
                             | Издадени фактури    
+                        li
+                          a(href="/reference")
+                            | Справки    
                         li
                           a(href='/logout') 
                             | Изход
                   li
                     if model
-                      a(href="/company/settings")
-                        = model.name
+                      a 
+                      //(href="/company/settings") = model.name                        
                 else                          
                   li
                     a(href='/login') Вход
