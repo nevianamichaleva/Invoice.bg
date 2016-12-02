@@ -85,11 +85,16 @@ module.exports = function(data) {
                 invoice = req.body;
 
             invoice.user = user;
-
             data.createInvoice(invoice)
                 .then(() => {
-                    //TODO
-                    console.log("done");
+                    invoice.client.user = user;
+                    data.createClient(invoice.client);
+                })
+                .then(() => {
+                    for (let product of invoice.products) {
+                        product.user = user;
+                        data.createProduct(product);
+                    }
                 })
                 .catch(err => {
                     //TODO
@@ -97,14 +102,24 @@ module.exports = function(data) {
                 });
         },
         updateInvoice(req, res) {
-            let id = req.params.id,
-                user = req.user.username,
+            let user = req.user.username,
+                id = req.params.id,
                 invoice = req.body;
 
-            // data.updateInvoice(id, invoice)
-            //     .then(() => {
-
-            //     });
+            data.updateInvoice(id, invoice)
+                .then(() => {
+                    invoice.client.user = user;
+                    data.createClient(invoice.client);
+                })
+                .then(() => {
+                    for (let product of invoice.products) {
+                        product.user = user;
+                        data.createProduct(product);
+                    }
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
     };
 };

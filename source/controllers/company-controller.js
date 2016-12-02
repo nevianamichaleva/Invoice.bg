@@ -32,6 +32,7 @@ module.exports = function(data) {
                 });
         },
         createCompanySettings(req, res) {
+            console.log(req.user);
             let companysettings = {
                 name: req.body.name,
                 bulstat: req.body.bulstat,

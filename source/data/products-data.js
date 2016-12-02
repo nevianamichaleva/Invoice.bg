@@ -5,16 +5,21 @@ module.exports = function(models) {
     let { Product } = models;
     return {
         createProduct(data) {
-            const product = new Product({
-                name: data.name,
-                description: data.description,
-                user: data.user
-            });
-
             return new Promise((resolve, reject) => {
-                product.save((err) => {
+                Product.findOne({ user: data.user, name: data.name }, (err, product) => {
                     if (err) {
-                        return reject(err);
+                        return resolve(err);
+                    }
+
+                    if (!product) {
+                        let newProduct = new Product(data);
+                        newProduct.save(err => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(newProduct);
+                        });
                     }
 
                     return resolve(product);

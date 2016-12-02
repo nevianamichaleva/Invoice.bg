@@ -10,7 +10,7 @@ let clientSchema = new mongoose.Schema({
         minlength: 2,
         maxlength: 50
     },
-    bulstat: {
+    identity: {
         type: String,
         required: true,
         minlength: 9,
@@ -40,8 +40,7 @@ let clientSchema = new mongoose.Schema({
 clientSchema.virtual.identity = function() {
     if (this.useTax) {
         return "BG" + this.busltat;
-    }
-    else {
+    } else {
         return "";
     }
 };
