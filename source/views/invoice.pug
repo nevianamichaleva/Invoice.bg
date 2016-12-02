@@ -9,6 +9,7 @@ block content
         .big-invoice
           #supplier-logo
             if model
+              input#hiddenData(type='hidden', value="data:" +model.logo.contentType + ";base64," +Buffer.from(model.logo.data).toString('base64'))
               img(src="data:" +model.logo.contentType + ";base64," +Buffer.from(model.logo.data).toString('base64'), alt='Company Logo')
             else
               img(src='/static/images/icon/Logo.jpg', alt='Company Logo')
@@ -21,7 +22,8 @@ block content
                       input#companyName.disabled(type='text', disabled='', value=model.name, size='50', name='companyName')
                   tr
                     td
-                      input#companyCity.disabled(type='text', disabled='', value=model.city, size='50')
+                      label гр.
+                      input#companyCity.disabled.space(type='text', disabled='', value=model.city, size='50')
                   tr
                     td
                       input#companyAddress.disabled(type='text', disabled='', value=model.address, size='50', name='companyAddress')
@@ -47,7 +49,8 @@ block content
                       input#companyName.disabled(type='text', placeholder='Име на фирмата', size='50', name='companyName')
                   tr
                     td
-                      input#companyCity.disabled(type='text', placeholder='Град', size='50')
+                      label гр.
+                      input#companyCity.disabled.space(type='text', placeholder='Град', size='50')
                   tr
                     td
                       input#companyAddress.disabled(type='text', placeholder='Адрес', size='50', name='companyAddress')
@@ -76,15 +79,19 @@ block content
                 option(selected='', value='1') ФАКТУРА
             div
               label.invoicenumber.space(name='number-input') №
+                                                             <span class="red">*</span>
               input#invoiceNumber.invoicenumber.space(type='text', name='number')
             div
               label.invoicenumber.space(for='date-input') дата
+                                                          <span class="red">*</span>
               input#date-input.invoicenumber.space(type='date', name='date')
             div
               label.space(for='place-input') Mясто на сделката
+                                             <span class="red">*</span>
               input#place-input.invoicenumber.space(type='text')
           #recipient
             h3 Получател
+               <span class="red">*</span>
             table#recipienttable
               tr
                 td
@@ -194,12 +201,12 @@ block content
                 p /подпис/
             .supplier-right
               label(for='systavil') Съставил:
-              input#systavil.disabled.space(type='text', size='50', placeholder='Въведете съставител')
+              input#systavil.disabled.space(type='text', size='50', value=(model ? model.accountablePerson : placeholder='Въведете съставител'))
               .points
                 p .........................................
                 p /подпис/
-          .down-nav
-            button#submit-invoice.btn.btn-primary.btn-lg.login-button(type='button') Запис
+        .down-nav
+            button#save-invoice.btn.btn-primary.btn-lg.login-button(type='button') Запис
             button.btn.btn-primary.btn-lg.login-button Печат
             button.btn.btn-primary.btn-lg.login-button E-mail
         script(src='/static/bower_components/jspdf/dist/jspdf.debug.js')

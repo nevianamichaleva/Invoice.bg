@@ -1,0 +1,27 @@
+extends _layout
+block content
+    .container
+      .row.main
+        .panel-heading
+          .panel-title.text-left
+            h1.title Справки
+            #dateReference
+                form
+                    h3 Справка за издадени фактури за период
+                    label(for='startDate') Въведете начална дата
+                    input(type='date', name='startDate')
+                    label(for='endDate') Въведете крайна дата
+                    input(type='date', name='endDate')
+                    button Справка
+            #conragentReference
+                form(action="/reference/place" method="get")
+                    h3 Справка за издадени фактури по място
+                    label(for='place') Изберете място на сделката
+                    input(type='text', name='place')
+                    button Справка
+            #conragentReference
+                form
+                    h3 Справка за продажби по продукти
+                    label(for='product') Изберете продукт
+                    input(type='text', name='product')
+                    button Справка

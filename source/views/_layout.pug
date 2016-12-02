@@ -18,7 +18,6 @@ html(lang='en')
     link(rel='icon', type='image/png', sizes='96x96', href='/static/images/icon/favicon-96x96.png')
     link(rel='icon', type='image/png', sizes='16x16', href='/static/images/icon/favicon-16x16.png')
     link(rel='manifest', href='./images/icon/manifest.json')
-    link(rel='stylesheet', href='/static/source/public/bower_components/toastr/toastr.min.css')
     meta(name='msapplication-TileColor', content='#ffffff')
     meta(name='msapplication-TileImage', content='/static/images/icon/ms-icon-144x144.png')
     meta(name='theme-color', content='#ffffff')
@@ -39,7 +38,7 @@ html(lang='en')
             a.navbar-brand(href='#') Invoice.bg
           #navbar.navbar-collapse.collapse
             ul.nav.navbar-nav
-              li.active
+              li
                 a(href='/home') Начало
               li
                 a(href='/about') За проекта
@@ -56,15 +55,21 @@ html(lang='en')
                           a(href="/user/profile") 
                             | Профил
                         li
+                          a(href="/company/settings") 
+                            | Фирмени данни
+                        li
                           a(href="/invoice/all")
                             | Издадени фактури    
+                        li
+                          a(href="/reference")
+                            | Справки    
                         li
                           a(href='/logout') 
                             | Изход
                   li
                     if model
-                      a(href="/company/settings")
-                        = model.name
+                      a 
+                      //(href="/company/settings") = model.name                        
                 else                          
                   li
                     a(href='/login') Вход
@@ -80,7 +85,7 @@ html(lang='en')
             a(href='https://telerikacademy.com/') Telerik Academy
           p.navbar-center
             | Application by 
-            a(href='#', target='_blanc') Tyche Team
+            a(href='https://github.com/Tyche-Team', target='_blanc') Tyche Team
     //
       Bootstrap core JavaScript
       ==================================================
@@ -93,5 +98,5 @@ html(lang='en')
     script(src='http://getbootstrap.com/assets/js/vendor/holder.min.js')
     // IE10 viewport hack for Surface/desktop Windows 8 bug
     script(src='http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js')
-    script(src='/static/source/public/bower_components/toastr/toastr.js')
+
 

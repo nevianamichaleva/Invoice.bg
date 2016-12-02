@@ -5,27 +5,40 @@ module.exports = function(models) {
     let { Client } = models;
     return {
         createClient(data) {
-            const client = new Client({
-                name: data.name,
-                bulstat: data.bulstat,
-                useTax: data.useTax,
-                city: data.city,
-                address: data.address,
-                email: data.email,
-                accountablePerson: data.accountablePerson,
-                phone: data.phone,
-                user: data.user
-            });
-
             return new Promise((resolve, reject) => {
-                client.save(err => {
+                Client.findOne({ user: data.user, name: data.name }, (err, client) => {
                     if (err) {
                         return reject(err);
                     }
 
+                    if (!client) {
+                        let newClient = new Client(data);
+                        newClient.save(err => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(newClient);
+                        });
+                    } else {
+                        for (let prop in data) {
+                            if (data[prop] !== client[prop]) {
+                                let newClient = new Client(data);
+                                newClient.save(err => {
+                                    if (err) {
+                                        return reject(err);
+                                    }
+
+                                    return resolve(newClient);
+                                })
+
+                                return;
+                            }
+                        }
+                    }
                     return resolve(client);
                 });
-            });
+            })
         },
         getAllClients(user) {
             return new Promise((resolve, reject) => {

@@ -1,16 +1,18 @@
 /* globals module */
 
 const express = require("express"),
-      bodyParser = require("body-parser"),
-      expressSession = require("express-session"),
-      cookieParser = require("cookie-parser");
+    bodyParser = require("body-parser"),
+    expressSession = require("express-session"),
+    cookieParser = require("cookie-parser"),
+    flash = require('connect-flash');
 
 let app = express();
 
 app.use(cookieParser('invoice'));
-app.use(bodyParser.urlencoded({ extended: true}));
-app.use(bodyParser.json());
-app.use(expressSession({ secret: 'invoice',  cookie: { maxAge: 60000 }}));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit: "10mb" }));
+app.use(expressSession({ secret: 'invoice', cookie: { maxAge: 60000 } }));
+app.use(flash());
 
 
 // security 

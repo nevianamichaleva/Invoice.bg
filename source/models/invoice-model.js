@@ -19,7 +19,8 @@ let invoiceSchema = new mongoose.Schema({
         identity: String,
         address: String,
         city: String,
-        accountablePerson: String
+        accountablePerson: String,
+        logo: String
     },
     client: {
         name: String,

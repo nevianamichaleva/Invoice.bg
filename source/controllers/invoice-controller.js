@@ -81,18 +81,45 @@ module.exports = function(data) {
                 })
         },
         createInvoice(req, res) {
-            let user = "author" || req.user.username,
+            let user = req.user.username,
                 invoice = req.body;
 
             invoice.user = user;
-
             data.createInvoice(invoice)
                 .then(() => {
-                    //TODO
-                    console.log("done");
+                    req.flash('invoiceMessage', 'Фактурата е записана успешно');
+                    console.log(req.flash('invoiceMessage'));
+                    invoice.client.user = user;
+                    data.createClient(invoice.client);
+                })
+                .then(() => {
+                    for (let product of invoice.products) {
+                        product.user = user;
+                        data.createProduct(product);
+                    }
                 })
                 .catch(err => {
                     //TODO
+                    console.log(err);
+                });
+        },
+        updateInvoice(req, res) {
+            let user = req.user.username,
+                id = req.params.id,
+                invoice = req.body;
+
+            data.updateInvoice(id, invoice)
+                .then(() => {
+                    invoice.client.user = user;
+                    data.createClient(invoice.client);
+                })
+                .then(() => {
+                    for (let product of invoice.products) {
+                        product.user = user;
+                        data.createProduct(product);
+                    }
+                })
+                .catch(err => {
                     console.log(err);
                 });
         }
