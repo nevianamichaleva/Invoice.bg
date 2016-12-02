@@ -12,7 +12,7 @@ module.exports = function (data) {
             /*res.json({
                 success: true,
                 msg: "You are logged."
-            });*/
+            });*/  
             res.redirect("/company");
         },
         register(req, res) {
