@@ -12,8 +12,10 @@ module.exports = function(data) {
             /*res.json({
                 success: true,
                 msg: "You are logged."
-            });*/  
-            res.redirect("/company");
+            });*/
+            res.redirect("/company", {
+                user: req.user
+            });
         },
         register(req, res) {
 
