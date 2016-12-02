@@ -17,7 +17,7 @@ mixin invoice-list(invoices, currentPage, pages)
 								-
 									var date= new Date(invoice.date);
 									var day = date.getDate();
-									var monthIndex = date.getMonth();
+									var monthIndex = date.getMonth() + 1;
 									var year = date.getFullYear();
 									var convertedDate = day + '.' + monthIndex + '.' + year + ' г.';
 								= convertedDate
