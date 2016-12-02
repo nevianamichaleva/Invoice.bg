@@ -6,6 +6,11 @@ block content
      .panel-title.text-center
        h1.title Вход
        hr
+       if (message.length > 0)
+        .alert.alert-danger.alert-dismissable
+          a.close(href='#', data-dismiss='alert', aria-label='close') ×
+          strong Внимание!
+          span= " " + message
     .main-login.main-center
       form.form-horizontal(method="post", action='/login')
         .form-group

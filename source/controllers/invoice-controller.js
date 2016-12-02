@@ -87,6 +87,8 @@ module.exports = function(data) {
             invoice.user = user;
             data.createInvoice(invoice)
                 .then(() => {
+                    req.flash('invoiceMessage', 'Фактурата е записана успешно');
+                    console.log(req.flash('invoiceMessage'));
                     invoice.client.user = user;
                     data.createClient(invoice.client);
                 })

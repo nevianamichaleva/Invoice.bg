@@ -1,9 +1,9 @@
 "user strict";
 
-module.exports = function (data) {
+module.exports = function(data) {
     return {
         getLogin(req, res) {
-            res.render("login");
+            res.render("login", { message: req.flash('signupMessage') });
         },
         getRegister(req, res) {
             res.render("register");

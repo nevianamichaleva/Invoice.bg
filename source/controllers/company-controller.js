@@ -32,7 +32,7 @@ module.exports = function(data) {
                 });
         },
         createCompanySettings(req, res) {
-            console.log(req.user);
+            //console.log(req.user);
             let companysettings = {
                 name: req.body.name,
                 bulstat: req.body.bulstat,
@@ -47,10 +47,12 @@ module.exports = function(data) {
             };
             data.createCompanySettings(companysettings)
                 .then(() => {
+                    //console.log("File to delete: "+ req.file);
                     fs.unlink('../source/' + req.file.path, function(err) {
                         if (err) {
                             return console.error(err);
                         }
+                        //console.log("File deleted successfully!");
                     });
                     res.redirect("/invoice");
                 });
