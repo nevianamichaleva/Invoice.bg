@@ -42,6 +42,8 @@ let invoiceSchema = new mongoose.Schema({
     },
     sum: Number,
     vat: Number,
+    total: Number,
+    dds: Number,
     user: {
         type: String,
         required: true
