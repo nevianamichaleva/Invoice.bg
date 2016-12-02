@@ -8,9 +8,13 @@ module.exports = function(data) {
             data.getCompanysettings(req.user._id)
                 .then(company => {
                     if (company === null) {
-                        return res.redirect("/company/create");
+                        return res.redirect("/company/create", {
+                            user: req.user
+                        });
                     }
-                    return res.redirect("/invoice/all");
+                    return res.redirect("/invoice/all", {
+                        user: req.user
+                    });
                 });
         },
         getBlankCompanySettings(req, res) {

@@ -4,7 +4,9 @@
 module.exports = function(data) {
     return {
         getReference(req, res) {
-            res.render("reference");
+            res.render("reference", {
+                user: req.user
+            });
         },
         getPlace(req, res) {
             let place = req.query.place;

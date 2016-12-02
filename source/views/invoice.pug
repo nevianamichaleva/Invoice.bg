@@ -137,7 +137,7 @@ block content
                   td
                     input.productValue(type='text', size='20', disabled='')
             button#add-more-products(type='button')
-              | + Добавете ред
+              | + 
           #invoice-value
             div
               label(for='value') Сума по фактура:
@@ -207,7 +207,7 @@ block content
                 p /подпис/
         .down-nav
             button#save-invoice.btn.btn-primary.btn-lg.login-button(type='button') Запис
-            button.btn.btn-primary.btn-lg.login-button Печат
+            button#print-invoice.btn.btn-primary.btn-lg.login-button Печат
             button.btn.btn-primary.btn-lg.login-button E-mail
         script(src='/static/bower_components/jspdf/dist/jspdf.debug.js')
         script(src='/static/bower_components/jquery/dist/jquery.js')

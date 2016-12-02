@@ -14,12 +14,18 @@ block content
                     input(type='date', name='endDate')
                     button Справка
             #conragentReference
+                form(action="/reference/contragent" method="get")
+                    h3 Справка за издадени фактури по клиент
+                    label(for='place') Въведете име на клиент
+                    input(type='text', name='contragent')
+                    button Справка
+            #placeReference
                 form(action="/reference/place" method="get")
                     h3 Справка за издадени фактури по място
                     label(for='place') Изберете място на сделката
                     input(type='text', name='place')
                     button Справка
-            #conragentReference
+            #productReference
                 form
                     h3 Справка за продажби по продукти
                     label(for='product') Изберете продукт
