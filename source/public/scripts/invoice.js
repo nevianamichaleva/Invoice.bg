@@ -143,7 +143,9 @@ $(function() {
             },
             products: products,
             sum: +($("#inv-value").val().split(" ")[0]),
-            vat: +($("#dds-value").val().split(" ")[0])
+            vat: +($("#dds-value").val().split(" ")[0]),
+            total: +($("#value-end").val().split(" ")[0]),
+            dds: +($("#dds").val().split(" ")[0])
         };
 
         return invoice;

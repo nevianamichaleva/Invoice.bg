@@ -18,7 +18,8 @@ module.exports = function(app, data) {
         .get("/register", controller.getRegister)
         .post("/login",
             passport.authenticate('local-login', {
-                failureRedirect: '/register',
+                successRedirect: '/',
+                failureRedirect: '/login',
                 passReqToCallback: true,
                 failureFlash: true
             }),

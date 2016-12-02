@@ -9,8 +9,9 @@ module.exports = function(data) {
             });
         },
         getAboutUs(req, res) {
-            res.status(201)
-                .send("<h1>About us</h1>");
+            res.render("about", {
+                user: req.user
+            });
         },
         getUser(req, res) {
             res.render("user", {

@@ -1,5 +1,6 @@
 /* globals require module Promise*/
 "use strict";
+const MIN_PATTERN_LENGTH = 3;
 
 module.exports = function(models) {
     let { Invoice } = models;
@@ -65,6 +66,17 @@ module.exports = function(models) {
         getInvoiceById(id) {
             return new Promise((resolve, reject) => {
                 Invoice.findById(id, (err, invoice) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(invoice);
+                });
+            });
+        },
+        searchInvoices(place) {
+            return new Promise((resolve, reject) => {
+                Invoice.find({ "place": place }, (err, invoice) => {
                     if (err) {
                         return reject(err);
                     }

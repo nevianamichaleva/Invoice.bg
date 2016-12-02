@@ -1,9 +1,9 @@
 "user strict";
 
-module.exports = function (data) {
+module.exports = function(data) {
     return {
         getLogin(req, res) {
-            res.render("login");
+            res.render("login", { message: req.flash('signupMessage') });
         },
         getRegister(req, res) {
             res.render("register");
@@ -12,7 +12,7 @@ module.exports = function (data) {
             /*res.json({
                 success: true,
                 msg: "You are logged."
-            });*/
+            });*/  
             res.redirect("/company");
         },
         register(req, res) {
