@@ -39,15 +39,25 @@ let companysettingsSchema = new mongoose.Schema({
         type: String,
         required: true
     }
+},
+{
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true
+    }
 });
 
-companysettingsSchema.virtual.identity = function() {
-    if (this.useTax) {
-        return "BG" + this.busltat;
-    } else {
-        return "";
-    }
-};
+companysettingsSchema
+    .virtual('identity')
+    .get(function() {
+        if (this.useTax) {
+            return "BG" + this.bulstat;
+        } else {
+            return "";
+        }
+    });
 
 mongoose.model("CompanySettings", companysettingsSchema);
 let CompanySettingsModel = mongoose.model("CompanySettings");
