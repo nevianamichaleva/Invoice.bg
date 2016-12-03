@@ -6,6 +6,14 @@ module.exports = function(models) {
     let { Invoice } = models;
     return {
         createInvoice(data) {
+            if (data.number.length !== 10) {
+                return Promise.reject({ reason: "Number must be exactly 10 symbols" });
+            }
+
+            if (!data.user) {
+                return Promise.reject({ reason: "User cannot be empty" });
+            }
+
             let invoice = new Invoice(data);
             return new Promise((resolve, reject) => {
                 invoice.save(err => {
@@ -18,6 +26,10 @@ module.exports = function(models) {
             });
         },
         updateInvoice(id, data) {
+            if (data.number.length !== 10) {
+                return Promise.reject({ reason: "Number must be exactly 10 symbols" });
+            }
+
             return new Promise((resolve, reject) => {
                 Invoice.findByIdAndUpdate(id, {
                         $set: data
@@ -70,7 +82,7 @@ module.exports = function(models) {
                         return reject(err);
                     }
 
-                    return resolve(invoice);
+                    return resolve(invoice || null);
                 });
             });
         },
