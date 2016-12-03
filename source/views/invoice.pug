@@ -36,7 +36,7 @@ block content
                   tr
                     td
                       label(name='ZDDS') ЗДДС №:
-                      input.disabled.space(type='text', name='ZDDS', value=model.identity, disabled='')
+                      input#companyZDDS.disabled.space(type='text', name='ZDDS', value=model.identity, disabled='')
                   tr
                     td
                       label(name='MOL') МОЛ:
@@ -63,7 +63,7 @@ block content
                   tr
                     td
                       label(name='ZDDS') ЗДДС №:
-                      input.disabled.space(type='text', name='ZDDS', placeholder='ДДС номер')
+                      input#companyZDDS.disabled.space(type='text', name='ZDDS', placeholder='ДДС номер')
                   tr
                     td
                       label(name='MOL') МОЛ:
@@ -215,3 +215,4 @@ block content
         script(src='/static/scripts/numberToWords.js')
         script(src='/static/scripts/pdfGenerator.js')
         script(src='/static/scripts/invoice.js')
+        script(src='/static/scripts/autocompletes.js')
