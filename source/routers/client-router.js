@@ -9,8 +9,8 @@ module.exports = function(app, data) {
     let router = new express.Router();
 
     router
+        .get("/search/:pattern", controller.getClientByTerm)
         .get("/:id", controller.getClientById)
-        .get("/search", controller.getClientByTerm)
 
     app.use("/client", router);
 };

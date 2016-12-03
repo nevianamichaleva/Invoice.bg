@@ -13,7 +13,7 @@ module.exports = function(data) {
                         if (company === null) {
                             return res.redirect("/company/create");
                         }
-                        console.log(company.identity);
+
                         return res.render("invoice", {
                             model: company,
                             user: req.user

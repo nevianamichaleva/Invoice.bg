@@ -58,11 +58,11 @@ let invoiceSchema = new mongoose.Schema({
     }
 });
 
-invoiceSchema
-    .virtual('total')
-    .get(function() {
-        return this.sum + this.vat;
-    });
+//invoiceSchema
+//    .virtual('total')
+//    .get(function() {
+//        return this.sum + this.vat;
+//    });
 
 mongoose.model("Invoice", invoiceSchema);
 let InvoiceModel = mongoose.model("Invoice");

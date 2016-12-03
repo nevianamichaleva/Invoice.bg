@@ -107,6 +107,49 @@ module.exports = function(models) {
                     return resolve(invoice);
                 });
             });
+        },
+        searchInvoicesByProduct(user, product) {
+            return new Promise((resolve, reject) => {
+                Invoice.find({ user: user, products: { $elemMatch: { name: product } } }, (err, invoice) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(invoice);
+                });
+            });
+        },
+        //('invoices').find({date: {$gte: ISODate("2016-12-02T00:00:00.000Z"), $lt: ISODate("2016-12-03T00:00:00.000Z")}})
+        getInvoicesBetweenDates(user, startDate, endDate, page, pageSize) {
+            let skip = (page - 1) * pageSize,
+                limit = pageSize;
+            return Promise.all([
+                new Promise((resolve, reject) => {
+                    Invoice.find({ user: user, date: { $gte: startDate, $lt: endDate } })
+                        .sort({ number: "desc" })
+                        .skip(skip)
+                        .limit(limit)
+                        .exec((err, invoices) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(invoices);
+                        });
+                }), new Promise((resolve, reject) => {
+                    Invoice.count({})
+                        .exec((err, count) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(count);
+                        });
+                })
+            ]).then(results => {
+                let [invoices, count] = results;
+                return { invoices, count };
+            });
         }
     };
 };
