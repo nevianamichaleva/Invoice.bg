@@ -86,6 +86,16 @@ module.exports = function(models) {
                 });
             });
         },
+        removeInvoice(id) {
+            return new Promise((resolve, reject) => {
+                Invoice.findOneAndRemove(id, (err, invoice) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    return resolve(invoice);
+                });
+            });
+        },
         searchInvoicesByPlace(user, place) {
             return new Promise((resolve, reject) => {
                 Invoice.find({ user: user, "place": place }, (err, invoice) => {

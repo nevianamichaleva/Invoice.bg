@@ -80,6 +80,17 @@ module.exports = function(data) {
                     console.log(err);
                 })
         },
+        getInvoiceByIdAndRemove(req, res) {
+            let id = req.params.id;
+            data.removeInvoice(id)
+                .then(() => {
+                    res.redirect("/invoice/all");
+                })
+                .catch(err => {
+                    //TODO
+                    console.log(err);
+                })
+        },
         createInvoice(req, res) {
             let user = req.user.username,
                 invoice = req.body;
