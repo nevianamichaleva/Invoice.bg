@@ -64,10 +64,18 @@ module.exports = function(models) {
                 });
             });
         },
-        getClientByTerm(term) {
+        getClientByTerm(pattern) {
             return new Promise((resolve, reject) => {
-                var regex = new RegExp(term, 'i');
-                Client.find({name: regex}, { 'name': 1 })
+                let query = {};
+                if (typeof pattern === "string") {
+                    var regex = new RegExp(`.*${pattern}.*`, "gi");
+                    query.$or = [{
+                        name: regex
+                    }];
+                }
+
+                Client.find()
+                    .where(query)
                     .sort({ name: "asc" })
                     .limit(20)
                     .lean()
@@ -75,7 +83,6 @@ module.exports = function(models) {
                     if (err) {
                         return reject(err);
                     }
-                    console.log(clients);
                     return resolve(clients);
                 });
             });

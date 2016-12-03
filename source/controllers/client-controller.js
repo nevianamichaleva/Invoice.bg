@@ -18,13 +18,12 @@ module.exports = function(data) {
                 })
         },
         getClientByTerm(req, res) {
-            console.log("Here!");
-            console.log(req.query["term"]);
-            data.getClientByTerm(req.query["term"])
+            data.getClientByTerm(req.params.pattern)
             .then(clients => {
                 console.log(clients);
+                console.log(JSON.stringify(clients));
                 if (!clients === null) {
-                    return res.end(JSON.stringify(clients));
+                    res.jsonp(clients);
                 }
             })
         }

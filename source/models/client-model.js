@@ -35,15 +35,25 @@ let clientSchema = new mongoose.Schema({
         type: String,
         required: true
     }
+},
+{
+    toObject: {
+        virtuals: true
+    },
+    toJSON: {
+        virtuals: true
+    }
 });
 
-clientSchema.virtual.identity = function() {
-    if (this.useTax) {
-        return "BG" + this.busltat;
-    } else {
-        return "";
-    }
-};
+// clientSchema
+//     .virtual('identity')
+//     .get(function() {
+//         if (this.useTax) {
+//             return "BG" + this.bulstat;
+//         } else {
+//             return "";
+//         }
+//     });
 
 mongoose.model("Client", clientSchema);
 let ClientModel = mongoose.model("Client");

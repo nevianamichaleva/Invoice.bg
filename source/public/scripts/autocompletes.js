@@ -1,87 +1,69 @@
-/* globals $ */
+/* globals $ alert */
 "use strict";
 
 $(function() {
-    let $clientName = $("#clientName"),
-        $clientCity = $("#clientCity");
+    let $clientName = $("#clientName");
 
-    var availableTags = [
-                         "ActionScript",
-                         "AppleScript",
-                         "Asp",
-                         "Scheme"
-                       ];
+    // let $clientCity = $("#clientCity");
+    // var availableTags = [
+    //                      "ActionScript",
+    //                      "AppleScript",
+    //                      "Asp",
+    //                      "Scheme"
+    //                    ];
+    // console.log($clientCity);
 
-    console.log($clientCity);
-
-    $clientCity.autocomplete({
-        source: availableTags
-    });
+    // $clientCity.autocomplete({
+    //     source: availableTags
+    // });
 
     $clientName.autocomplete({
-        source: function (request, response) {
-        //console.log("0. Source Here!");
-        $.ajax({
-            url: "/client/search",
-            type: "GET",
-            dataType: "jsonp",
-            data: {
-                q: request.term
-            },
-            //data: request,  // request is the value of search input
-            success: function (data) {
-                response( data );
-                console.log('success', data);
-                // Map response values to field label and value
-                //response($.map(data, function (cl) {
-                //    console.log(cl);
-                //    return {
-                //        name: cl.name,
-                //        city: cl.city,
-                //        address: cl.address,
-                //       identity: cl.bulstat,
-                //        zdds: cl.identity,
-                //        mol: cl.accountablePerson,
-                //        value: cl._id
-                //    };
-            },
-            complete: function() {
-                console.log('done');
-            }
+        source: function (req, res) {
+            // alert(req.term);
+            $.ajax({
+                    url: "/client/search/"+req.term,
+                    type: "GET",
+                    dataType: "jsonp",
+                    data: {
+                        term: req.term
+                    },          // request is the value of search input
+                    success: function (data) {
+                        res($.map(data, function (item) {
+                            return {
+                                //autocomplete default values REQUIRED
+                                label: item.name,
+                                value: item._id,
+
+                                //extend values
+                                city: item.city,
+                                address: item.address,
+                                identity: item.bulstat,
+                                mol: item.accountablePerson,
+                                zdds: ""//item.identity
+                            }
+                        }));
+                    },
+                    error: function(xhr) {
+                        alert(xhr.status + ' : ' + xhr.statusText);
+                    }
             });
         },
 
         // The minimum number of characters a user must type before a search is performed.
-        minLength: 3,
+        minLength: 1,
 
-        //select: function( event, ui ) {
-           // console.log( ui.item ?
-           // "Selected: " + ui.item.label :
-           // "Nothing selected, input was " + this.value);
-       // },
+        select: function( event, ui ) {
+            $("#clientCity").val(ui.item.city);
+            $("#clientAddress").val(ui.item.address);
+            $("#clientIdentity").val(ui.item.identity);
+            $("#clientZDDS").val(ui.item.zdds);
+            $("#clientMOL").val(ui.item.mol);
+        },
         open: function() {
             $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
         },
         close: function() {
             $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-            }
-
-         // set an onFocus event to show the result on input field when result is focused
-        //focus: function (event, ui) {
-        //    console.log("2. Focus Here!");
-        //    this.value = ui.item.name;
-        //    console.log(ui);
-            // Prevent other event from not being execute
-        //    event.preventDefault();
-       // },
-        //select: function (event, ui) {
-        //    console.log("3. Select Here!");
-            // Prevent value from being put in the input:
-        //    this.value = ui.item.name;
-            // Set the id to the next input hidden field
-       //     $(this).next("input").val(ui.item.value);
-            // Prevent other event from not being execute
-        //    event.preventDefault();
-        // }
+        }
     });
 });
