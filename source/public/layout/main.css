@@ -203,3 +203,12 @@ input::-webkit-input-placeholder {
 #inwords {
     font-size: 18px;
 }
+
+.text-center .btn-social-icon {
+    margin: 4px;
+    display: inline-block;
+}
+
+.from-group .text-center {
+     text-align: center;
+}
