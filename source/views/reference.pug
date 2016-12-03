@@ -6,7 +6,7 @@ block content
           .panel-title.text-left
             h1.title Справки
             #dateReference
-                form
+                form(action="/reference/period" method="get")
                     h3 Справка за издадени фактури за период
                     label(for='startDate') Въведете начална дата
                     input(type='date', name='startDate')
@@ -14,13 +14,19 @@ block content
                     input(type='date', name='endDate')
                     button Справка
             #conragentReference
+                form(action="/reference/contragent" method="get")
+                    h3 Справка за издадени фактури по клиент
+                    label(for='contragent') Въведете име на клиент
+                    input(type='text', name='contragent')
+                    button Справка
+            #placeReference
                 form(action="/reference/place" method="get")
                     h3 Справка за издадени фактури по място
                     label(for='place') Изберете място на сделката
                     input(type='text', name='place')
                     button Справка
-            #conragentReference
-                form
+            #productReference
+                form(action="/reference/product" method="get")
                     h3 Справка за продажби по продукти
                     label(for='product') Изберете продукт
                     input(type='text', name='product')

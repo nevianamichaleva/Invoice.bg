@@ -11,7 +11,7 @@ let app = express();
 app.use(cookieParser('invoice'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: "10mb" }));
-app.use(expressSession({ secret: 'invoice', cookie: { maxAge: 60000 } }));
+app.use(expressSession({ secret: 'invoice', resave: true, saveUninitialized: true, cookie: { maxAge: 60000 } }));
 app.use(flash());
 
 

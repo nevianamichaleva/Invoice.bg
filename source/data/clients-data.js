@@ -63,6 +63,29 @@ module.exports = function(models) {
                     return resolve(client);
                 });
             });
+        },
+        getClientByTerm(pattern) {
+            return new Promise((resolve, reject) => {
+                let query = {};
+                if (typeof pattern === "string") {
+                    var regex = new RegExp(`.*${pattern}.*`, "gi");
+                    query.$or = [{
+                        name: regex
+                    }];
+                }
+
+                Client.find()
+                    .where(query)
+                    .sort({ name: "asc" })
+                    .limit(20)
+                    .lean()
+                    .exec((err, clients) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    return resolve(clients);
+                });
+            });
         }
     };
 };

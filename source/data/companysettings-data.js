@@ -7,10 +7,13 @@ module.exports = function(models) {
     let { CompanySettings } = models;
     return {
         createCompanySettings(data) {
-            let logoImage = {
-                data: fs.readFileSync(data.logo.path),
-                contentType: 'image/png'
-            };
+            if (data.logo) {
+                //console.log("Data logo:" + data.logo);
+                var logoImage = {
+                    data: fs.readFileSync(data.logo.path),
+                    contentType: 'image/png'
+                };
+            }
             const companysettings = new CompanySettings({
                 name: data.name,
                 bulstat: data.bulstat,
@@ -45,32 +48,54 @@ module.exports = function(models) {
         },
         updateCompanysettings(id, data) {
             return new Promise((resolve, reject) => {
-                //console.log(data.logo);
-                let logoImage = {
-                    data: fs.readFileSync(data.logo.path),
-                    contentType: 'image/png'
-                };
-                CompanySettings.findByIdAndUpdate(id, {
-                        $set: {
-                            name: data.name,
-                            bulstat: data.bulstat,
-                            useTax: data.useTax,
-                            city: data.city,
-                            address: data.address,
-                            email: data.email,
-                            accountablePerson: data.accountablePerson,
-                            phone: data.phone,
-                            logo: logoImage
-                        }
-                    }, { new: true },
-                    (err, companysettings) => {
-                        if (err) {
-                            return reject(err);
-                        }
+                if (data.logo) {
+                    //console.log("Data logo:" + data.logo);
+                    var logoImage = {
+                        data: fs.readFileSync(data.logo.path),
+                        contentType: 'image/png'
+                    };
+                    CompanySettings.findByIdAndUpdate(id, {
+                            $set: {
+                                name: data.name,
+                                bulstat: data.bulstat,
+                                useTax: data.useTax,
+                                city: data.city,
+                                address: data.address,
+                                email: data.email,
+                                accountablePerson: data.accountablePerson,
+                                phone: data.phone,
+                                logo: logoImage
+                            }
+                        }, { new: true },
+                        (err, companysettings) => {
+                            if (err) {
+                                return reject(err);
+                            }
 
-                        return resolve(companysettings);
-                    });
-            });
+                            return resolve(companysettings);
+                        });
+                } else {
+                    CompanySettings.findByIdAndUpdate(id, {
+                            $set: {
+                                name: data.name,
+                                bulstat: data.bulstat,
+                                useTax: data.useTax,
+                                city: data.city,
+                                address: data.address,
+                                email: data.email,
+                                accountablePerson: data.accountablePerson,
+                                phone: data.phone
+                            }
+                        }, { new: true },
+                        (err, companysettings) => {
+                            if (err) {
+                                return reject(err);
+                            }
+
+                            return resolve(companysettings);
+                        });
+                }
+            })
         }
     };
 };

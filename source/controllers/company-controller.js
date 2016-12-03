@@ -23,7 +23,7 @@ module.exports = function(data) {
                 .then(company => {
                     if (company === null) {
                         return res.status(404)
-                            .redirect("/error");
+                            .redirect("/company/create");
                     }
                     return res.render("company-details", {
                         model: company,
@@ -48,12 +48,14 @@ module.exports = function(data) {
             data.createCompanySettings(companysettings)
                 .then(() => {
                     //console.log("File to delete: "+ req.file);
-                    fs.unlink('../source/' + req.file.path, function(err) {
-                        if (err) {
-                            return console.error(err);
-                        }
-                        //console.log("File deleted successfully!");
-                    });
+                    if (req.file != undefined) {
+                        fs.unlink('../source/' + req.file.path, function(err) {
+                            if (err) {
+                                return console.error(err);
+                            }
+                            //console.log("File deleted successfully!");
+                        });
+                    }
                     res.redirect("/invoice");
                 });
         },
@@ -73,12 +75,15 @@ module.exports = function(data) {
             data.updateCompanysettings(req.body._id, companysettings)
                 .then(() => {
                     //console.log("Going to delete an existing file");
-                    fs.unlink('../source/' + req.file.path, function(err) {
-                        if (err) {
-                            return console.error(err);
-                        }
-                        //console.log("File deleted successfully!");
-                    });
+                    if (req.file != undefined) {
+                        console.log("Going to delete an existing file");
+                        fs.unlink('../source/' + req.file.path, function(err) {
+                            if (err) {
+                                return console.error(err);
+                            }
+                            //console.log("File deleted successfully!");
+                        });
+                    }
                     res.redirect("/invoice");
                 });
         }

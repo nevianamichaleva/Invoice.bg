@@ -1,7 +1,7 @@
 /* globals module */
 "user strict";
 
-module.exports = function (data) {
+module.exports = function(data) {
     return {
         getProfile(req, res) {
             res.render("profile", {
@@ -9,7 +9,7 @@ module.exports = function (data) {
                 user: req.user
             });
         },
-        changeProfile(req, res){
+        changeProfile(req, res) {
             let userdata = {
                 name: req.body.name,
                 email: req.body.email,
@@ -18,7 +18,9 @@ module.exports = function (data) {
             };
             data.updateUser(userdata)
                 .then(() => {
-                    res.redirect("/home");
+                    res.redirect("/home", {
+                        user: req.user
+                    });
                 });
         },
         getUserSettings(req, res) {
