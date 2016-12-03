@@ -6,9 +6,21 @@ const DEFAULT_PAGE = 1,
 module.exports = function(data) {
     return {
         getReference(req, res) {
-            res.render("reference", {
-                user: req.user
-            });
+            let user = req.user.username;
+            data.getAllProducts(user)
+                .then(product => {
+                    data.getAllClients(user)
+                        .then(client => {
+                            res.render("reference", {
+                                model: product,
+                                model1: client,
+                                user: req.user
+                            })
+                        })
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         },
         getPlace(req, res) {
             let place = req.query.place;
