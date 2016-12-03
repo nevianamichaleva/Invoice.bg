@@ -37,7 +37,7 @@ module.exports = function(models) {
 
             return Promise.all([
                 new Promise((resolve, reject) => {
-                    Invoice.find()
+                    Invoice.find({ user: user })
                         .sort({ date: "desc" })
                         .skip(skip)
                         .limit(limit)
@@ -74,9 +74,20 @@ module.exports = function(models) {
                 });
             });
         },
-        searchInvoices(place) {
+        searchInvoicesByPlace(user, place) {
             return new Promise((resolve, reject) => {
-                Invoice.find({ "place": place }, (err, invoice) => {
+                Invoice.find({ user: user, "place": place }, (err, invoice) => {
+                    if (err) {
+                        return reject(err);
+                    }
+
+                    return resolve(invoice);
+                });
+            });
+        },
+        searchInvoicesByContragent(user, contragent) {
+            return new Promise((resolve, reject) => {
+                Invoice.find({ user: user, "client.name": contragent }, (err, invoice) => {
                     if (err) {
                         return reject(err);
                     }

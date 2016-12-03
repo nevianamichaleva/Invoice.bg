@@ -13,9 +13,7 @@ module.exports = function(data) {
                 success: true,
                 msg: "You are logged."
             });*/
-            res.redirect("/company", {
-                user: req.user
-            });
+            res.redirect("/company");
         },
         register(req, res) {
 
