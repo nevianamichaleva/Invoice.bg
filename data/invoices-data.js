@@ -43,8 +43,9 @@ module.exports = function(models) {
             });
         },
         getAllInvoices(user, page, pageSize) {
-            if (!user) {
-                return Promise.reject({ reason: "User is required" });
+            let error = validator.checkForUser(user);
+            if (error) {
+                return Promise.reject({ reason: error });
             }
 
             let skip = (page - 1) * pageSize,
@@ -100,8 +101,9 @@ module.exports = function(models) {
             });
         },
         searchInvoicesByPlace(user, place) {
-            if (!user) {
-                return Promise.reject({ reason: "User is required" });
+            let error = validator.checkForUser(user);
+            if (error) {
+                return Promise.reject({ reason: error });
             }
 
             return new Promise((resolve, reject) => {
@@ -115,8 +117,9 @@ module.exports = function(models) {
             });
         },
         searchInvoicesByContragent(user, contragent) {
-            if (!user) {
-                return Promise.reject({ reason: "User is required" });
+            let error = validator.checkForUser(user);
+            if (error) {
+                return Promise.reject({ reason: error });
             }
 
             return new Promise((resolve, reject) => {
@@ -130,8 +133,9 @@ module.exports = function(models) {
             });
         },
         searchInvoicesByProduct(user, product) {
-            if (!user) {
-                return Promise.reject({ reason: "User is required" });
+            let error = validator.checkForUser(user);
+            if (error) {
+                return Promise.reject({ reason: error });
             }
 
             return new Promise((resolve, reject) => {
@@ -146,8 +150,9 @@ module.exports = function(models) {
         },
         //('invoices').find({date: {$gte: ISODate("2016-12-02T00:00:00.000Z"), $lt: ISODate("2016-12-03T00:00:00.000Z")}})
         getInvoicesBetweenDates(user, startDate, endDate, page, pageSize) {
-            if (!user) {
-                return Promise.reject({ reason: "User is required" });
+            let error = validator.checkForUser(user);
+            if (error) {
+                return Promise.reject({ reason: error });
             }
 
             let skip = (page - 1) * pageSize,

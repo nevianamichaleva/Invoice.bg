@@ -72,11 +72,10 @@ describe("Test invoices data", () => {
                 });
         });
 
-        it("Expect to fail, when user is empty", done => {
-            let number = "0123456789",
-                user = "";
+        it("Expect to fail, when haven't user", done => {
+            let number = "0123456789";
 
-            data.createInvoice({ number, user })
+            data.createInvoice({ number })
                 .catch(err => {
                     expect(err).not.to.be.null;
                     done();
@@ -124,7 +123,8 @@ describe("Test invoices data", () => {
         it("Expect to fail, when new number is less then 10 symbols", done => {
             let newNumber = "987654321",
                 newData = {
-                    number: newNumber
+                    number: newNumber,
+                    user: "currentUser"
                 };
 
             data.updateInvoice(invoiceId, newData)
@@ -135,6 +135,20 @@ describe("Test invoices data", () => {
         });
 
         it("Expect to fail, when number is greater then 10 symbols", done => {
+            let newNumber = "98765432109",
+                newData = {
+                    number: newNumber,
+                    user: "currentUser"
+                };
+
+            data.updateInvoice(invoiceId, newData)
+                .catch(err => {
+                    expect(err).not.to.be.null;
+                    done();
+                });
+        });
+
+        it("Expect to fail, when haven't user", done => {
             let newNumber = "98765432109",
                 newData = {
                     number: newNumber
@@ -191,8 +205,7 @@ describe("Test invoices data", () => {
 
         let invoice = {
             user,
-            place,
-            number: "1234567890"
+            place
         };
 
         let invoices = [invoice];
@@ -201,7 +214,6 @@ describe("Test invoices data", () => {
             sinon.stub(Invoice, "find", (query, cb) => {
                 let currentPlace = query.place,
                     currentUser = query.user;
-
                 let currentInvoices = invoices.filter(iv => iv.place === currentPlace && iv.user === currentUser);
                 cb(null, currentInvoices);
             });

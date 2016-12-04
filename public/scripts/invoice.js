@@ -89,27 +89,27 @@ $(function() {
             $(field).children().val("");
         });
 
-        $productForm.find(productNameSelector).autocomplete({
-            source: function (req, res) {
+        $productForm.first().find(productNameSelector).autocomplete({
+            source: function(req, res) {
                 $.ajax({
-                        url: "/product/search/" + req.term,
-                        type: "GET",
-                        dataType: "jsonp",
-                        data: {
-                            term: req.term
-                        },          // request is the value of search input
-                        success: function (data) {
-                            res($.map(data, function (item) {
-                                return {
-                                    //autocomplete default values REQUIRED
-                                    label: item.name,
-                                    value: item.name
-                                }
-                            }));
-                        },
-                        error: function(xhr) {
-                            console.log(xhr.status + ' : ' + xhr.statusText);
-                        }
+                    url: "/product/search/" + req.term,
+                    type: "GET",
+                    dataType: "jsonp",
+                    data: {
+                        term: req.term
+                    }, // request is the value of search input
+                    success: function(data) {
+                        res($.map(data, function(item) {
+                            return {
+                                //autocomplete default values REQUIRED
+                                label: item.name,
+                                value: item.name
+                            }
+                        }));
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.status + ' : ' + xhr.statusText);
+                    }
                 });
             },
 
