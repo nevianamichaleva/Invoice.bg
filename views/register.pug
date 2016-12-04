@@ -7,9 +7,11 @@ block content
         h1.title Регистрация
         hr
     if errors  
-      ul
         for err in errors
-          li!= err.msg
+          .alert.alert-danger.alert-dismissable
+            a.close(href='#', data-dismiss='alert', aria-label='close') ×
+            strong Внимание!
+            span= " " +err.msg 
     .main-login.main-center
       form.form-horizontal(method='post', action='/register')
         .form-group
