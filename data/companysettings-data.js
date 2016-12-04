@@ -3,10 +3,17 @@
 
 const fs = require("fs");
 
+const validator = require("./utils/validator");
+
 module.exports = function(models) {
     let { CompanySettings } = models;
     return {
         createCompanySettings(data) {
+            let error = validator.validateCompany(data);
+            if (error) {
+                return Promise.reject({ reason: error });
+            }
+
             if (data.logo) {
                 //console.log("Data logo:" + data.logo);
                 var logoImage = {
@@ -47,6 +54,11 @@ module.exports = function(models) {
             });
         },
         updateCompanysettings(id, data) {
+            let error = validator.validateCompany(data);
+            if (error) {
+                return Promise.reject({ reason: error });
+            }
+
             return new Promise((resolve, reject) => {
                 if (data.logo) {
                     //console.log("Data logo:" + data.logo);
