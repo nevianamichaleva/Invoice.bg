@@ -26,7 +26,8 @@ passport.deserializeUser((userId, done) => {
 });
 
 
-require('./strategy.js')(passport, userModel);
+require('./local-strategy.js')(passport, userModel);
+require('./facebook-strategy')(passport, userModel);
 
 
 module.exports = app => {

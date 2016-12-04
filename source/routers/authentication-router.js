@@ -16,6 +16,11 @@ module.exports = function(app, controllers) {
     router
         .get("/login", controller.getLogin)
         .get("/register", controller.getRegister)
+        .get("/login/facebook/callback",
+            passport.authenticate('facebook', {
+                successRedirect: '/',
+                failureRedirect: '/home'
+            }))
         .post("/login",
             passport.authenticate('local-login', {
                 failureRedirect: '/login',

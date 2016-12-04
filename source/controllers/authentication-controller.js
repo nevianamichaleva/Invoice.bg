@@ -42,6 +42,9 @@ module.exports = function(data) {
         logout(req, res) {
             req.logout();
             res.redirect("/home");
+        },
+        facebookRegister(req, res) {
+            res.redirect("/company");
         }
     }
 }
