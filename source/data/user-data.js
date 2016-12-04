@@ -1,7 +1,7 @@
 /* globals require module Promise*/
 "use strict";
 
-module.exports = function (models) {
+module.exports = function(models) {
     let {
         User
     } = models;
@@ -28,33 +28,27 @@ module.exports = function (models) {
         },
         updateUser(data) {
             return new Promise((resolve, reject) => {
-                User.findOne({ _id: data._id }, (err, user) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    user.name = data.name;
-                    user.email = data.email;
-                    user.password = data.password;
-
-                    user.save(err1 => {
-                        if (err1) {
-                            return reject(err1);
+                User.findByIdAndUpdate(data._id, {
+                        $set: data
+                    }, { new: true },
+                    (err, user) => {
+                        if (err) {
+                            return reject(err);
                         }
 
                         return resolve(user);
                     });
-                });
             });
         },
         getUserByUsername(username) {
             return new Promise((resolve, reject) => {
                 User.findOne({
                     username
-                }, (err, clients) => {
+                }, (err, user) => {
                     if (err) {
                         return reject(err);
                     }
-                    return resolve(clients);
+                    return resolve(user || null);
                 });
             });
         },

@@ -18,7 +18,7 @@ describe("Test invoices data", () => {
         }
 
         save() {
-            console.log(this.number); //TODO: This is usefull (only for eslint correct syntax)
+            console.log(this.number); //TODO: This is useless (only for eslint correct syntax)
         }
 
         static findByIdAndUpdate() {}
@@ -107,7 +107,7 @@ describe("Test invoices data", () => {
             sinon.restore();
         });
 
-        it("Expect to update invoice", done => {
+        it("Expect to update the invoice", done => {
             let newNumber = "9876543210",
                 newData = {
                     number: newNumber,
