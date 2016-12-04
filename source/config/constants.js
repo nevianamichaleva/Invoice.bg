@@ -15,7 +15,7 @@ module.exports = {
     wrongInvoiceNumberMessage: "Моля въведете номер на фактура с 10 символа",
     wrongIdentityMessage: "Моля въведете ЕИК между 9 и 13 символа",
     wrongCompanyNameMessage: "Моля въведете Име на фирма между 2 и 50 символа",
-    wrongUsernameMessage: "Моля въведете Потребителско име между 6 и 50 символа", 
+    wrongUsernameMessage: "Моля въведете Потребителско име между 6 и 50 символа",
     emptyCompanyNameMessage: "Моля въведете Име на фирма",
     emptyIdentityMessage: "Моля въведете ЕИК",
     emptyCityMessage: "Моля въведете град",
