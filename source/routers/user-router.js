@@ -10,9 +10,7 @@ module.exports = function (app, data) {
 
     router
         .get("/profile", controller.getProfile)
-        .post("/profile", controller.changeProfile)
-        .get("/settings", controller.getUserSettings)
-        .post("/settings", controller.changeUserSettings);
+        .post("/profile", controller.changeProfile);
 
     app.use("/user", router);
 };

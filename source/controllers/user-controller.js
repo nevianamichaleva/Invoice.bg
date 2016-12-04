@@ -4,12 +4,18 @@
 module.exports = function(data) {
     return {
         getProfile(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             res.render("profile", {
                 model: req.user,
                 user: req.user
             });
         },
         changeProfile(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             let userdata = {
                 name: req.body.name,
                 email: req.body.email,
@@ -22,12 +28,6 @@ module.exports = function(data) {
                         user: req.user
                     });
                 });
-        },
-        getUserSettings(req, res) {
-            res.send("<h1>User Settings</h1>");
-        },
-        changeUserSettings(req, res) {
-            res.send("<h1> Changed user settings");
         }
     }
 }
