@@ -1,4 +1,4 @@
-/* globals $ converter */
+/* globals $ converter location */
 "use strict";
 
 $(function() {
@@ -100,7 +100,17 @@ $(function() {
             url: url,
             method: "POST",
             contentType: "application/json",
-            data: JSON.stringify(invoice)
+            data: JSON.stringify(invoice),
+            success: function() {
+                location.href = "/invoice/all";
+            },
+            error: function(err) {
+                let status = err.statusCode().status;
+
+                if (status === 401) {
+                    location.href = "/login";
+                }
+            }
         });
     });
 
@@ -113,7 +123,17 @@ $(function() {
             url: url,
             method: "PUT",
             contentType: "application/json",
-            data: JSON.stringify(invoice)
+            data: JSON.stringify(invoice),
+            success: function() {
+                location.href = "/invoice/all";
+            },
+            error: function(err) {
+                let status = err.statusCode().status;
+
+                if (status === 401) {
+                    location.href = "/login";
+                }
+            }
         })
     });
 
@@ -192,7 +212,7 @@ $(function() {
 
 
         var invoice = {
-            number: +$invoiceNumber.val(),
+            number: $invoiceNumber.val(),
             date: new Date($invoiceDate.val()),
             place: $invoicePlace.val(),
             company: {

@@ -6,6 +6,7 @@ const { expect } = require("chai"),
 
 describe("Test invoices data", () => {
     let sinon;
+
     beforeEach(() => {
         sinon = sinonModule.sandbox.create();
     });
@@ -16,7 +17,9 @@ describe("Test invoices data", () => {
             this.user = props.user;
         }
 
-        save() {}
+        save() {
+            console.log(this.number); //TODO: This is usefull (only for eslint correct syntax)
+        }
 
         static findByIdAndUpdate() {}
         static findById() {}
@@ -107,7 +110,8 @@ describe("Test invoices data", () => {
         it("Expect to update invoice", done => {
             let newNumber = "9876543210",
                 newData = {
-                    number: newNumber
+                    number: newNumber,
+                    user: "currentUser"
                 };
 
             data.updateInvoice(invoiceId, newData)
@@ -223,10 +227,18 @@ describe("Test invoices data", () => {
                 });
         });
 
-        it("Expect to return empty array, when haven't invoice whith current user", done => {
+        it("Expect to return empty array, when haven't invoice with current user", done => {
             data.searchInvoicesByPlace("wrongUser", place)
                 .then(actualInvoices => {
                     expect(actualInvoices).to.eql([]);
+                    done();
+                });
+        });
+
+        it("Expect to fail, when haven't user", done => {
+            data.searchInvoicesByPlace(null, place)
+                .catch(err => {
+                    expect(err).not.to.be.null;
                     done();
                 });
         });
@@ -276,10 +288,18 @@ describe("Test invoices data", () => {
                 });
         });
 
-        it("Expect to return empty array, when haven't invoice whith current user", done => {
+        it("Expect to return empty array, when haven't invoice with current user", done => {
             data.searchInvoicesByContragent("wrongUser", clientName)
                 .then(actualInvoices => {
                     expect(actualInvoices).to.eql([]);
+                    done();
+                });
+        });
+
+        it("Expect to fail, when haven't user", done => {
+            data.searchInvoicesByContragent(null, clientName)
+                .catch(err => {
+                    expect(err).not.to.be.null;
                     done();
                 });
         });

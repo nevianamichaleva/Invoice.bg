@@ -24,8 +24,12 @@ module.exports = function(data) {
             }
         },
         getAllInvoices(req, res) {
-            let user = req.user.username;
-            let page = Number(req.query.page || DEFAULT_PAGE);
+            if (!req.user) {
+                return res.redirect("/login");
+            }
+
+            let user = req.user.username,
+                page = Number(req.query.page || DEFAULT_PAGE);
 
             data.getAllInvoices(user, page, PAGE_SIZE)
                 .then((result => {
@@ -67,6 +71,10 @@ module.exports = function(data) {
                 });
         },
         getInvoiceById(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
+
             let id = req.params.id;
             data.getInvoiceById(id)
                 .then(invoice => {
@@ -81,14 +89,17 @@ module.exports = function(data) {
                 })
         },
         createInvoice(req, res) {
+            if (!req.user) {
+                return res.sendStatus(401);
+            }
+
             let user = req.user.username,
                 invoice = req.body;
 
             invoice.user = user;
+
             data.createInvoice(invoice)
                 .then(() => {
-                    req.flash('invoiceMessage', 'Фактурата е записана успешно');
-                    console.log(req.flash('invoiceMessage'));
                     invoice.client.user = user;
                     data.createClient(invoice.client);
                 })
@@ -98,12 +109,18 @@ module.exports = function(data) {
                         data.createProduct(product);
                     }
                 })
-                .catch(err => {
-                    //TODO
-                    console.log(err);
+                .then(() => {
+                    res.sendStatus(201);
+                })
+                .catch(() => {
+                    res.sendStatus(400);
                 });
         },
         updateInvoice(req, res) {
+            if (!req.user) {
+                return res.sendStatus(401);
+            }
+
             let user = req.user.username,
                 id = req.params.id,
                 invoice = req.body;
@@ -119,8 +136,11 @@ module.exports = function(data) {
                         data.createProduct(product);
                     }
                 })
-                .catch(err => {
-                    console.log(err);
+                .then(() => {
+                    res.sendStatus(201);
+                })
+                .catch(() => {
+                    res.sendStatus(400);
                 });
         }
     };
