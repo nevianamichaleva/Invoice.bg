@@ -17,15 +17,24 @@ module.exports = function(data) {
                     console.log(err);
                 })
         },
-        getClientByTerm(req, res) {
-            data.getClientByTerm(req.params.pattern)
-            .then(clients => {
-                console.log(clients);
-                console.log(JSON.stringify(clients));
-                if (!clients === null) {
-                    res.jsonp(clients);
-                }
-            })
+        getClientByPattern(req, res) {
+            if (req.user) {
+                data.getClientByPattern(req.params.pattern, req.user.username)
+                .then(clients => {
+                    if (clients) {
+                        res.type('jsonp');
+                        res.jsonp(clients);
+                    }
+                })
+                .catch(err => {
+                    //TODO
+                    console.log(err);
+                })
+            }
+            else {
+                res.type('jsonp');
+                res.jsonp({});
+            }
         }
     };
 };

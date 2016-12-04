@@ -1,18 +1,22 @@
 mixin invoice-list(invoices, currentPage, pages)
 		
 	#invoicelist-details
-		table#nvoicelist
+		table#nvoicelist.table-bordered
 				thead
 					tr
-						td(width='10%') Дата
-						td(width='10%') Номер
-						td(width='10%') Стойност
-						td(width='20%') Клиент
-						td(width='20%') МОЛ
-						td(width='30%') Адрес
+						td.text-center(width='8%') Изтрий
+						td.text-center(width='12%') Дата
+						td.text-center(width='10%') Номер
+						td.text-center(width='13%') Стойност
+						td.text-center(width='20%') Клиент
+						td.text-center(width='17%') МОЛ
+						td.text-center(width='20%') Адрес
 				tbody
 					each invoice in invoices
 						tr
+							td.text-center
+								a(href="/invoice/remove/" + invoice._id)
+									strong -
 							td.date
 								-
 									var date= new Date(invoice.date);

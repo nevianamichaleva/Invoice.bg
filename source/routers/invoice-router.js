@@ -12,6 +12,7 @@ module.exports = function(app, data) {
         .get("/", controller.getInvoice)
         .get("/all", controller.getAllInvoices)
         .get("/:id", controller.getInvoiceById)
+        .get("/remove/:id", controller.getInvoiceByIdAndRemove)
         .post("/", controller.createInvoice)
         .put("/:id", controller.updateInvoice);
 

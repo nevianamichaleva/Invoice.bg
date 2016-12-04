@@ -88,6 +88,17 @@ module.exports = function(data) {
                     console.log(err);
                 })
         },
+        getInvoiceByIdAndRemove(req, res) {
+            let id = req.params.id;
+            data.removeInvoice(id)
+                .then(() => {
+                    res.redirect("/invoice/all");
+                })
+                .catch(err => {
+                    //TODO
+                    console.log(err);
+                })
+        },
         createInvoice(req, res) {
             if (!req.user) {
                 return res.sendStatus(401);
