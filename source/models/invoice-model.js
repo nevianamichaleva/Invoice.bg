@@ -48,21 +48,7 @@ let invoiceSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-},
-{
-    toObject: {
-        virtuals: true
-    },
-    toJSON: {
-        virtuals: true
-    }
 });
-
-//invoiceSchema
-//    .virtual('total')
-//    .get(function() {
-//        return this.sum + this.vat;
-//    });
 
 mongoose.model("Invoice", invoiceSchema);
 let InvoiceModel = mongoose.model("Invoice");

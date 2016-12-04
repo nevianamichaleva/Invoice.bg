@@ -6,7 +6,7 @@ module.exports = function(models) {
     let { Invoice } = models;
     return {
         createInvoice(data) {
-            if (data.number.length !== 10) {
+            if (data.number.toString().length !== 10) {
                 return Promise.reject({ reason: "Number must be exactly 10 symbols" });
             }
 
@@ -26,7 +26,7 @@ module.exports = function(models) {
             });
         },
         updateInvoice(id, data) {
-            if (data.number.length !== 10) {
+            if (data.number.toString().length !== 10) {
                 return Promise.reject({ reason: "Number must be exactly 10 symbols" });
             }
 

@@ -45,15 +45,11 @@ let clientSchema = new mongoose.Schema({
     }
 });
 
-// clientSchema
-//     .virtual('identity')
-//     .get(function() {
-//         if (this.useTax) {
-//             return "BG" + this.bulstat;
-//         } else {
-//             return "";
-//         }
-//     });
+clientSchema
+    .virtual('zdds')
+    .get(function() {
+        return "BG" + this.identity;
+    });
 
 mongoose.model("Client", clientSchema);
 let ClientModel = mongoose.model("Client");

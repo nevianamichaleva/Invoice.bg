@@ -48,6 +48,31 @@ module.exports = function(models) {
                     return resolve(category);
                 });
             });
+        },
+        getProductByPattern(pattern, user) {
+            return new Promise((resolve, reject) => {
+                let query = {};
+                if (typeof pattern === "string") {
+                    var regex = new RegExp(`.*${pattern}.*`, "gi");
+                    query.$and = [{
+                        name: regex,
+                        user
+                    }];
+                }
+
+                Product.find()
+                    .where(query)
+                    .sort({ name: "asc" })
+                    .limit(20)
+                    .lean()
+                    .exec((err, products) => {
+                    if (err) {
+                        return reject(err);
+                    }
+                    console.log(products);
+                    return resolve(products);
+                });
+            });
         }
     };
 };

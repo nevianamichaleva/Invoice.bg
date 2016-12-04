@@ -64,13 +64,14 @@ module.exports = function(models) {
                 });
             });
         },
-        getClientByTerm(pattern) {
+        getClientByPattern(pattern, user) {
             return new Promise((resolve, reject) => {
                 let query = {};
                 if (typeof pattern === "string") {
                     var regex = new RegExp(`.*${pattern}.*`, "gi");
-                    query.$or = [{
-                        name: regex
+                    query.$and = [{
+                        name: regex,
+                        user
                     }];
                 }
 
