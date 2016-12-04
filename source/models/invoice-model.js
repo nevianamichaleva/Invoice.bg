@@ -3,11 +3,13 @@
 
 const mongoose = require("mongoose");
 
+const constants = require("../config/constants");
+
 let invoiceSchema = new mongoose.Schema({
     number: {
         type: String,
         required: true,
-        length: 10
+        length: constants.invoiceNumberLength
     },
     date: {
         type: Date,

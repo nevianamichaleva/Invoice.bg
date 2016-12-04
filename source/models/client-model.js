@@ -3,18 +3,20 @@
 
 const mongoose = require("mongoose");
 
+const constants = require("../config/constants");
+
 let clientSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minlength: 2,
-        maxlength: 50
+        minlength: constants.minClientNameLength,
+        maxlength: constants.maxClientNameLength
     },
     identity: {
         type: String,
         required: true,
-        minlength: 9,
-        maxlength: 13
+        minlength: constants.minIdentityLength,
+        maxlength: constants.maxIdentityLength
     },
     useTax: Boolean,
     city: {
@@ -35,8 +37,7 @@ let clientSchema = new mongoose.Schema({
         type: String,
         required: true
     }
-},
-{
+}, {
     toObject: {
         virtuals: true
     },

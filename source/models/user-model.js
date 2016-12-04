@@ -2,15 +2,17 @@
 "use strict";
 
 const mongoose = require("mongoose"),
-     bcrypt = require("bcrypt-nodejs");
+    bcrypt = require("bcrypt-nodejs");
+
+const constants = require("../config/constants");
 
 let userSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
         unique: true,
-        minlength: 6,
-        maxlength: 50
+        minlength: constants.minUsernameLength,
+        maxlength: constants.maxUsernameLength
     },
     name: String,
     email: {

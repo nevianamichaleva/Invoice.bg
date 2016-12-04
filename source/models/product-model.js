@@ -3,12 +3,14 @@
 
 const mongoose = require("mongoose");
 
+const constants = require("../config/constants");
+
 let productSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minlength: 2,
-        maxlength: 100
+        minlength: constants.minProductNameLength,
+        maxlength: constants.maxProductNameLength
     },
     description: String,
     user: {
