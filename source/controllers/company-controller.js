@@ -5,6 +5,9 @@ var fs = require("fs");
 module.exports = function(data) {
     return {
         checkCompanySettings(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             data.getCompanysettings(req.user._id)
                 .then(company => {
                     if (company === null) {
@@ -14,11 +17,17 @@ module.exports = function(data) {
                 });
         },
         getBlankCompanySettings(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             res.render("company-details", {
                 user: req.user
             });
         },
         getCompanySettings(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             data.getCompanysettings(req.user._id)
                 .then(company => {
                     if (company === null) {
@@ -32,7 +41,9 @@ module.exports = function(data) {
                 });
         },
         createCompanySettings(req, res) {
-            //console.log(req.user);
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             let companysettings = {
                 name: req.body.name,
                 bulstat: req.body.bulstat,
@@ -47,20 +58,20 @@ module.exports = function(data) {
             };
             data.createCompanySettings(companysettings)
                 .then(() => {
-                    //console.log("File to delete: "+ req.file);
                     if (req.file != undefined) {
                         fs.unlink('../source/' + req.file.path, function(err) {
                             if (err) {
                                 return console.error(err);
                             }
-                            //console.log("File deleted successfully!");
                         });
                     }
-                    res.redirect("/invoice");
+                    return res.redirect("/invoice");
                 });
         },
         changeCompanySettings(req, res) {
-            //console.log(req.file);
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             let companysettings = {
                 name: req.body.name,
                 bulstat: req.body.bulstat,
@@ -74,17 +85,14 @@ module.exports = function(data) {
             };
             data.updateCompanysettings(req.body._id, companysettings)
                 .then(() => {
-                    //console.log("Going to delete an existing file");
                     if (req.file != undefined) {
-                        console.log("Going to delete an existing file");
                         fs.unlink('../source/' + req.file.path, function(err) {
                             if (err) {
                                 return console.error(err);
                             }
-                            //console.log("File deleted successfully!");
                         });
                     }
-                    res.redirect("/invoice");
+                    return res.redirect("/invoice");
                 });
         }
     };

@@ -6,6 +6,9 @@ const DEFAULT_PAGE = 1,
 module.exports = function(data) {
     return {
         getReference(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             let user = req.user.username;
             data.getAllProducts(user)
                 .then(product => {
@@ -23,9 +26,12 @@ module.exports = function(data) {
                 });
         },
         getPlace(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             let place = req.query.place;
             let user = req.user.username;
-            //console.log(user);
+
             data.searchInvoicesByPlace(user, place)
                 .then(invoice => {
                     res.render("invoice-listplace", {
@@ -39,6 +45,9 @@ module.exports = function(data) {
                 })
         },
         getContragent(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             let contragent = req.query.contragent;
             let user = req.user.username;
             //console.log(contragent, user);
@@ -55,6 +64,9 @@ module.exports = function(data) {
                 })
         },
         getProduct(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             let product = req.query.product;
             let user = req.user.username;
             //console.log(contragent, user);
@@ -73,6 +85,9 @@ module.exports = function(data) {
                 })
         },
         getInvoicesBetweenDates(req, res) {
+            if (!req.user) {
+                return res.redirect("/login");
+            }
             let startDate = req.query.startDate,
                 endDate = req.query.endDate,
                 user = req.user.username,
