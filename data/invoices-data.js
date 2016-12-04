@@ -1,16 +1,15 @@
 /* globals require module Promise*/
 "use strict";
 
+const validator = require("./utils/validator");
+
 module.exports = function(models) {
     let { Invoice } = models;
     return {
         createInvoice(data) {
-            if (data.number.length !== 10) {
-                return Promise.reject({ reason: "Number must be exactly 10 symbols" });
-            }
-
-            if (!data.user) {
-                return Promise.reject({ reason: "User is required" });
+            let error = validator.validateInvoice(data);
+            if (error) {
+                return Promise.reject({ reason: error });
             }
 
             let invoice = new Invoice(data);
@@ -25,8 +24,9 @@ module.exports = function(models) {
             });
         },
         updateInvoice(id, data) {
-            if (data.number.toString().length !== 10) {
-                return Promise.reject({ reason: "Number must be exactly 10 symbols" });
+            let error = validator.validateInvoice(data);
+            if (error) {
+                return Promise.reject({ reason: error });
             }
 
             return new Promise((resolve, reject) => {

@@ -60,8 +60,10 @@ module.exports = function(data) {
 
             var errors = validator.validateCompany(req);
             if (errors) {
-                return res.render("company-details", {errors,
-                                        model: companysettings });
+                return res.render("company-details", {
+                    errors,
+                    model: companysettings
+                });
             }
 
             data.createCompanySettings(companysettings)
@@ -89,14 +91,17 @@ module.exports = function(data) {
                 accountablePerson: req.body.accountablePerson,
                 email: req.body.email,
                 phone: req.body.phone,
+                user: req.user._id,
                 logo: req.file,
                 _id: req.body._id
             };
 
             var errors = validator.validateCompany(req);
             if (errors) {
-                return res.render("company-details", {errors,
-                                        model: companysettings });
+                return res.render("company-details", {
+                    errors,
+                    model: companysettings
+                });
             }
 
             data.updateCompanysettings(req.body._id, companysettings)
