@@ -14,8 +14,7 @@ app.use(bodyParser.json({ limit: "10mb" }));
 app.use(expressSession({ secret: 'invoice', resave: true, saveUninitialized: true, cookie: { secure: false, maxAge: 2160000000 } }));
 app.use(flash());
 
-
-// security 
+// security
 require("./security.js")(app);
 
 // passport

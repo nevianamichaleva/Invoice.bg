@@ -108,7 +108,7 @@ $(function() {
                             }));
                         },
                         error: function(xhr) {
-                            alert(xhr.status + ' : ' + xhr.statusText);
+                            console.log(xhr.status + ' : ' + xhr.statusText);
                         }
                 });
             },

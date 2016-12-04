@@ -1,4 +1,4 @@
-/* globals $ alert */
+/* globals $ */
 "use strict";
 
 $(function() {
@@ -31,7 +31,7 @@ $(function() {
                         }));
                     },
                     error: function(xhr) {
-                        alert(xhr.status + ' : ' + xhr.statusText);
+                        console.log(xhr.status + ' : ' + xhr.statusText);
                     }
             });
         },
@@ -67,7 +67,7 @@ $(function() {
                         }));
                     },
                     error: function(xhr) {
-                        alert(xhr.status + ' : ' + xhr.statusText);
+                        console.log(xhr.status + ' : ' + xhr.statusText);
                     }
             });
         },

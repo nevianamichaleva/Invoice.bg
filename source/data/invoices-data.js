@@ -1,6 +1,5 @@
 /* globals require module Promise*/
 "use strict";
-const MIN_PATTERN_LENGTH = 3;
 
 module.exports = function(models) {
     let { Invoice } = models;

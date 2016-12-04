@@ -8,8 +8,12 @@ const path = require("path"),
 
 module.exports = function(config) {
     mongoose.Promise = global.Promise;
-    // mongoose.connect(config.connectionString["prod"]);
-    mongoose.connect(config.connectionString["dev"]);
+
+    var connectionString = config.connectionString["dev"];
+    if (process.env.NODE_ENV === 'production') {
+        connectionString = config.connectionString["prod"];
+    }
+    mongoose.connect(connectionString);
     let User = require("../models/user-model.js");
     let Client = require("../models/client-model.js");
     let CompanySettings = require("../models/companysettings-model.js");
