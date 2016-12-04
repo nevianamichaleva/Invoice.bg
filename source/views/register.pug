@@ -8,8 +8,8 @@ block content
         hr
     if errors  
       ul
-        for error in errors
-          li!= error.msg
+        for err in errors
+          li!= err.msg
     .main-login.main-center
       form.form-horizontal(method='post', action='/register')
         .form-group
@@ -19,7 +19,10 @@ block content
             .input-group
               span.input-group-addon
                 i.fa.fa-user.fa(aria-hidden='true')
-              input#name.form-control(type='text', name='name', placeholder='Въведете име и фамилия')
+              if model
+                input#name.form-control(type='text', name='name', value=model.name)
+              else   
+                input#name.form-control(type='text', name='name', placeholder='Въведете име и фамилия')
         .form-group
           label.cols-sm-2.control-label(for='email') Email
                                                      <span class="red">*</span>
@@ -27,7 +30,10 @@ block content
             .input-group
               span.input-group-addon
                 i.fa.fa-envelope.fa(aria-hidden='true')
-              input#email.form-control(type='text', name='email', placeholder='Въведете вашия Email')
+              if model
+                input#email.form-control(type='text', name='email', value=model.email)
+              else
+                input#email.form-control(type='text', name='email', placeholder='Въведете вашия Email')  
         .form-group
           label.cols-sm-2.control-label(for='username') Потребителско име
                                                         <span class="red">*</span>
@@ -35,7 +41,10 @@ block content
             .input-group
               span.input-group-addon
                 i.fa.fa-users.fa(aria-hidden='true')
-              input#username.form-control(type='text', name='username', placeholder='Въведете вашето потребителско име')
+              if model
+                input#username.form-control(type='text', name='username', value=model.username)
+              else
+                input#username.form-control(type='text', name='username', placeholder='Въведете вашето потребителско име')  
         .form-group
           label.cols-sm-2.control-label(for='password') Парола
                                                         <span class="red">*</span>

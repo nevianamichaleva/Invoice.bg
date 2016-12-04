@@ -6,6 +6,10 @@ block content
     .panel-title.text-center
       h1.title Въведете фирмените си данни
       hr
+    if errors  
+      ul
+        for err in errors
+          li!= err.msg
     .main-login.main-center
       form.form-horizontal(method='post', action='#', enctype="multipart/form-data")
        if model

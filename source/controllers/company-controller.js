@@ -56,6 +56,48 @@ module.exports = function(data) {
                 user: req.user._id,
                 logo: req.file
             };
+
+            req.checkBody('name', 'Моля въведете Име на фирма').notEmpty();
+            req.checkBody('bulstat', 'Моля въведете ЕИК').notEmpty();
+            req.checkBody('city', 'Моля въведете град').notEmpty();
+            req.checkBody('address', 'Моля въведете адрес').notEmpty();
+            req.checkBody('accountablePerson', 'Моля въведете име на МОЛ').notEmpty();
+            req.checkBody('email', 'Моля въведете валиден Email').isEmail();
+
+            var errors = req.validationErrors();
+            if (req.body.name && req.body.name.toString().length < 2 ||
+                    req.body.name.toString().length > 50) {
+                        var tmpError = {
+                                param: "name",
+                                msg: "Моля въведете Име на фирма между 2 и 50 символа",
+                                value: ""
+                            };
+                        if (errors) {
+                            errors.push(tmpError);
+                        }
+                        else {
+                            errors = [tmpError];
+                        }
+                    }
+            if (req.body.bulstat && req.body.bulstat.toString().length < 9 ||
+                    req.body.bulstat.toString().length > 13) {
+                        var tmpError1 = {
+                                param: "bulstat",
+                                msg: "Моля въведете ЕИК между 9 и 13 символа",
+                                value: ""
+                            }
+                        if (errors) {
+                            errors.push(tmpError1);
+                        }
+                        else {
+                            errors = [tmpError1];
+                        }
+                    }
+            if (errors) {
+                return res.render("company-details", {errors,
+                                        model: companysettings });
+            }
+
             data.createCompanySettings(companysettings)
                 .then(() => {
                     if (req.file != undefined) {

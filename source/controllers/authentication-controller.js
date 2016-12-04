@@ -29,14 +29,41 @@ module.exports = function(data) {
             req.checkBody('confirm', 'Моля потвърдете паролата').notEmpty();
 
             var errors = req.validationErrors();
+            console.log(errors);
+            if (req.body.username && req.body.username.toString().length < 6 ||
+                    req.body.username.toString().length > 50) {
+                        if (errors) {
+                            errors.push({
+                                param: "username",
+                                msg: "Моля въведете Потребителско име между 6 и 50 символа",
+                                value: ""
+                            });
+                        }
+                        else {
+                            errors = [{param: "username",
+                                msg: "Моля въведете Потребителско име между 6 и 50 символа",
+                                value: ""}];
+                        }
+                    }
+
             if (errors) {
-                res.render('register', { errors: errors });
-                return;
+                return res.render("register", {errors,
+                                        model: {
+                                            name: user.name,
+                                            email: user.email,
+                                            username: user.username }
+                });
             }
 
             data.createUser(user)
+            .then(() => {
+                    res.redirect("/login");
+                })
+            .catch(err => {
+                //TODO
+                console.log(err);
+            })
 
-            res.redirect("/login");
             return;
         },
         logout(req, res) {
