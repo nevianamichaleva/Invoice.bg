@@ -88,6 +88,7 @@ $(function() {
         $.each($productFields, function(_, field) {
             $(field).children().val("");
         });
+        console.log("-------------------------------------------------------");
         console.log($productForm.find(productNameSelector));
         $productForm.find(productNameSelector).autocomplete({
             source: function(req, res) {

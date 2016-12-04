@@ -4,6 +4,7 @@
 $(function() {
     let $clientName = $("#clientName"),
         $productName = $(".productName");
+    console.log("-------------------------------------------------------");
     console.log($clientName);
     $clientName.autocomplete({
         source: function(req, res) {
