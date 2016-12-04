@@ -206,8 +206,9 @@ block content
                 p .........................................
                 p /подпис/
         .down-nav
-            button#save-invoice.btn.btn-primary.btn-lg.login-button(type='button') Запис
-            button#print-invoice.btn.btn-primary.btn-lg.login-button Печат
+            if user
+              button#save-invoice.btn.btn-primary.btn-lg.login-button(type='button') Запис
+            button#print-invoice.btn.btn-primary.btn-lg.login-button(type='button') Печат
             button.btn.btn-primary.btn-lg.login-button E-mail
         script(src='/static/bower_components/jspdf/dist/jspdf.debug.js')
         script(src='/static/bower_components/jquery/dist/jquery.js')
