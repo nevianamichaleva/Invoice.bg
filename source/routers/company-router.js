@@ -3,8 +3,8 @@
 
 const express = require("express"),
     multer = require('multer');
-module.exports = function(app, data) {
-    let controller = require("../controllers/company-controller")(data);
+module.exports = function(app, controllers) {
+    let controller = controllers.company;
 
     let router = new express.Router();
 

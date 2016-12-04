@@ -2,6 +2,7 @@
 
 module.exports = function(data) {
     return {
+        name: "authentication",
         getLogin(req, res) {
             res.render("login", { message: req.flash('signupMessage') });
         },

@@ -6,6 +6,8 @@ const app = require("./config/app");
 
 const data = require("./data")(config);
 
-require("./routers")(app, data);
+const controllers = require("./controllers")(data);
+
+require("./routers")(app, controllers);
 
 app.listen(config.port, () => console.log(`Running at :${config.port}`));

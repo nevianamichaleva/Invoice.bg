@@ -3,8 +3,8 @@
 
 const express = require("express");
 
-module.exports = function (app, data) {
-    let controller = require("../controllers/user-controller")(data);
+module.exports = function(app, controllers) {
+    let controller = controllers.user;
 
     let router = new express.Router();
 

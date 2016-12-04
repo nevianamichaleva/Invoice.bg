@@ -3,8 +3,8 @@
 
 const express = require("express");
 
-module.exports = function(app, data) {
-    let controller = require("../controllers/reference-controller")(data);
+module.exports = function(app, controllers) {
+    let controller = controllers.reference;
 
     let router = new express.Router();
 

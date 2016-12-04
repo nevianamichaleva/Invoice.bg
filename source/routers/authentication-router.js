@@ -5,8 +5,8 @@ const express = require("express"),
     expressValidator = require("express-validator"),
     passport = require("passport");
 
-module.exports = function(app, data) {
-    let controller = require("../controllers/authentication-controller")(data);
+module.exports = function(app, controllers) {
+    let controller = controllers.authentication;
 
     let router = new express.Router();
 
