@@ -1,10 +1,17 @@
 /* globals require module Promise*/
 "use strict";
 
+const validator = require("./utils/validator");
+
 module.exports = function(models) {
     let { Client } = models;
     return {
         createClient(data) {
+            let error = validator.validateClient(data);
+            if (error) {
+                return Promise.reject({ reason: error });
+            }
+
             return new Promise((resolve, reject) => {
                 Client.findOne({ user: data.user, name: data.name }, (err, client) => {
                     if (err) {
@@ -81,11 +88,11 @@ module.exports = function(models) {
                     .limit(20)
                     .lean()
                     .exec((err, clients) => {
-                    if (err) {
-                        return reject(err);
-                    }
-                    return resolve(clients);
-                });
+                        if (err) {
+                            return reject(err);
+                        }
+                        return resolve(clients);
+                    });
             });
         }
     };

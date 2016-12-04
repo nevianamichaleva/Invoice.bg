@@ -136,6 +136,8 @@ module.exports = function(data) {
                 id = req.params.id,
                 invoice = req.body;
 
+            invoice.user = user;
+
             data.updateInvoice(id, invoice)
                 .then(() => {
                     invoice.client.user = user;
