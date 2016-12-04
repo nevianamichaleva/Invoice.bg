@@ -9,9 +9,9 @@ const path = require("path"),
 module.exports = function(config) {
     mongoose.Promise = global.Promise;
 
-    var connectionString = config.connectionString["dev"];
+    var connectionString = config.connectionString["development"];
     if (process.env.NODE_ENV === 'production') {
-        connectionString = config.connectionString["prod"];
+        connectionString = config.connectionString["production"];
     }
     mongoose.connect(connectionString);
     let User = require("../models/user-model.js");
