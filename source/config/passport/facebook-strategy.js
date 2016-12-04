@@ -8,48 +8,35 @@ const FACEBOOK = {
     callbackURL: "http://localhost:3001/login/facebook/callback"
 };
 
-module.exports = function (passport, userModel) {
+module.exports = function(passport, data) {
     const facebookAuthStrategy = new FacebookStrategy({
             clientID: FACEBOOK.APP_ID,
             clientSecret: FACEBOOK.APP_SECRET,
             callbackURL: FACEBOOK.callbackURL,
             profileFields: ['id', 'emails', 'name']
         },
-        function (accessToken, refreshToken, profile, done) {
-            
-            const promise = new Promise((res, rej) => {
-                    userModel.findOne({
-                        username: profile.displayName.toString(),
-                        email: profile.emails[0].value
-                    }, (err, user) => {
-                        if (err) {
-                            return rej(err);
-                        }
+        function(accessToken, refreshToken, profile, done) {
+            let username = profile.displayName.toString(),
+                email = profile.emails[0].value;
 
-                        return res(user);
-                    });
-                })
-                .then((user) => {
+            data.getUserByUsernameAndEmail(username, email)
+                .then(user => {
                     if (user) {
                         return user;
                     } else {
-                        let user = new userModel({
+                        return data.createUser({
                             name: profile.displayName.toString(),
                             email: profile.emails[0].value,
                             username: profile.displayName.toString(),
                             provider: 'facebook',
                             facebook: profile._json
                         });
-                        user.save(function (err) {
-                            if (err) console.log(err);
-                            return done(err, user);
-                        });
                     }
                 })
-                .then((user) => {
-                    return done(null, user);
+                .then(user => {
+                    done(null, user);
                 })
-                .catch(error => done(error, false));
+                .catch(err => done(err, false));
         });
 
     passport.use(facebookAuthStrategy);

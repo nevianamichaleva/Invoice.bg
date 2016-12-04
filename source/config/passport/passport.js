@@ -1,36 +1,35 @@
 'use struct';
 
-const passport = require('passport'),
-    userModel = require('../../models/user-model.js');
+const passport = require('passport');
 
-passport.serializeUser((user, done) => {
+module.exports = function(app, data) {
+    passport.serializeUser((user, done) => {
 
-    if (user) {
-        return done(null, user._id);
-    }
-
-    return done(null, false);
-});
-
-
-passport.deserializeUser((userId, done) => {
-    userModel.findOne({
-        '_id': userId
-    }, function (error, user) {
         if (user) {
-            return done(null, user);
+            return done(null, user._id);
         }
 
         return done(null, false);
     });
-});
 
 
-require('./local-strategy.js')(passport, userModel);
-require('./facebook-strategy')(passport, userModel);
+    passport.deserializeUser((userId, done) => {
+        data.findUserById(userId)
+            .then(user => {
+                if (user) {
+                    return done(null, user);
+                }
 
+                return done(null, false);
+            })
+            .catch(err => {
+                done(err, false);
+            });
+    });
 
-module.exports = app => {
+    require('./local-strategy.js')(passport, data);
+    require('./facebook-strategy')(passport, data);
+
     app.use(passport.initialize());
     app.use(passport.session());
-}
+};

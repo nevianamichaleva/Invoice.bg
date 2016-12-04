@@ -1,24 +1,15 @@
 "use strict";
 
-module.exports = function(passport, userModel) {
-    const LocalStrategy = require('passport-local');
+const LocalStrategy = require('passport-local');
 
+module.exports = function(passport, data) {
     passport.use("local-login", new LocalStrategy({
         username: 'username',
         password: 'password',
         passReqToCallback: true
     }, function(req, username, password, done) {
-        userModel.findOne({
-                username: username
-            },
-            function(err, user) {
-                if (err) {
-                    //console.log('dsddsds');
-                    return done(null, false, {
-                        success: false,
-                        message: "Incorrect username"
-                    });
-                }
+        data.getUserByUsername(username)
+            .then(user => {
                 if (!user) {
                     return done(null, false, req.flash('signupMessage', 'Невалидно потребителско име'));
                 }
@@ -26,6 +17,12 @@ module.exports = function(passport, userModel) {
                     return done(null, false, req.flash('signupMessage', 'Невалидна парола'));
                 }
                 return done(null, user);
+            })
+            .catch(() => {
+                done(null, false, {
+                    success: false,
+                    message: "Incorrect username"
+                });
             });
     }));
 }

@@ -2,9 +2,9 @@
 
 const config = require("./config");
 
-const app = require("./config/app");
-
 const data = require("./data")(config);
+
+const app = require("./config/app")(data);
 
 const controllers = require("./controllers")(data);
 
