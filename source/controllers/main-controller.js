@@ -1,7 +1,7 @@
 /* globals module */
 "user strict";
 
-module.exports = function(data) {
+module.exports = function() {
     return {
         getHome(req, res) {
             res.render("carousel", {
