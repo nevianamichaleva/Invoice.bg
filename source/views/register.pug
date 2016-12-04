@@ -6,6 +6,10 @@ block content
       .panel-title.text-center
         h1.title Регистрация
         hr
+    if errors  
+      ul
+        for error in errors
+          li!= error.msg
     .main-login.main-center
       form.form-horizontal(method='post', action='/register')
         .form-group

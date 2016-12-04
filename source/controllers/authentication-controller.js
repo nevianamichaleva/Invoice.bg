@@ -10,10 +10,6 @@ module.exports = function(data) {
             res.render("register");
         },
         login(req, res) {
-            /*res.json({
-                success: true,
-                msg: "You are logged."
-            });*/
             res.redirect("/company");
         },
         register(req, res) {
@@ -25,18 +21,20 @@ module.exports = function(data) {
                 password: req.body.password
             };
 
-            req.checkBody('name', 'Name is required').notEmpty();
-            req.checkBody('username', 'Username is required').notEmpty();
-            req.checkBody('email', 'Email is required').notEmpty();
-            req.checkBody('email', 'Please add a valid email').isEmail();
-            req.checkBody('password', 'Password is required').notEmpty();
+            req.checkBody('name', 'Моля въведете Име, фамилия').notEmpty();
+            req.checkBody('username', 'Моля въведете Потребителско име').notEmpty();
+            req.checkBody('email', 'Моля въведете Email').notEmpty();
+            req.checkBody('email', 'Моля въведете валиден Email').isEmail();
+            req.checkBody('password', 'Моля въведете парола').notEmpty();
+            req.checkBody('confirm', 'Моля потвърдете паролата').notEmpty();
+
+            var errors = req.validationErrors();
+            if (errors) {
+                res.render('register', { errors: errors });
+                return;
+            }
 
             data.createUser(user)
-
-            /*res.json({
-                success: true,
-                msg: "The user is created."
-            });*/
 
             res.redirect("/login");
             return;
