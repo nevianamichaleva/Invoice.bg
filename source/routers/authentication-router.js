@@ -19,7 +19,8 @@ module.exports = function(app, controllers) {
         .get("/login/facebook/callback",
             passport.authenticate('facebook', {
                 successRedirect: '/',
-                failureRedirect: '/home'
+                failureRedirect: '/home',
+                scope: ['email']
             }))
         .post("/login",
             passport.authenticate('local-login', {

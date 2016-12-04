@@ -12,13 +12,15 @@ module.exports = function (passport, userModel) {
     const facebookAuthStrategy = new FacebookStrategy({
             clientID: FACEBOOK.APP_ID,
             clientSecret: FACEBOOK.APP_SECRET,
-            callbackURL: FACEBOOK.callbackURL
+            callbackURL: FACEBOOK.callbackURL,
+            profileFields: ['id', 'emails', 'name']
         },
         function (accessToken, refreshToken, profile, done) {
-            //console.log(profile);
+            
             const promise = new Promise((res, rej) => {
                     userModel.findOne({
-                        username: profile.displayName
+                        username: profile.displayName.toString(),
+                        email: profile.emails[0].value
                     }, (err, user) => {
                         if (err) {
                             return rej(err);
@@ -29,13 +31,11 @@ module.exports = function (passport, userModel) {
                 })
                 .then((user) => {
                     if (user) {
-                        console.log("dfdadsad");
                         return user;
                     } else {
                         let user = new userModel({
                             name: profile.displayName.toString(),
-                            // Here i had a problem with the email.It will stay here temporary.
-                            email: "asdasddcsdsdasdasdad@gmail.com",
+                            email: profile.emails[0].value,
                             username: profile.displayName.toString(),
                             provider: 'facebook',
                             facebook: profile._json
