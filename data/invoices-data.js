@@ -154,7 +154,7 @@ module.exports = function(models) {
                 limit = pageSize;
             return Promise.all([
                 new Promise((resolve, reject) => {
-                    Invoice.find({ user: user, date: { $gte: startDate, $lt: endDate } })
+                    Invoice.find({ user: user, date: { $gte: startDate, $lte: endDate } })
                         .sort({ number: "desc" })
                         .skip(skip)
                         .limit(limit)

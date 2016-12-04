@@ -220,6 +220,7 @@ input::-webkit-input-placeholder {
 .social button {
     margin-right: 20px;
 }
+
 .social a {
     margin-right: 20px;
 }
@@ -230,4 +231,8 @@ input::-webkit-input-placeholder {
 
 .social {
     padding: 0 0 0 48px;
+}
+
+.bold {
+    font-weight: bold;
 }
