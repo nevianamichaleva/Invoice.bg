@@ -88,7 +88,7 @@ module.exports = function(models) {
         },
         removeInvoice(id) {
             return new Promise((resolve, reject) => {
-                Invoice.findOneAndRemove(id, (err, invoice) => {
+                Invoice.findByIdAndRemove(id, (err, invoice) => {
                     if (err) {
                         return reject(err);
                     }
