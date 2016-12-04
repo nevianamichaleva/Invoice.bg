@@ -1,7 +1,7 @@
 /* globals require module */
 "use strict";
 
-const constants = require("./constants");
+const constants = require("../../config/constants");
 
 module.exports = {
     checkInvoiceNumber(number) {

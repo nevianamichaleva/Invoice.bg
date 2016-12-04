@@ -1,5 +1,7 @@
 "user strict";
 
+const validator = require("./utils/validator");
+
 module.exports = function(data) {
     return {
         name: "authentication",
@@ -21,30 +23,7 @@ module.exports = function(data) {
                 password: req.body.password
             };
 
-            req.checkBody('name', 'Моля въведете Име, фамилия').notEmpty();
-            req.checkBody('username', 'Моля въведете Потребителско име').notEmpty();
-            req.checkBody('email', 'Моля въведете Email').notEmpty();
-            req.checkBody('email', 'Моля въведете валиден Email').isEmail();
-            req.checkBody('password', 'Моля въведете парола').notEmpty();
-            req.checkBody('confirm', 'Моля потвърдете паролата').notEmpty();
-
-            var errors = req.validationErrors();
-            console.log(errors);
-            if (req.body.username && req.body.username.toString().length < 6 ||
-                    req.body.username.toString().length > 50) {
-                        if (errors) {
-                            errors.push({
-                                param: "username",
-                                msg: "Моля въведете Потребителско име между 6 и 50 символа",
-                                value: ""
-                            });
-                        }
-                        else {
-                            errors = [{param: "username",
-                                msg: "Моля въведете Потребителско име между 6 и 50 символа",
-                                value: ""}];
-                        }
-                    }
+            var errors = validator.validateRegister(req);
 
             if (errors) {
                 return res.render("register", {errors,
