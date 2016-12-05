@@ -64,11 +64,7 @@ module.exports = function(data) {
                         user: req.user,
                         params: { page, pages }
                     });
-                }))
-                .catch(err => {
-                    //TODO
-                    console.log(err);
-                });
+                }));
         },
         getInvoiceById(req, res) {
             if (!req.user) {
@@ -82,22 +78,14 @@ module.exports = function(data) {
                         model: invoice,
                         user: req.user
                     })
-                })
-                .catch(err => {
-                    //TODO
-                    console.log(err);
-                })
+                });
         },
         getInvoiceByIdAndRemove(req, res) {
             let id = req.params.id;
             data.removeInvoice(id)
                 .then(() => {
                     res.redirect("/invoice/all");
-                })
-                .catch(err => {
-                    //TODO
-                    console.log(err);
-                })
+                });
         },
         createInvoice(req, res) {
             if (!req.user) {

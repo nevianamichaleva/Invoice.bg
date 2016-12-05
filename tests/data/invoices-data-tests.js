@@ -18,7 +18,7 @@ describe("Test invoices data", () => {
         }
 
         save() {
-            console.log(this.number); //TODO: This is useless (only for eslint correct syntax)
+            (this.number); //TODO: This is useless (only for eslint correct syntax)
         }
 
         static findByIdAndUpdate() {}

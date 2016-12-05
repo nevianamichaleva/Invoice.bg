@@ -1,7 +1,10 @@
+/* globals parseInt */
+"use strict";
+
 var converter = function() {
 
     function num2bgtext(leva) {
-        var number = parseInt(leva);
+        var number = parseInt(leva, 10);
         var flval = parseFloat(leva);
         var stotinki = Math.round(flval * 100) % 100;
         var tmp;
@@ -13,7 +16,7 @@ var converter = function() {
         ];
         var num100 = [" ", "сто", "двеста", "триста"];
 
-        number = parseInt(number);
+        number = parseInt(number, 10);
 
         var div10 = (number - number % 10) / 10;
         var mod10 = number % 10;
@@ -107,7 +110,7 @@ var converter = function() {
     }
 
     function number2lv(leva) {
-        var lv = parseInt(leva);
+        var lv = parseInt(leva, 10);
         var flval = parseFloat(leva);
         var stotinki = Math.round(flval * 100) % 100;
         if (lv >= 2000000000)

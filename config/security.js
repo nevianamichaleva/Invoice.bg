@@ -1,4 +1,5 @@
-"use strict";
+/* globals module require */
+
 const helmet = require("helmet"),
     ienoopen = require('ienoopen'),
     dontSniffMimeTypes = require("dont-sniff-mimetype"),
