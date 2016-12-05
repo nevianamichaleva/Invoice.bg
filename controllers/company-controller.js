@@ -1,4 +1,4 @@
-/* globals module */
+/* globals module require */
 "user strict";
 var fs = require("fs");
 const validator = require("./utils/validator");

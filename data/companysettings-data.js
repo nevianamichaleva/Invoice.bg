@@ -15,7 +15,6 @@ module.exports = function(models) {
             }
 
             if (data.logo) {
-                //console.log("Data logo:" + data.logo);
                 var logoImage = {
                     data: fs.readFileSync(data.logo.path),
                     contentType: 'image/png'
@@ -61,7 +60,6 @@ module.exports = function(models) {
 
             return new Promise((resolve, reject) => {
                 if (data.logo) {
-                    //console.log("Data logo:" + data.logo);
                     var logoImage = {
                         data: fs.readFileSync(data.logo.path),
                         contentType: 'image/png'

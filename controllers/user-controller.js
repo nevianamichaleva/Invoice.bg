@@ -24,9 +24,7 @@ module.exports = function(data) {
             };
             data.updateUser(userdata)
                 .then(() => {
-                    res.redirect("/home", {
-                        user: req.user
-                    });
+                    res.redirect("/home");
                 });
         }
     }

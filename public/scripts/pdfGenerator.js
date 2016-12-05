@@ -1,5 +1,6 @@
 /* globals require module $ jsPDF domtoimage Image window*/
 "use strict";
+
 var PDFGenerator = (function() {
     const invoiceClassName = '.big-invoice',
         buttonGenerateId = '#print-invoice',
