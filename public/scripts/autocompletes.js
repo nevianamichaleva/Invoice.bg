@@ -4,9 +4,8 @@
 $(function() {
     let $clientName = $("#clientName"),
         $productName = $(".productName");
-    console.log("-------------------------------------------------------");
-    console.log($clientName);
-    $clientName.autocomplete({
+
+    $clientName.first().autocomplete({
         source: function(req, res) {
             $.ajax({
                 url: "/client/search/" + req.term,
