@@ -20,7 +20,7 @@ describe("Test invoices data", () => {
         }
 
         save() {
-            console.log(this.username); //Useless (only for eslint correct syntax)
+            (this.username); //Useless (only for eslint correct syntax)
         }
 
         generateHash(pass) {
@@ -49,7 +49,7 @@ describe("Test invoices data", () => {
             let user = {
                 username: "username",
                 name: "name",
-                email: "random@email.dev",
+                email: "email",
                 password: "password"
             };
 
@@ -57,9 +57,36 @@ describe("Test invoices data", () => {
                 .then(actualUser => {
                     expect(actualUser).to.eql(user);
                     done();
-                })
+                });
+        });
+
+        it("Expect to fail, when username is less then 6 symbols", done => {
+            let user = {
+                username: "user",
+                name: "name",
+                email: "email",
+                password: "password"
+            };
+
+            data.createUser(user)
                 .catch(err => {
-                    console.log(err);
+                    expect(err).not.to.be.null;
+                    done();
+                });
+        });
+
+        it("Expect to fail, when username is greater than 50 symbols", done => {
+            let user = {
+                username: "a".repeat(55),
+                name: "name",
+                email: "email",
+                password: "password"
+            };
+
+            data.createUser(user)
+                .catch(err => {
+                    expect(err).not.to.be.null;
+                    done();
                 });
         });
     });
@@ -71,7 +98,7 @@ describe("Test invoices data", () => {
             _id: userId,
             username: "username",
             name: "name",
-            email: "random@email.dev",
+            email: "email",
             password: "password"
         };
 
@@ -101,9 +128,6 @@ describe("Test invoices data", () => {
                 .then(actualUser => {
                     expect(actualUser.username).to.equal(newUsername);
                     done();
-                })
-                .catch(err => {
-                    console.log(err);
                 });
         });
     });
@@ -113,7 +137,7 @@ describe("Test invoices data", () => {
             _id: 1,
             username: "username",
             name: "name",
-            email: "random@email.dev",
+            email: "email",
             password: "password"
         };
 
@@ -145,6 +169,109 @@ describe("Test invoices data", () => {
             let username = "wrongUsername";
 
             data.getUserByUsername(username)
+                .then(actualUser => {
+                    expect(actualUser).to.be.null;
+                    done();
+                });
+        });
+    });
+
+    describe("getUserByUsernameAndEmail()", () => {
+        let user = {
+            _id: 1,
+            username: "username",
+            name: "name",
+            email: "email",
+            password: "password"
+        };
+
+        let users = [user];
+
+        beforeEach(() => {
+            sinon.stub(User, "findOne", (query, cb) => {
+                let currentUsername = query.username,
+                    currentEmail = query.email;
+                (currentEmail);
+                let currentUser = users.find(us => us.username === currentUsername && us.email === currentEmail);
+                cb(null, currentUser);
+            });
+        });
+
+        afterEach(() => {
+            sinon.restore();
+        });
+
+        it("Expect to return the user", done => {
+            let username = "username",
+                email = "email";
+
+            data.getUserByUsernameAndEmail(username, email)
+                .then(actualUser => {
+                    expect(actualUser).to.eql(user);
+                    done();
+                });
+        });
+
+        it("Expect to return null, when haven't user with current username", done => {
+            let username = "wrongUsername",
+                email = "email";
+
+            data.getUserByUsernameAndEmail(username, email)
+                .then(actualUser => {
+                    expect(actualUser).to.be.null;
+                    done();
+                });
+        });
+
+        it("Expect to return null, when hanv't user with current email", done => {
+            let username = "username",
+                email = "wrongEmail";
+
+            data.getUserByUsernameAndEmail(username, email)
+                .then(actualUser => {
+                    expect(actualUser).to.be.null;
+                    done();
+                });
+        });
+    });
+
+    describe("getUserById()", () => {
+        let user = {
+            _id: 1,
+            username: "username",
+            name: "name",
+            email: "email",
+            password: "password"
+        };
+
+        let users = [user];
+
+        beforeEach(() => {
+            sinon.stub(User, "findOne", (query, cb) => {
+                let currentId = query._id;
+                let currentUser = users.find(us => us._id === currentId);
+                cb(null, currentUser);
+            });
+        });
+
+        afterEach(() => {
+            sinon.restore();
+        });
+
+        it("Expect to return the user", done => {
+            let id = 1;
+
+            data.getUserById(id)
+                .then(actualUser => {
+                    expect(actualUser).to.eql(user);
+                    done();
+                });
+        });
+
+        it("Expect to return null, when haven't user with current id", done => {
+            let id = 100;
+
+            data.getUserById(id)
                 .then(actualUser => {
                     expect(actualUser).to.be.null;
                     done();

@@ -1,3 +1,4 @@
+/* globals module require */
 'use struct';
 
 const passport = require('passport');
@@ -14,7 +15,7 @@ module.exports = function(app, data) {
 
 
     passport.deserializeUser((userId, done) => {
-        data.findUserById(userId)
+        data.getUserById(userId)
             .then(user => {
                 if (user) {
                     return done(null, user);

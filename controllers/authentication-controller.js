@@ -1,3 +1,4 @@
+/* globals module require */
 "user strict";
 
 const validator = require("./utils/validator");
@@ -15,7 +16,6 @@ module.exports = function(data) {
             res.redirect("/company");
         },
         register(req, res) {
-
             let user = {
                 name: req.body.name,
                 username: req.body.username,
@@ -26,24 +26,20 @@ module.exports = function(data) {
             var errors = validator.validateRegister(req);
 
             if (errors) {
-                return res.render("register", {errors,
-                                        model: {
-                                            name: user.name,
-                                            email: user.email,
-                                            username: user.username }
+                return res.render("register", {
+                    errors,
+                    model: {
+                        name: user.name,
+                        email: user.email,
+                        username: user.username
+                    }
                 });
             }
 
             data.createUser(user)
-            .then(() => {
+                .then(() => {
                     res.redirect("/login");
-                })
-            .catch(err => {
-                //TODO
-                console.log(err);
-            })
-
-            return;
+                });
         },
         logout(req, res) {
             req.logout();

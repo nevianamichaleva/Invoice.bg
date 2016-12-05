@@ -12,11 +12,7 @@ module.exports = function(data) {
                         model: invoice,
                         user: req.user
                     })
-                })
-                .catch(err => {
-                    //TODO
-                    console.log(err);
-                })
+                });
         },
         getClientByPattern(req, res) {
             if (req.user) {
@@ -26,11 +22,7 @@ module.exports = function(data) {
                             res.type('jsonp');
                             res.jsonp(clients);
                         }
-                    })
-                    .catch(err => {
-                        //TODO
-                        console.log(err);
-                    })
+                    });
             } else {
                 res.type('jsonp');
                 res.jsonp({});

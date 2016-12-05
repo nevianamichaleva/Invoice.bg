@@ -1,3 +1,4 @@
+/* globals module require */
 "use strict";
 
 const FacebookStrategy = require("passport-facebook");

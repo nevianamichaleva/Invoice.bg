@@ -1,4 +1,4 @@
-/* globals module */
+/* globals module require */
 
 const express = require("express"),
     bodyParser = require("body-parser"),
